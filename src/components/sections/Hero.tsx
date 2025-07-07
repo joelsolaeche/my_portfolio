@@ -71,7 +71,7 @@ const Hero = () => {
               transition={{ duration: 0.6, delay: 0.5 }}
               className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-6 tracking-tight"
             >
-              Hello, I'm{' '}
+              Hello, I&apos;m{' '}
               <span className="text-blue-400">
                 {PORTFOLIO_DATA.name}
               </span>

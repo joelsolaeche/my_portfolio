@@ -71,10 +71,10 @@ const Contact = () => {
           className="text-center mb-20"
         >
           <h2 className="text-4xl sm:text-5xl font-bold text-slate-100 mb-6 tracking-tight">
-            Let's Work Together
+            Let&apos;s Work Together
           </h2>
           <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
-            I'd love to hear from you! Whether you have an ML project in mind, want to collaborate, 
+            I&apos;d love to hear from you! Whether you have an ML project in mind, want to collaborate, 
             or just want to say hello, feel free to reach out.
           </p>
         </motion.div>

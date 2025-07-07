@@ -116,7 +116,7 @@ const Projects = () => {
             More ML Projects Coming Soon
           </h3>
           <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-            I'm always working on new ML projects and exploring different AI technologies. 
+            I&apos;m always working on new ML projects and exploring different AI technologies. 
             Check back soon for more exciting work!
           </p>
           <motion.button
@@ -125,7 +125,7 @@ const Projects = () => {
             whileTap={{ scale: 0.95 }}
             className="inline-block bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-300 shadow-lg"
           >
-            Let's Collaborate
+            Let&apos;s Collaborate
           </motion.button>
         </motion.div>
       </div>
