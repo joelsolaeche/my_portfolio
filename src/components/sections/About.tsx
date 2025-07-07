@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { PORTFOLIO_DATA, SKILLS } from '@/lib/constants';
 
@@ -57,21 +56,21 @@ const About = () => {
             <h3 className="text-2xl font-semibold text-slate-100 mb-8">My Background</h3>
             <div className="space-y-6 text-slate-300 leading-relaxed">
               <p>
-                Hello! I'm {PORTFOLIO_DATA.name}, a Machine Learning Engineer with +3 years of experience specializing 
+                Hello! I&apos;m {PORTFOLIO_DATA.name}, a Machine Learning Engineer with +3 years of experience specializing 
                 in AI technologies. Based in Buenos Aires, Argentina, I have a passion for applying machine learning 
                 to solve complex problems and create innovative solutions.
               </p>
               <p>
                 My expertise spans Python, SQL, machine learning frameworks like TensorFlow, Scikit-learn, and 
-                Keras, along with deployment technologies including Docker, AWS, FastAPI, and Streamlit. I've 
+                Keras, along with deployment technologies including Docker, AWS, FastAPI, and Streamlit. I&apos;ve 
                 worked on diverse projects from credit risk analysis to multimodal ML systems.
               </p>
               <p>
-                I'm also skilled in full stack development with React, JavaScript, Next.js, and modern web technologies, 
+                I&apos;m also skilled in full stack development with React, JavaScript, Next.js, and modern web technologies, 
                 enabling me to build complete AI-powered applications from backend models to user interfaces.
               </p>
               <p>
-                Currently, I'm enhancing AI models through coding and prompt engineering at Scale AI, while 
+                Currently, I&apos;m enhancing AI models through coding and prompt engineering at Scale AI, while 
                 contributing to real-world ML engineering projects. I hold a degree in Software Engineering 
                 from UADE and am multilingual (Spanish, English C1, Japanese N2).
               </p>

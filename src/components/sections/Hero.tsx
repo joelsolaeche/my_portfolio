@@ -92,7 +92,7 @@ const Hero = () => {
               transition={{ duration: 0.6, delay: 0.9 }}
               className="text-lg text-slate-300 mb-8 leading-relaxed max-w-lg"
             >
-              {PORTFOLIO_DATA.description}. Let's create something exceptional together.
+              {PORTFOLIO_DATA.description}. Let&apos;s create something exceptional together.
             </motion.p>
 
             {/* Action Buttons */}

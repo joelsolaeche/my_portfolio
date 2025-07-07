@@ -45,7 +45,7 @@ const Contact = () => {
       } else {
         setSubmitStatus('error');
       }
-    } catch (error) {
+    } catch {
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
@@ -97,7 +97,7 @@ const Contact = () => {
                 animate={{ opacity: 1, y: 0 }}
                 className="mb-6 p-4 bg-green-600/20 border border-green-500/50 rounded-lg text-green-400 text-sm"
               >
-                ✅ Message sent successfully! I'll get back to you within 24 hours.
+                ✅ Message sent successfully! I&apos;ll get back to you within 24 hours.
               </motion.div>
             )}
 
