@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { PROJECTS } from '@/lib/constants';
 import ProjectModal from '@/components/ui/ProjectModal';
@@ -54,11 +55,12 @@ const Projects = () => {
             >
               {/* Project Image */}
               <div className="relative overflow-hidden">
-                <div className="h-48 bg-slate-900">
-                  <img 
+                <div className="h-48 bg-slate-900 relative">
+                  <Image 
                     src={project.image} 
                     alt={project.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300"></div>
@@ -138,10 +140,12 @@ const Projects = () => {
                       className="flex items-center text-blue-400 hover:text-blue-300 transition-colors duration-200 text-sm font-medium"
                     >
                       {project.demo.includes('railway.app') ? (
-                        <img 
+                        <Image 
                           src="/images/profile/railway.png" 
                           alt="Railway" 
-                          className="w-4 h-4 mr-2 brightness-0 invert opacity-80 group-hover:opacity-100 transition-opacity duration-200"
+                          width={16}
+                          height={16}
+                          className="mr-2 brightness-0 invert opacity-80 group-hover:opacity-100 transition-opacity duration-200"
                           style={{ filter: 'brightness(0) invert(1) sepia(1) saturate(3) hue-rotate(200deg)' }}
                         />
                       ) : (

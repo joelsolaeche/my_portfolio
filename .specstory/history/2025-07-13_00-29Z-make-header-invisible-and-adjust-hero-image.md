@@ -3446,3 +3446,57 @@ This creates a much more sophisticated and international feel to your portfolio,
 
 ---
 
+_**User**_
+
+when deploying via vercel, i got these errors. [14:08:55.665] Running build in Washington, D.C., USA (East) – iad1
+[14:08:55.666] Build machine configuration: 2 cores, 8 GB
+[14:08:55.696] Cloning github.com/joelsolaeche/my_portfolio (Branch: main, Commit: c410792)
+[14:08:56.263] Cloning completed: 567.000ms
+[14:08:57.648] Restored build cache from previous deployment (2SUHZEdChBJTCmuyAXdKsqnidV1q)
+[14:09:01.793] Running "vercel build"
+[14:09:02.293] Vercel CLI 44.4.3
+[14:09:02.665] Installing dependencies...
+[14:09:05.255] 
+[14:09:05.255] added 1 package in 2s
+[14:09:05.256] 
+[14:09:05.256] 140 packages are looking for funding
+[14:09:05.256]   run `npm fund` for details
+[14:09:05.291] Detected Next.js version: 15.3.5
+[14:09:05.295] Running "npm run build"
+[14:09:05.440] 
+[14:09:05.441] > my-portfolio@0.1.0 build
+[14:09:05.441] > next build
+[14:09:05.441] 
+[14:09:06.465]    ▲ Next.js 15.3.5
+[14:09:06.466] 
+[14:09:06.493]    Creating an optimized production build ...
+[14:09:17.292]  ✓ Compiled successfully in 7.0s
+[14:09:17.299]    Linting and checking validity of types ...
+[14:09:22.027] 
+[14:09:22.027] Failed to compile.
+[14:09:22.027] 
+[14:09:22.027] ./src/components/layout/Header.tsx
+[14:09:22.027] 6:10  Error: 'NAVIGATION_ITEMS' is defined but never used.  @typescript-eslint/no-unused-vars
+[14:09:22.027] 
+[14:09:22.027] ./src/components/sections/Projects.tsx
+[14:09:22.027] 58:19  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+[14:09:22.032] 141:25  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+[14:09:22.032] 
+[14:09:22.032] ./src/components/ui/ProjectModal.tsx
+[14:09:22.032] 21:47  Error: 'item' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+[14:09:22.032] 21:53  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+[14:09:22.032] 55:15  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+[14:09:22.032] 
+[14:09:22.033] info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules
+[14:09:22.081] Error: Command "npm run build" exited with 1
+[14:09:23.346] 
+[14:09:26.497] Exiting build container
+
+---
+
+_**Assistant**_
+
+
+
+---
+

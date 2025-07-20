@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { NAVIGATION_ITEMS, PORTFOLIO_DATA } from '@/lib/constants';
+import { PORTFOLIO_DATA } from '@/lib/constants';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { USFlag, JapanFlag } from '@/components/ui/FlagIcons';
 

@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 import { PROJECTS } from '@/lib/constants';
@@ -18,7 +19,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, project })
   if (!isOpen) return null;
 
   // Get language-specific content
-  const getLocalizedContent = (field: string, item: any = null) => {
+  const getLocalizedContent = (field: string) => {
     if (language === 'ja') {
       if (field === 'impact' && project.impactJa) return project.impactJa;
       if (field === 'architecture' && project.architectureJa) return project.architectureJa;
@@ -51,11 +52,12 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, project })
         >
           {/* Header */}
           <div className="relative">
-            <div className="h-48 bg-gradient-to-br from-blue-600 to-purple-600 overflow-hidden">
-              <img 
+            <div className="h-48 bg-gradient-to-br from-blue-600 to-purple-600 overflow-hidden relative">
+              <Image 
                 src={project.image} 
                 alt={project.title}
-                className="w-full h-full object-cover opacity-80"
+                fill
+                className="object-cover opacity-80"
               />
               <div className="absolute inset-0 bg-gradient-to-r from-blue-600/80 to-purple-600/80"></div>
             </div>
