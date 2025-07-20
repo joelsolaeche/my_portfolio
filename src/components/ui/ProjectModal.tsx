@@ -18,19 +18,61 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, project })
   
   if (!isOpen) return null;
 
-  // Get language-specific content
-  const getLocalizedContent = (field: string) => {
-    if (language === 'ja') {
-      if (field === 'impact' && project.impactJa) return project.impactJa;
-      if (field === 'architecture' && project.architectureJa) return project.architectureJa;
-      if (field === 'features' && project.featuresJa) return project.featuresJa;
-      if (field === 'highlights' && project.highlightsJa) return project.highlightsJa;
+  // Get impact content with proper typing
+  const getImpactContent = () => {
+    if (language === 'ja' && 'impactJa' in project && project.impactJa) {
+      return project.impactJa as {
+        businessProblem: string;
+        technicalAchievement: string;
+        results: readonly string[];
+      };
     }
-    // Fallback to English
-    if (field === 'impact') return project.impact;
-    if (field === 'architecture') return project.architecture;
-    if (field === 'features') return project.features;
-    if (field === 'highlights') return project.highlights;
+    if ('impact' in project && project.impact) {
+      return project.impact as {
+        businessProblem: string;
+        technicalAchievement: string;
+        results: readonly string[];
+      };
+    }
+    return null;
+  };
+
+  // Get architecture content with proper typing
+  const getArchitectureContent = () => {
+    if (language === 'ja' && 'architectureJa' in project && project.architectureJa) {
+      return project.architectureJa as {
+        before: readonly string[];
+        after: readonly string[];
+      };
+    }
+    if ('architecture' in project && project.architecture) {
+      return project.architecture as {
+        before: readonly string[];
+        after: readonly string[];
+      };
+    }
+    return null;
+  };
+
+  // Get features content
+  const getFeaturesContent = () => {
+    if (language === 'ja' && 'featuresJa' in project && project.featuresJa) {
+      return project.featuresJa;
+    }
+    if ('features' in project && project.features) {
+      return project.features;
+    }
+    return null;
+  };
+
+  // Get highlights content
+  const getHighlightsContent = () => {
+    if (language === 'ja' && 'highlightsJa' in project && project.highlightsJa) {
+      return project.highlightsJa;
+    }
+    if ('highlights' in project && project.highlights) {
+      return project.highlights;
+    }
     return null;
   };
 
@@ -84,7 +126,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, project })
             <div className="space-y-8">
               
               {/* Impact Section */}
-              {project.impact && (
+              {'impact' in project && (
                 <div>
                   <h3 className="text-xl font-bold text-slate-100 mb-4 flex items-center">
                     🎯 {t.projects.modal.projectImpact}
@@ -93,20 +135,20 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, project })
                     <div>
                       <h4 className="font-semibold text-blue-400 mb-2">{t.projects.modal.businessProblem}</h4>
                       <p className="text-slate-300 text-sm leading-relaxed">
-                        {getLocalizedContent('impact')?.businessProblem}
+                        {getImpactContent()?.businessProblem}
                       </p>
                     </div>
                     <div>
                       <h4 className="font-semibold text-blue-400 mb-2">{t.projects.modal.technicalAchievement}</h4>
                       <p className="text-slate-300 text-sm leading-relaxed">
-                        {getLocalizedContent('impact')?.technicalAchievement}
+                        {getImpactContent()?.technicalAchievement}
                       </p>
                     </div>
                   </div>
                   <div className="mt-4">
                     <h4 className="font-semibold text-blue-400 mb-2">{t.projects.modal.keyResults}</h4>
                     <ul className="list-disc list-inside text-slate-300 text-sm space-y-1">
-                      {getLocalizedContent('impact')?.results?.map((result: string, index: number) => (
+                      {getImpactContent()?.results?.map((result: string, index: number) => (
                         <li key={index}>{result}</li>
                       ))}
                     </ul>
@@ -115,7 +157,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, project })
               )}
               
               {/* Architecture Section */}
-              {project.architecture && (
+              {'architecture' in project && (
                 <div>
                   <h3 className="text-xl font-bold text-slate-100 mb-4 flex items-center">
                     🏗️ {t.projects.modal.technicalArchitecture}
@@ -124,7 +166,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, project })
                     <div>
                       <h4 className="font-semibold text-red-400 mb-3">{t.projects.modal.beforeManual} ❌</h4>
                       <ul className="space-y-2 text-slate-300 text-sm">
-                        {getLocalizedContent('architecture')?.before?.map((item: string, index: number) => (
+                        {getArchitectureContent()?.before?.map((item: string, index: number) => (
                           <li key={index} className="flex items-center">
                             <span className="w-2 h-2 bg-red-400 rounded-full mr-3 flex-shrink-0"></span>
                             {item}
@@ -135,7 +177,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, project })
                     <div>
                       <h4 className="font-semibold text-green-400 mb-3">{t.projects.modal.afterAutomated} ✅</h4>
                       <ul className="space-y-2 text-slate-300 text-sm">
-                        {getLocalizedContent('architecture')?.after?.map((item: string, index: number) => (
+                        {getArchitectureContent()?.after?.map((item: string, index: number) => (
                           <li key={index} className="flex items-center">
                             <span className="w-2 h-2 bg-green-400 rounded-full mr-3 flex-shrink-0"></span>
                             {item}
@@ -165,13 +207,13 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, project })
               </div>
               
               {/* Key Features */}
-              {project.features && (
+              {'features' in project && (
                 <div>
                   <h3 className="text-xl font-bold text-slate-100 mb-4 flex items-center">
                     🚀 {t.projects.modal.keyFeatures}
                   </h3>
                   <div className="grid md:grid-cols-2 gap-3">
-                    {getLocalizedContent('features')?.map((feature: string, index: number) => (
+                    {getFeaturesContent()?.map((feature: string, index: number) => (
                       <div key={index} className="flex items-center text-slate-300 text-sm">
                         <span className="text-green-400 mr-2">✅</span>
                         {feature}
@@ -182,13 +224,13 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, project })
               )}
               
               {/* Highlights */}
-              {project.highlights && (
+              {'highlights' in project && (
                 <div>
                   <h3 className="text-xl font-bold text-slate-100 mb-4 flex items-center">
                     💡 {t.projects.modal.whatMakesSpecial}
                   </h3>
                   <ul className="space-y-2">
-                    {getLocalizedContent('highlights')?.map((highlight: string, index: number) => (
+                    {getHighlightsContent()?.map((highlight: string, index: number) => (
                       <li key={index} className="text-slate-300 text-sm leading-relaxed">
                         <span className="text-yellow-400 mr-2">⭐</span>
                         {highlight}

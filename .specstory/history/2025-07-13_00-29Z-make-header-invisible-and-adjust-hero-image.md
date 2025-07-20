@@ -3496,6 +3496,1031 @@ when deploying via vercel, i got these errors. [14:08:55.665] Running build in W
 
 _**Assistant**_
 
+<think><details><summary>Thought Process</summary>The user is getting build errors when deploying to Vercel. Let me analyze the errors:
+
+1. `Header.tsx`: 'NAVIGATION_ITEMS' is defined but never used - this is because we replaced it with the translated navigation items
+2. `Projects.tsx`: Using `<img>` instead of `<Image />` from next/image - performance warning
+3. `ProjectModal.tsx`: 
+   - 'item' parameter is unused in the function
+   - Using 'any' type which is not allowed
+   - Using `<img>` instead of `<Image />`
+
+I need to fix these linting errors to allow the build to pass.</details></think>
+
+---
+
+I can see the build errors from Vercel. Let me fix these linting issues quickly:
+
+---
+
+```diff
+  import Link from 'next/link';
+  import { motion } from 'framer-motion';
+- import { NAVIGATION_ITEMS, PORTFOLIO_DATA } from '@/lib/constants';
++ import { PORTFOLIO_DATA } from '@/lib/constants';
+  import { useLanguage } from '@/contexts/LanguageContext';
+  import { USFlag, JapanFlag } from '@/components/ui/FlagIcons';
+```
+
+---
+
+```diff
+  
+    // Get language-specific content
+-   const getLocalizedContent = (field: string, item: any = null) => {
++   const getLocalizedContent = (field: string) => {
+      if (language === 'ja') {
+        if (field === 'impact' && project.impactJa) return project.impactJa;
+```
+
+---
+
+```diff
+  
+  import React, { useState } from 'react';
++ import Image from 'next/image';
+  import { motion } from 'framer-motion';
+  import { PROJECTS } from '@/lib/constants';
+```
+
+```diff
+                <div className="relative overflow-hidden">
+                  <div className="h-48 bg-slate-900">
+-                   <img 
++                   <Image 
+                      src={project.image} 
+                      alt={project.title}
+-                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
++                     layout="fill"
++                     objectFit="cover"
++                     className="w-full h-full group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+```
+
+```diff
+                      >
+                        {project.demo.includes('railway.app') ? (
+-                         <img 
++                         <Image 
+                            src="/images/profile/railway.png" 
+                            alt="Railway" 
++                           width={16}
++                           height={16}
+                            className="w-4 h-4 mr-2 brightness-0 invert opacity-80 group-hover:opacity-100 transition-opacity duration-200"
+                            style={{ filter: 'brightness(0) invert(1) sepia(1) saturate(3) hue-rotate(200deg)' }}
+```
+
+---
+
+```diff
+                {/* Project Image */}
+                <div className="relative overflow-hidden">
+-                 <div className="h-48 bg-slate-900">
++                 <div className="h-48 bg-slate-900 relative">
+                    <Image 
+                      src={project.image} 
+                      alt={project.title}
+-                     layout="fill"
+-                     objectFit="cover"
+-                     className="w-full h-full group-hover:scale-105 transition-transform duration-300"
++                     fill
++                     className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+```
+
+---
+
+```diff
+                            width={16}
+                            height={16}
+-                           className="w-4 h-4 mr-2 brightness-0 invert opacity-80 group-hover:opacity-100 transition-opacity duration-200"
++                           className="mr-2 brightness-0 invert opacity-80 group-hover:opacity-100 transition-opacity duration-200"
+                            style={{ filter: 'brightness(0) invert(1) sepia(1) saturate(3) hue-rotate(200deg)' }}
+                          />
+```
+
+---
+
+```diff
+  
+  import React from 'react';
++ import Image from 'next/image';
+  import { motion, AnimatePresence } from 'framer-motion';
+  import { X } from 'lucide-react';
+```
+
+```diff
+            <div className="relative">
+              <div className="h-48 bg-gradient-to-br from-blue-600 to-purple-600 overflow-hidden">
+-               <img 
++               <Image 
+                  src={project.image} 
+                  alt={project.title}
+-                 className="w-full h-full object-cover opacity-80"
++                 layout="fill"
++                 objectFit="cover"
++                 className="opacity-80"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-600/80 to-purple-600/80"></div>
+```
+
+---
+
+```diff
+            {/* Header */}
+            <div className="relative">
+-             <div className="h-48 bg-gradient-to-br from-blue-600 to-purple-600 overflow-hidden">
++             <div className="h-48 bg-gradient-to-br from-blue-600 to-purple-600 overflow-hidden relative">
+                <Image 
+                  src={project.image} 
+                  alt={project.title}
+-                 layout="fill"
+-                 objectFit="cover"
+-                 className="opacity-80"
++                 fill
++                 className="object-cover opacity-80"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-600/80 to-purple-600/80"></div>
+```
+
+---
+
+<think><details><summary>Thought Process</summary>Perfect! I've fixed all the linting errors that were causing the Vercel build to fail:
+
+1. **Header.tsx**: Removed unused `NAVIGATION_ITEMS` import
+2. **ProjectModal.tsx**: 
+   - Removed unused `item` parameter from `getLocalizedContent` function
+   - Removed the `any` type by removing the unused parameter
+   - Added `Image` import and replaced `img` with `Image` component
+3. **Projects.tsx**: 
+   - Added `Image` import
+   - Replaced both `img` elements with `Image` components
+   - Used proper Next.js 15 syntax (`fill` instead of `layout="fill"`)
+
+The build should now pass since I've addressed all the TypeScript errors and warnings:
+
+- ✅ Removed unused variables
+- ✅ Fixed TypeScript `any` type usage  
+- ✅ Replaced `<img>` with Next.js `<Image />` for better performance
+- ✅ Used proper Next.js 15 Image component syntax
+
+This should resolve the Vercel deployment issues.</details></think>
+
+---
+
+Perfect! I've fixed all the linting errors that were causing your Vercel build to fail. Here's what I addressed:
+
+## ✅ **Fixed Linting Errors:**
+
+### **1. Header.tsx:**
+- **Removed unused import** - `NAVIGATION_ITEMS` was no longer needed since we're using translated navigation
+
+### **2. ProjectModal.tsx:**
+- **Removed unused parameter** - `item` parameter in `getLocalizedContent` function
+- **Fixed TypeScript `any` type** - Removed the problematic parameter
+- **Replaced `<img>` with `<Image />`** - Better performance and SEO
+
+### **3. Projects.tsx:**
+- **Added Image import** from Next.js
+- **Replaced both `<img>` elements** with optimized `<Image />` components
+- **Used proper Next.js 15 syntax** - `fill` instead of deprecated `layout="fill"`
+
+## 🚀 **Performance Improvements:**
+
+### **Next.js Image Optimization:**
+- **Automatic optimization** - Images are compressed and served in modern formats
+- **Better loading performance** - Lazy loading and proper sizing
+- **Improved LCP scores** - Critical for SEO and user experience
+- **Bandwidth savings** - Automatically optimized for different devices
+
+### **Clean Code:**
+- **No unused variables** - Cleaner TypeScript compilation
+- **Proper typing** - No more `any` types
+- **Modern Next.js patterns** - Using latest Image API
+
+## 🔧 **Ready for Deployment:**
+
+Your build should now pass on Vercel! The errors were:
+- ❌ `NAVIGATION_ITEMS` unused → ✅ **Fixed**
+- ❌ `<img>` performance warnings → ✅ **Fixed with `<Image />`**
+- ❌ TypeScript `any` type → ✅ **Fixed**
+- ❌ Unused parameters → ✅ **Cleaned up**
+
+Try redeploying to Vercel now - the build should complete successfully! 🎉
+
+---
+
+_**User**_
+
+now this [14:13:45.680] Running build in Washington, D.C., USA (East) – iad1
+[14:13:45.681] Build machine configuration: 2 cores, 8 GB
+[14:13:45.719] Cloning github.com/joelsolaeche/my_portfolio (Branch: main, Commit: 0024adb)
+[14:13:47.099] Cloning completed: 1.378s
+[14:13:49.237] Restored build cache from previous deployment (DcyKs2Thc1gdd1HtJVfHLE7xhxVp)
+[14:13:49.679] Running "vercel build"
+[14:13:50.569] Vercel CLI 44.4.3
+[14:13:51.419] Installing dependencies...
+[14:13:54.144] 
+[14:13:54.144] added 1 package in 2s
+[14:13:54.145] 
+[14:13:54.145] 140 packages are looking for funding
+[14:13:54.145]   run `npm fund` for details
+[14:13:54.194] Detected Next.js version: 15.3.5
+[14:13:54.198] Running "npm run build"
+[14:13:54.313] 
+[14:13:54.313] > my-portfolio@0.1.0 build
+[14:13:54.313] > next build
+[14:13:54.313] 
+[14:13:55.345]    ▲ Next.js 15.3.5
+[14:13:55.346] 
+[14:13:55.378]    Creating an optimized production build ...
+[14:14:06.261]  ✓ Compiled successfully in 7.0s
+[14:14:06.268]    Linting and checking validity of types ...
+[14:14:13.098] Failed to compile.
+[14:14:13.098] 
+[14:14:13.099] ./src/components/ui/ProjectModal.tsx:24:41
+[14:14:13.099] Type error: Property 'impactJa' does not exist on type '{ readonly id: 1; readonly title: "Credit Risk Analysis Predictor"; readonly titleJa: "信用リスク分析予測システム"; readonly description: "ML model to predict default risk using supervised learning, deep learning, and financial data modeling"; ... 13 more ...; readonly highlightsJa: readonly [...]; } | { ...; } | { ...; } | { .....'.
+[14:14:13.099]   Property 'impactJa' does not exist on type '{ readonly id: 2; readonly title: "Multimodal E-Commerce Classifier"; readonly titleJa: "マルチモーダルEコマース分類器"; readonly description: "Machine learning model that classifies e-commerce products by integrating NLP and Computer Vision"; ... 4 more ...; readonly demo: "#"; }'.
+[14:14:13.099] 
+[14:14:13.099] [0m [90m 22 |[39m   [36mconst[39m getLocalizedContent [33m=[39m (field[33m:[39m string) [33m=>[39m {[0m
+[14:14:13.100] [0m [90m 23 |[39m     [36mif[39m (language [33m===[39m [32m'ja'[39m) {[0m
+[14:14:13.100] [0m[31m[1m>[22m[39m[90m 24 |[39m       [36mif[39m (field [33m===[39m [32m'impact'[39m [33m&&[39m project[33m.[39mimpactJa) [36mreturn[39m project[33m.[39mimpactJa[33m;[39m[0m
+[14:14:13.100] [0m [90m    |[39m                                         [31m[1m^[22m[39m[0m
+[14:14:13.100] [0m [90m 25 |[39m       [36mif[39m (field [33m===[39m [32m'architecture'[39m [33m&&[39m project[33m.[39marchitectureJa) [36mreturn[39m project[33m.[39marchitectureJa[33m;[39m[0m
+[14:14:13.100] [0m [90m 26 |[39m       [36mif[39m (field [33m===[39m [32m'features'[39m [33m&&[39m project[33m.[39mfeaturesJa) [36mreturn[39m project[33m.[39mfeaturesJa[33m;[39m[0m
+[14:14:13.100] [0m [90m 27 |[39m       [36mif[39m (field [33m===[39m [32m'highlights'[39m [33m&&[39m project[33m.[39mhighlightsJa) [36mreturn[39m project[33m.[39mhighlightsJa[33m;[39m[0m
+[14:14:13.120] Next.js build worker exited with code: 1 and signal: null
+[14:14:13.139] Error: Command "npm run build" exited with 1
+[14:14:13.505] 
+[14:14:17.397] Exiting build container
+
+---
+
+_**Assistant**_
+
+<think><details><summary>Thought Process</summary>The error shows that TypeScript is complaining about properties not existing on all project types in the union type. The issue is that not all projects have the Japanese properties like `impactJa`, `architectureJa`, etc. 
+
+Looking at the error, it seems like some projects in the `PROJECTS` array don't have these Japanese properties defined, so TypeScript is complaining when we try to access them.
+
+I need to check the constants file to see which projects are missing these properties, and either add them or fix the type checking in the modal component to handle optional properties correctly.
+
+Let me first check the constants file to see the current structure of the projects.</details></think>
+
+---
+
+I can see there's a TypeScript error because not all projects have the Japanese translation properties defined. Let me check the current state of the constants file and fix the type issues:
+
+---
+
+Read file: src/lib/constants.ts
+
+---
+
+<think><details><summary>Thought Process</summary>I can see the issue. The first project (Credit Risk) has all the Japanese properties defined, but I need to check if the other projects have them too. Let me continue reading the constants file to see the full structure.</details></think>
+
+---
+
+Read file: src/lib/constants.ts
+
+---
+
+<think><details><summary>Thought Process</summary>I can see the issue now. The second project (Multimodal E-Commerce Classifier) doesn't have the detailed Japanese properties like `impactJa`, `architectureJa`, `featuresJa`, and `highlightsJa`. It only has basic properties.
+
+Let me continue reading to see the full structure and then I'll need to either:
+1. Add the missing Japanese properties to all projects, OR
+2. Fix the TypeScript types to handle optional properties properly
+
+Let me first see the rest of the file to understand the complete structure.</details></think>
+
+---
+
+Read file: src/lib/constants.ts
+
+---
+
+<think><details><summary>Thought Process</summary>Now I can see the issue clearly. The PROJECTS array has mixed types:
+
+1. Project 1 (Credit Risk) - Has all Japanese properties: `impactJa`, `architectureJa`, `featuresJa`, `highlightsJa`
+2. Project 2 (Multimodal E-Commerce Classifier) - Only has basic properties, missing the detailed Japanese properties
+3. Project 3 (E-Commerce Data Pipeline ELT) - Has all Japanese properties 
+4. Project 4 (AI Image Classifier Web App) - Only has basic properties, missing the detailed Japanese properties
+
+This creates a TypeScript union type issue. When we try to access `project.impactJa` on a project that doesn't have that property, TypeScript throws an error.
+
+I need to fix this by making the ProjectModal component handle optional properties correctly. The easiest approach is to use optional chaining and type guards to safely access these properties.
+
+Let me fix the ProjectModal component:</details></think>
+
+---
+
+I can see the issue! Some projects in the `PROJECTS` array don't have the detailed Japanese properties (`impactJa`, `architectureJa`, etc.) while others do. This creates a TypeScript union type error. Let me fix the `ProjectModal` component to handle optional properties correctly:
+
+---
+
+```diff
+    const getLocalizedContent = (field: string) => {
+      if (language === 'ja') {
+-       if (field === 'impact' && project.impactJa) return project.impactJa;
+-       if (field === 'architecture' && project.architectureJa) return project.architectureJa;
+-       if (field === 'features' && project.featuresJa) return project.featuresJa;
+-       if (field === 'highlights' && project.highlightsJa) return project.highlightsJa;
++       if (field === 'impact' && 'impactJa' in project && project.impactJa) return project.impactJa;
++       if (field === 'architecture' && 'architectureJa' in project && project.architectureJa) return project.architectureJa;
++       if (field === 'features' && 'featuresJa' in project && project.featuresJa) return project.featuresJa;
++       if (field === 'highlights' && 'highlightsJa' in project && project.highlightsJa) return project.highlightsJa;
+      }
+      // Fallback to English
+-     if (field === 'impact') return project.impact;
+-     if (field === 'architecture') return project.architecture;
+-     if (field === 'features') return project.features;
+-     if (field === 'highlights') return project.highlights;
++     if (field === 'impact' && 'impact' in project) return project.impact;
++     if (field === 'architecture' && 'architecture' in project) return project.architecture;
++     if (field === 'features' && 'features' in project) return project.features;
++     if (field === 'highlights' && 'highlights' in project) return project.highlights;
+      return null;
+    };
+```
+
+---
+
+<think><details><summary>Thought Process</summary>Good! Now I need to also update the parts of the modal that render these sections to handle cases where the properties might not exist. Let me check the rest of the ProjectModal component to see how these sections are rendered and make sure they handle the optional properties correctly.</details></think>
+
+---
+
+Read file: src/components/ui/ProjectModal.tsx
+
+---
+
+<think><details><summary>Thought Process</summary>I need to update the conditional checks to use the 'in' operator for TypeScript safety. The current checks like `project.impact` need to be changed to `'impact' in project` to properly check if the property exists on the project object.</details></think>
+
+---
+
+```diff
+                
+                {/* Impact Section */}
+-               {project.impact && (
++               {'impact' in project && (
+                  <div>
+                    <h3 className="text-xl font-bold text-slate-100 mb-4 flex items-center">
+```
+
+```diff
+                
+                {/* Architecture Section */}
+-               {project.architecture && (
++               {'architecture' in project && (
+                  <div>
+                    <h3 className="text-xl font-bold text-slate-100 mb-4 flex items-center">
+```
+
+```diff
+                
+                {/* Key Features */}
+-               {project.features && (
++               {'features' in project && (
+                  <div>
+                    <h3 className="text-xl font-bold text-slate-100 mb-4 flex items-center">
+```
+
+```diff
+                
+                {/* Highlights */}
+-               {project.highlights && (
++               {'highlights' in project && (
+                  <div>
+                    <h3 className="text-xl font-bold text-slate-100 mb-4 flex items-center">
+```
+
+---
+
+<think><details><summary>Thought Process</summary>Good! The apply model automatically updated all the sections. Now let me check if there are any other sections that need updating by reading the rest of the file to make sure everything is consistent.</details></think>
+
+---
+
+Read file: src/components/ui/ProjectModal.tsx
+
+---
+
+<think><details><summary>Thought Process</summary>
+
+
+
+Perfect! All the sections are now properly updated with the correct TypeScript property checking using the 'in' operator. Now let me run a test build locally to ensure everything compiles correctly.</details></think>
+
+---
+
+Perfect! I've fixed all the TypeScript errors in the `ProjectModal` component. Let me run a quick build test to ensure everything compiles correctly now:
+
+---
+
+```bash
+npm run build
+```
+
+```
+PS C:\Users\joel_\OneDrive\Escritorio\Portfolio\my-portfolio> npm run build
+
+> my-portfolio@0.1.0 build
+> next build
+
+   ▲ Next.js 15.3.5
+
+   Creating an optimized production build ...
+```
+
+---
+
+<think><details><summary>Thought Process</summary>
+
+
+
+Let me wait for the build to complete and then check if there are any remaining errors. Since the command was popped out, let me run a simple check to see if the build completed successfully.</details></think>
+
+---
+
+Let me check if the build completed successfully:
+
+---
+
+```bash
+echo "Checking build status..." && timeout 2 > nul && echo "Build should be complete now"
+```
+
+```
+PS C:\Users\joel_\OneDrive\Escritorio\Portfolio\my-portfolio> echo "Checking bui
+ld status..." && timeout 
+2 > nul && echo "Build should be complete now"
+                         PS C:\Users\joel_\OneDrive\Escritorio\Portfolio\my-port
+folio> echo "Checking build status..." && timeout 
+2 > nul && echo "Build should be complete now"
+                         
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+En línea: 1 Carácter: 33
+
+```
+
+---
+
+<think><details><summary>Thought Process</summary>
+
+
+
+The previous command seems to have some formatting issues. Let me try running a new build command to test our fixes:</details></think>
+
+---
+
+Let me run the build command again to verify our fixes:
+
+---
+
+```bash
+npm run build
+```
+
+```
+PS C:\Users\joel_\OneDrive\Escritorio\Portfolio\my-portfolio> npm run build
+
+> my-portfolio@0.1.0 build
+> next build
+
+   ▲ Next.js 15.3.5
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 2000ms
+   Linting and checking validity of types  .Failed to compile.
+
+./src/components/ui/ProjectModal.tsx:96:57
+Type error: Property 'businessProblem' does not exist on type 'readonly ["Multi-Model ML Pipeline: Logist
+ic Regression, XGBoost, LightGBM, Random Forest", "Real-Time Processing: <200ms response time with Redis 
+message queue", "Advanced Feature Engineering: 15 core risk factors across demographics and finance", ...
+ 4 more ..., "Instant Decision Engine: Automated approval/rejecti...'.
+  Property 'businessProblem' does not exist on type 'readonly ["Multi-Model ML Pipeline: Logistic Regress
+ion, XGBoost, LightGBM, Random Forest", "Real-Time Processing: <200ms response time with Redis message qu
+eue", "Advanced Feature Engineering: 15 core risk factors across demographics and finance", ... 4 more ..
+., "Instant Decision Engine: Automated approval/rejecti...'.
+
+  94 |                       <h4 className="font-semibold text-blue-400 mb-2">{t.projects.modal.businessP
+roblem}</h4>
+  95 |                       <p className="text-slate-300 text-sm leading-relaxed">
+> 96 |                         {getLocalizedContent('impact')?.businessProblem}
+     |                                                         ^
+  97 |                       </p>
+  98 |                     </div>
+  99 |                     <div>
+Next.js build worker exited with code: 1 and signal: null
+PS C:\Users\joel_\OneDrive\Escritorio\Portfolio\my-portfolio>
+```
+
+---
+
+<think><details><summary>Thought Process</summary>
+
+
+
+I can see there's still a TypeScript error. It seems like the `getLocalizedContent` function is returning the wrong type. The error suggests that it's returning an array instead of an object with `businessProblem` property. Let me check and fix this issue.
+
+The problem is likely that the function is returning the arrays (features, highlights) instead of the complex objects (impact, architecture) in some cases. Let me fix this by being more specific about the return types.</details></think>
+
+---
+
+I can see there's still a TypeScript error. The `getLocalizedContent` function is returning the wrong type. Let me fix this by being more specific about the return types:
+
+---
+
+```diff
+    if (!isOpen) return null;
+  
+-   // Get language-specific content
+-   const getLocalizedContent = (field: string) => {
++   // Get language-specific content for impact and architecture
++   const getComplexLocalizedContent = (field: 'impact' | 'architecture') => {
+      if (language === 'ja') {
+        if (field === 'impact' && 'impactJa' in project && project.impactJa) return project.impactJa;
+        if (field === 'architecture' && 'architectureJa' in project && project.architectureJa) return project.architectureJa;
++     }
++     // Fallback to English
++     if (field === 'impact' && 'impact' in project) return project.impact;
++     if (field === 'architecture' && 'architecture' in project) return project.architecture;
++     return null;
++   };
++ 
++   // Get language-specific content for features and highlights (arrays)
++   const getArrayLocalizedContent = (field: 'features' | 'highlights') => {
++     if (language === 'ja') {
+        if (field === 'features' && 'featuresJa' in project && project.featuresJa) return project.featuresJa;
+        if (field === 'highlights' && 'highlightsJa' in project && project.highlightsJa) return project.highlightsJa;
+      }
+      // Fallback to English
+-     if (field === 'impact' && 'impact' in project) return project.impact;
+-     if (field === 'architecture' && 'architecture' in project) return project.architecture;
+      if (field === 'features' && 'features' in project) return project.features;
+      if (field === 'highlights' && 'highlights' in project) return project.highlights;
+```
+
+```diff
+                        <h4 className="font-semibold text-blue-400 mb-2">{t.projects.modal.businessProblem}</h4>
+                        <p className="text-slate-300 text-sm leading-relaxed">
+-                         {getLocalizedContent('impact')?.businessProblem}
++                         {getComplexLocalizedContent('impact')?.businessProblem}
+                        </p>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-blue-400 mb-2">{t.projects.modal.technicalAchievement}</h4>
+                        <p className="text-slate-300 text-sm leading-relaxed">
+-                         {getLocalizedContent('impact')?.technicalAchievement}
++                         {getComplexLocalizedContent('impact')?.technicalAchievement}
+                        </p>
+                      </div>
+```
+
+```diff
+                      <h4 className="font-semibold text-blue-400 mb-2">{t.projects.modal.keyResults}</h4>
+                      <ul className="list-disc list-inside text-slate-300 text-sm space-y-1">
+-                       {getLocalizedContent('impact')?.results?.map((result: string, index: number) => (
++                       {getComplexLocalizedContent('impact')?.results?.map((result: string, index: number) => (
+                          <li key={index}>{result}</li>
+                        ))}
+```
+
+```diff
+                        <h4 className="font-semibold text-red-400 mb-3">{t.projects.modal.beforeManual} ❌</h4>
+                        <ul className="space-y-2 text-slate-300 text-sm">
+-                         {getLocalizedContent('architecture')?.before?.map((item: string, index: number) => (
++                         {getComplexLocalizedContent('architecture')?.before?.map((item: string, index: number) => (
+                            <li key={index} className="flex items-center">
+                              <span className="w-2 h-2 bg-red-400 rounded-full mr-3 flex-shrink-0"></span>
+```
+
+```diff
+                        <h4 className="font-semibold text-green-400 mb-3">{t.projects.modal.afterAutomated} ✅</h4>
+                        <ul className="space-y-2 text-slate-300 text-sm">
+-                         {getLocalizedContent('architecture')?.after?.map((item: string, index: number) => (
++                         {getComplexLocalizedContent('architecture')?.after?.map((item: string, index: number) => (
+                            <li key={index} className="flex items-center">
+                              <span className="w-2 h-2 bg-green-400 rounded-full mr-3 flex-shrink-0"></span>
+```
+
+```diff
+                    </h3>
+                    <div className="grid md:grid-cols-2 gap-3">
+-                     {getLocalizedContent('features')?.map((feature: string, index: number) => (
++                     {getArrayLocalizedContent('features')?.map((feature: string, index: number) => (
+                        <div key={index} className="flex items-center text-slate-300 text-sm">
+                          <span className="text-green-400 mr-2">✅</span>
+```
+
+```diff
+                    </h3>
+                    <ul className="space-y-2">
+-                     {getLocalizedContent('highlights')?.map((highlight: string, index: number) => (
++                     {getArrayLocalizedContent('highlights')?.map((highlight: string, index: number) => (
+                        <li key={index} className="text-slate-300 text-sm leading-relaxed">
+                          <span className="text-yellow-400 mr-2">⭐</span>
+```
+
+---
+
+<think><details><summary>Thought Process</summary>Perfect! I've now separated the functions to handle different return types properly. This should resolve the TypeScript errors. Let me run the build again to verify:</details></think>
+
+---
+
+Perfect! Now let me test the build again to ensure all TypeScript errors are resolved:
+
+---
+
+```bash
+npm run build
+```
+
+```
+PS C:\Users\joel_\OneDrive\Escritorio\Portfolio\my-portfolio> npm run build   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+> my-portfolio@0.1.0 build
+> next build
+
+   ▲ Next.js 15.3.5
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 2000ms
+   Linting and checking validity of types  ...Failed to compile.
+
+./src/components/ui/ProjectModal.tsx:104:64
+Type error: Property 'businessProblem' does not exist on type '{ readonly busine
+ssProblem: "Traditional l
+oan approval processes are time-consuming (3-5 days), subjective with human bias
+, costly with high operational overhead, and risk-prone with inconsistent risk a
+ssessment leading to higher default rates."; readonly technicalAchievement: "Bui
+lt intelligent credit risk assessme...'.                                     Pro
+perty 'businessProblem' does not exist on type '{ readonly before: readonly ["Ma
+nual application rev
+iew → 3-5 days", "Subjective human assessment → Variable consistency", "High ope
+rational overhead → $150K+ annual costs", "Inconsistent risk evaluation → 70-75%
+ accuracy", "Total: High cost, slow, error-prone process"]; readonly after: read
+only [...]; }'.                                                            
+  102 |                       <h4 className="font-semibold text-blue-400 mb-2">{
+t.projects.modal.business
+Problem}</h4>
+                           103 |                       <p className="text-slate-
+300 text-sm leading-relaxed">
+> 104 |                         {getComplexLocalizedContent('impact')?.businessP
+roblem}
+      |                                                                ^
+  105 |                       </p>
+  106 |                     </div>
+  107 |                     <div>
+Next.js build worker exited with code: 1 and signal: null
+
+```
+
+---
+
+<think><details><summary>Thought Process</summary>The error indicates there's still a type issue. The function is returning different types in a union, and TypeScript can't guarantee which properties exist. I need to be more specific about the return types or use type assertions. Let me fix this by using proper type guards and optional chaining.
+
+Let me check the current state of the function and fix the issue properly.</details></think>
+
+---
+
+I still see a TypeScript error. The issue is that the function returns a union type and TypeScript can't guarantee which properties exist. Let me fix this by using type assertions and better type handling:
+
+---
+
+```diff
+    if (!isOpen) return null;
+  
+-   // Get language-specific content for impact and architecture
+-   const getComplexLocalizedContent = (field: 'impact' | 'architecture') => {
+-     if (language === 'ja') {
+-       if (field === 'impact' && 'impactJa' in project && project.impactJa) return project.impactJa;
+-       if (field === 'architecture' && 'architectureJa' in project && project.architectureJa) return project.architectureJa;
+-     }
+-     // Fallback to English
+-     if (field === 'impact' && 'impact' in project) return project.impact;
+-     if (field === 'architecture' && 'architecture' in project) return project.architecture;
++   // Get impact content with proper typing
++   const getImpactContent = () => {
++     if (language === 'ja' && 'impactJa' in project && project.impactJa) {
++       return project.impactJa as {
++         businessProblem: string;
++         technicalAchievement: string;
++         results: readonly string[];
++       };
++     }
++     if ('impact' in project && project.impact) {
++       return project.impact as {
++         businessProblem: string;
++         technicalAchievement: string;
++         results: readonly string[];
++       };
++     }
++     return null;
++   };
++ 
++   // Get architecture content with proper typing
++   const getArchitectureContent = () => {
++     if (language === 'ja' && 'architectureJa' in project && project.architectureJa) {
++       return project.architectureJa as {
++         before: readonly string[];
++         after: readonly string[];
++       };
++     }
++     if ('architecture' in project && project.architecture) {
++       return project.architecture as {
++         before: readonly string[];
++         after: readonly string[];
++       };
++     }
++     return null;
++   };
++ 
++   // Get features content
++   const getFeaturesContent = () => {
++     if (language === 'ja' && 'featuresJa' in project && project.featuresJa) {
++       return project.featuresJa;
++     }
++     if ('features' in project && project.features) {
++       return project.features;
++     }
+      return null;
+    };
+  
+-   // Get language-specific content for features and highlights (arrays)
+-   const getArrayLocalizedContent = (field: 'features' | 'highlights') => {
+-     if (language === 'ja') {
+-       if (field === 'features' && 'featuresJa' in project && project.featuresJa) return project.featuresJa;
+-       if (field === 'highlights' && 'highlightsJa' in project && project.highlightsJa) return project.highlightsJa;
++   // Get highlights content
++   const getHighlightsContent = () => {
++     if (language === 'ja' && 'highlightsJa' in project && project.highlightsJa) {
++       return project.highlightsJa;
+      }
+-     // Fallback to English
+-     if (field === 'features' && 'features' in project) return project.features;
+-     if (field === 'highlights' && 'highlights' in project) return project.highlights;
++     if ('highlights' in project && project.highlights) {
++       return project.highlights;
++     }
+      return null;
+    };
+```
+
+```diff
+                        <h4 className="font-semibold text-blue-400 mb-2">{t.projects.modal.businessProblem}</h4>
+                        <p className="text-slate-300 text-sm leading-relaxed">
+-                         {getComplexLocalizedContent('impact')?.businessProblem}
++                         {getImpactContent()?.businessProblem}
+                        </p>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-blue-400 mb-2">{t.projects.modal.technicalAchievement}</h4>
+                        <p className="text-slate-300 text-sm leading-relaxed">
+-                         {getComplexLocalizedContent('impact')?.technicalAchievement}
++                         {getImpactContent()?.technicalAchievement}
+                        </p>
+                      </div>
+```
+
+```diff
+                      <h4 className="font-semibold text-blue-400 mb-2">{t.projects.modal.keyResults}</h4>
+                      <ul className="list-disc list-inside text-slate-300 text-sm space-y-1">
+-                       {getComplexLocalizedContent('impact')?.results?.map((result: string, index: number) => (
++                       {getImpactContent()?.results?.map((result: string, index: number) => (
+                          <li key={index}>{result}</li>
+                        ))}
+```
+
+```diff
+                        <h4 className="font-semibold text-red-400 mb-3">{t.projects.modal.beforeManual} ❌</h4>
+                        <ul className="space-y-2 text-slate-300 text-sm">
+-                         {getComplexLocalizedContent('architecture')?.before?.map((item: string, index: number) => (
++                         {getArchitectureContent()?.before?.map((item: string, index: number) => (
+                            <li key={index} className="flex items-center">
+                              <span className="w-2 h-2 bg-red-400 rounded-full mr-3 flex-shrink-0"></span>
+```
+
+```diff
+                        <h4 className="font-semibold text-green-400 mb-3">{t.projects.modal.afterAutomated} ✅</h4>
+                        <ul className="space-y-2 text-slate-300 text-sm">
+-                         {getComplexLocalizedContent('architecture')?.after?.map((item: string, index: number) => (
++                         {getArchitectureContent()?.after?.map((item: string, index: number) => (
+                            <li key={index} className="flex items-center">
+                              <span className="w-2 h-2 bg-green-400 rounded-full mr-3 flex-shrink-0"></span>
+```
+
+```diff
+                    </h3>
+                    <div className="grid md:grid-cols-2 gap-3">
+-                     {getArrayLocalizedContent('features')?.map((feature: string, index: number) => (
++                     {getFeaturesContent()?.map((feature: string, index: number) => (
+                        <div key={index} className="flex items-center text-slate-300 text-sm">
+                          <span className="text-green-400 mr-2">✅</span>
+```
+
+```diff
+                    </h3>
+                    <ul className="space-y-2">
+-                     {getArrayLocalizedContent('highlights')?.map((highlight: string, index: number) => (
++                     {getHighlightsContent()?.map((highlight: string, index: number) => (
+                        <li key={index} className="text-slate-300 text-sm leading-relaxed">
+                          <span className="text-yellow-400 mr-2">⭐</span>
+```
+
+---
+
+<think><details><summary>Thought Process</summary>
+
+
+
+Great! Now I've created specific functions for each content type with proper type assertions. This should resolve the TypeScript errors. Let me test the build one more time to ensure everything compiles correctly.</details></think>
+
+---
+
+Perfect! Now let me test the build again to ensure all TypeScript errors are resolved:
+
+---
+
+```bash
+npm run build
+```
+
+```
+PS C:\Users\joel_\OneDrive\Escritorio\Portfolio\my-portfolio> npm run build
+
+> my-portfolio@0.1.0 build
+> next build
+
+   ▲ Next.js 15.3.5
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 2000ms
+   Linting and checking validity of types  ...Failed to compile.
+
+./src/contexts/LanguageContext.tsx:51:31
+Type error: Type '{ language: Language; setLanguage: (lang: Language) => void; t: { readonly nav: { reado
+nly home: "Home"; readonly about: "About"; readonly experience: "Experience"; readonly projects: "Project
+s"; readonly contact: "Contact"; }; ... 4 more ...; readonly contact: { ...; }; } | { ...; }; }' is not a
+ssignable to type 'LanguageContextType'.
+  Types of property 't' are incompatible.
+    Type '{ readonly nav: { readonly home: "Home"; readonly about: "About"; readonly experience: "Experie
+nce"; readonly projects: "Projects"; readonly contact: "Contact"; }; readonly hero: { readonly greeting:
+"Hello, I'm"; readonly description: "Machine Learning Engineer with +3 years of experience specializing i
+n AI technol...' is not assignable to type '{ readonly nav: { readonly home: "Home"; readonly about: "Abo
+ut"; readonly experience: "Experience"; readonly projects: "Projects"; readonly contact: "Contact"; }; re
+adonly hero: { readonly greeting: "Hello, I'm"; readonly description: "Machine Learning Engineer with +3
+years of experience specializing in AI technol...'. Two different types with this name exist, but they ar
+e unrelated.
+      Type '{ readonly nav: { readonly home: "ホーム"; readonly about: "私について"; readonly experience:
+ "経験"; readonly projects: "プロジェクト"; readonly contact: "お問い合わせ"; }; readonly hero: { readonly greeting: "は
+じめまして、"; readonly description: "AI技術を専門とする3年以上の経験を持つ機械学習エンジ ニア。React、JavaScript、最新のWeb技術を使ったフルスタック開発も得意とし
+ています"; readonly additio...' is not assignable to type '{ readonly nav: { readonly home: "Home"; readonly
+about: "About"; readonly experience: "Experience"; readonly projects: "Projects"; readonly contact: "Cont
+act"; }; readonly hero: { readonly greeting: "Hello, I'm"; readonly description: "Machine Learning Engine
+er with +3 years of experience specializing in AI technol...'.
+                                       Type '"ホーム"' is not assignable to type '"Home"'.
+
+  49 |
+  50 |   return (
+> 51 |     <LanguageContext.Provider value={value}>
+     |                               ^
+  52 |       {children}
+  53 |     </LanguageContext.Provider>
+  54 |   );
+Next.js build worker exited with code: 1 and signal: null
+
+```
+
+---
+
+<think><details><summary>Thought Process</summary>
+
+
+
+Now there's a different TypeScript error in the `LanguageContext`. The issue is that the TypeScript types are too strict - they expect the exact same literal types for both English and Japanese, but we have different values. I need to fix the type definition to be more flexible.
+
+Let me check the current LanguageContext file and fix the type issues.</details></think>
+
+---
+
+Now there's a TypeScript error in the `LanguageContext` file. The type system is being too strict about the literal types. Let me fix this:
+
+---
+
+Read file: src/contexts/LanguageContext.tsx
+
+---
+
+<think><details><summary>Thought Process</summary>
+
+
+
+I can see the issue. The type definition `t: typeof translations.en` is forcing the type to be exactly like the English translations, but we need it to be flexible to handle both English and Japanese translations which have different literal string values.
+
+Let me fix this by making the type more flexible.</details></think>
+
+---
+
+```diff
+    language: Language;
+    setLanguage: (lang: Language) => void;
+-   t: typeof translations.en;
++   t: typeof translations[Language];
+  }
+  
+```
+
+---
+
+<think><details><summary>Thought Process</summary>
+
+
+
+The issue is still there because `typeof translations[Language]` isn't the right syntax for TypeScript. I need to use a union type instead. Let me fix this properly.</details></think>
+
+---
+
+```diff
+    language: Language;
+    setLanguage: (lang: Language) => void;
+-   t: typeof translations[Language];
++   t: typeof translations.en | typeof translations.ja;
+  }
+  
+```
+
+---
+
+<think><details><summary>Thought Process</summary>
+
+
+
+Great! Now let me test the build again to see if this fixes the TypeScript errors.</details></think>
+
+---
+
+Perfect! Now let me test the build again:
+
+---
+
+
+
+---
+
+
+
+---
+
 
 
 ---
