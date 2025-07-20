@@ -3,6 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const EXPERIENCE = [
   {
@@ -17,6 +18,12 @@ const EXPERIENCE = [
       'Guiding AI agents through software development tasks with multi-turn prompt sequences',
       'Contributed to real-world project GitHub repositories for bug fixing and feature improvements',
       'Specialized in Reinforcement Learning from Human Feedback (RLHF) to fine-tune AI understanding'
+    ],
+    descriptionJa: [
+      'コーディング、画像ベース学習、プロンプトエンジニアリングを通じてAIモデルを改善',
+      'マルチターンプロンプトシーケンスでAIエージェントをソフトウェア開発タスクに導く',
+      'バグ修正と機能改善のため実世界のプロジェクトGitHubリポジトリに貢献',
+      '人間フィードバックからの強化学習（RLHF）を専門とし、AI理解を微調整'
     ],
     technologies: ['Python', 'Docker', 'Prompt Engineering', 'LLM Agents', 'GitHub', 'Cursor'],
     isActive: true
@@ -34,6 +41,12 @@ const EXPERIENCE = [
       'Developed Home Credit Risk Prediction model with >0.72 AUC ROC score',
       'Created multimodal ML system integrating NLP and Computer Vision for e-commerce classification'
     ],
+    descriptionJa: [
+      '高需要ML工学プロジェクト向け2%未満合格率の実践プログラム',
+      '季節的インサイトを含むeコマースデータ分析用ELTパイプラインを構築',
+      '0.72以上のAUC ROCスコアでHome Credit Risk Predictionモデルを開発',
+      'eコマース分類のためNLPとComputer Visionを統合したマルチモーダルMLシステムを作成'
+    ],
     technologies: ['Python', 'SQL', 'TensorFlow', 'Scikit-learn', 'AWS', 'FastAPI', 'Streamlit'],
     isActive: false
   },
@@ -50,12 +63,20 @@ const EXPERIENCE = [
       'Focused on software documentation and agile methodologies (Scrum, Kanban)',
       'Created and delivered presentations sharing insights for impactful changes'
     ],
+    descriptionJa: [
+      '東京拠点のコンサルティング会社でのオンラインインターンシップ',
+      'ユーザートラフィック40%増加に繋がるUI/UX改善に貢献',
+      'ソフトウェアドキュメンテーションとアジャイル手法（Scrum、Kanban）に注力',
+      'インパクトのある変更のための洞察を共有するプレゼンテーションを作成・発表'
+    ],
     technologies: ['JavaScript', 'UI/UX', 'Scrum', 'Kanban', 'Documentation'],
     isActive: false
   }
 ];
 
 const Timeline = () => {
+  const { language, t } = useLanguage();
+  
   return (
     <section id="timeline" className="relative bg-slate-800 py-24 px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
@@ -68,10 +89,10 @@ const Timeline = () => {
           className="text-center mb-20"
         >
           <h2 className="text-4xl sm:text-5xl font-bold text-slate-100 mb-6 tracking-tight">
-            Professional Experience
+            {t.timeline.title}
           </h2>
           <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
-            My journey in Machine Learning and AI, from hands-on development to cutting-edge research.
+            {t.timeline.subtitle}
           </p>
         </motion.div>
 
@@ -130,7 +151,7 @@ const Timeline = () => {
                       {/* Period and Location */}
                       <div className="text-right">
                         <p className="text-slate-300 font-medium">
-                          {exp.period}
+                          {exp.period.replace('Present', t.timeline.present)}
                         </p>
                         <p className="text-slate-400 text-sm">
                           {exp.location}
@@ -141,7 +162,7 @@ const Timeline = () => {
                     {/* Description */}
                     <div className="mb-6">
                       <ul className="space-y-2">
-                        {exp.description.map((item, idx) => (
+                        {(language === 'ja' && exp.descriptionJa ? exp.descriptionJa : exp.description).map((item, idx) => (
                           <li key={idx} className="flex items-start">
                             <span className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
                             <span className="text-slate-300 leading-relaxed">{item}</span>

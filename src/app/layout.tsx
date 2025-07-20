@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -59,11 +60,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={inter.variable}>
-      <body className="font-inter antialiased text-slate-100 bg-black">
-        <Header />
-        <main className="pt-12">
-          {children}
-        </main>
+      <body className="font-inter antialiased text-slate-100 bg-black" suppressHydrationWarning={true}>
+        <LanguageProvider>
+          <Header />
+          <main>
+            {children}
+          </main>
+        </LanguageProvider>
       </body>
     </html>
   );

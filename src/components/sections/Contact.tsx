@@ -3,8 +3,10 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { PORTFOLIO_DATA } from '@/lib/constants';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const Contact = () => {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -71,11 +73,10 @@ const Contact = () => {
           className="text-center mb-20"
         >
           <h2 className="text-4xl sm:text-5xl font-bold text-slate-100 mb-6 tracking-tight">
-            Let&apos;s Work Together
+            {t.contact.title}
           </h2>
           <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
-            I&apos;d love to hear from you! Whether you have an ML project in mind, want to collaborate, 
-            or just want to say hello, feel free to reach out.
+            {t.contact.subtitle}
           </p>
         </motion.div>
 
@@ -88,7 +89,7 @@ const Contact = () => {
             viewport={{ once: true }}
             className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl p-8 border border-slate-700"
           >
-            <h3 className="text-2xl font-bold text-slate-100 mb-6">Send Me a Message</h3>
+            <h3 className="text-2xl font-bold text-slate-100 mb-6">{t.contact.sendMessage}</h3>
             
             {/* Success Message */}
             {submitStatus === 'success' && (
@@ -97,7 +98,7 @@ const Contact = () => {
                 animate={{ opacity: 1, y: 0 }}
                 className="mb-6 p-4 bg-green-600/20 border border-green-500/50 rounded-lg text-green-400 text-sm"
               >
-                ✅ Message sent successfully! I&apos;ll get back to you within 24 hours.
+                {t.contact.successMessage}
               </motion.div>
             )}
 
@@ -108,14 +109,14 @@ const Contact = () => {
                 animate={{ opacity: 1, y: 0 }}
                 className="mb-6 p-4 bg-red-600/20 border border-red-500/50 rounded-lg text-red-400 text-sm"
               >
-                ❌ Something went wrong. Please try again or contact me directly via email.
+                {t.contact.errorMessage}
               </motion.div>
             )}
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-slate-300 mb-2">
-                  Name
+                  {t.contact.name}
                 </label>
                 <input
                   type="text"
@@ -126,12 +127,12 @@ const Contact = () => {
                   required
                   disabled={isSubmitting}
                   className="w-full px-4 py-3 border border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-300 bg-slate-800 text-slate-200 placeholder-slate-500 disabled:opacity-50"
-                  placeholder="Your Name"
+                  placeholder={t.contact.namePlaceholder}
                 />
               </div>
               <div>
                 <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-2">
-                  Email
+                  {t.contact.email}
                 </label>
                 <input
                   type="email"
@@ -142,12 +143,12 @@ const Contact = () => {
                   required
                   disabled={isSubmitting}
                   className="w-full px-4 py-3 border border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-300 bg-slate-800 text-slate-200 placeholder-slate-500 disabled:opacity-50"
-                  placeholder="your.email@example.com"
+                  placeholder={t.contact.emailPlaceholder}
                 />
               </div>
               <div>
                 <label htmlFor="message" className="block text-sm font-medium text-slate-300 mb-2">
-                  Message
+                  {t.contact.message}
                 </label>
                 <textarea
                   id="message"
@@ -158,7 +159,7 @@ const Contact = () => {
                   disabled={isSubmitting}
                   rows={4}
                   className="w-full px-4 py-3 border border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-300 resize-none bg-slate-800 text-slate-200 placeholder-slate-500 disabled:opacity-50"
-                  placeholder="Tell me about your ML project or just say hello!"
+                  placeholder={t.contact.messagePlaceholder}
                 />
               </div>
               <motion.button
@@ -168,7 +169,7 @@ const Contact = () => {
                 whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
                 className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-black disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {isSubmitting ? 'Sending...' : 'Send Message'}
+                {isSubmitting ? t.contact.sending : t.contact.send}
               </motion.button>
             </form>
           </motion.div>
@@ -183,7 +184,7 @@ const Contact = () => {
           >
             {/* Contact Information */}
             <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl p-8 border border-slate-700">
-              <h3 className="text-2xl font-bold text-slate-100 mb-6">Get in Touch</h3>
+              <h3 className="text-2xl font-bold text-slate-100 mb-6">{t.contact.getInTouch}</h3>
               <div className="space-y-4">
                 <div className="flex items-center">
                   <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mr-4">
@@ -192,7 +193,7 @@ const Contact = () => {
                     </svg>
                   </div>
                   <div>
-                    <p className="text-sm text-slate-400">Email</p>
+                    <p className="text-sm text-slate-400">{t.contact.email}</p>
                     <a 
                       href={`mailto:${PORTFOLIO_DATA.email}`}
                       className="font-medium text-slate-200 hover:text-blue-400 transition-colors duration-200"
@@ -210,7 +211,7 @@ const Contact = () => {
                     </svg>
                   </div>
                   <div>
-                    <p className="text-sm text-slate-400">Location</p>
+                    <p className="text-sm text-slate-400">{t.contact.location}</p>
                     <p className="font-medium text-slate-200">{PORTFOLIO_DATA.location}</p>
                   </div>
                 </div>
@@ -222,8 +223,8 @@ const Contact = () => {
                     </svg>
                   </div>
                   <div>
-                    <p className="text-sm text-slate-400">Response Time</p>
-                    <p className="font-medium text-slate-200">Within 24 hours</p>
+                    <p className="text-sm text-slate-400">{t.contact.responseTime}</p>
+                    <p className="font-medium text-slate-200">{t.contact.responseTimeText}</p>
                   </div>
                 </div>
               </div>
@@ -231,7 +232,7 @@ const Contact = () => {
 
             {/* Social Links */}
             <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl p-8 border border-slate-700">
-              <h3 className="text-xl font-bold text-slate-100 mb-6">Connect With Me</h3>
+              <h3 className="text-xl font-bold text-slate-100 mb-6">{t.contact.connectWithMe}</h3>
               <div className="flex flex-wrap gap-4">
                 <motion.a
                   href={PORTFOLIO_DATA.github}
@@ -275,7 +276,7 @@ const Contact = () => {
               </div>
               
               <p className="text-sm text-slate-400 mt-4">
-                Click WhatsApp to send me a direct message!
+                {t.contact.whatsappText}
               </p>
             </div>
           </motion.div>
@@ -290,7 +291,7 @@ const Contact = () => {
           className="text-center mt-16 pt-8 border-t border-slate-800"
         >
           <p className="text-slate-400">
-            © 2025 {PORTFOLIO_DATA.name}. Built with Next.js, TypeScript, and Tailwind CSS.
+            © 2025 {PORTFOLIO_DATA.name}. {t.contact.copyright}
           </p>
         </motion.div>
       </div>

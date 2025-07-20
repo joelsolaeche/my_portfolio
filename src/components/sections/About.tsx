@@ -3,8 +3,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { PORTFOLIO_DATA, SKILLS } from '@/lib/constants';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const About = () => {
+  const { t } = useLanguage();
+  
   return (
     <section id="about" className="relative bg-slate-900 py-24 px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
@@ -17,10 +20,10 @@ const About = () => {
           className="text-center mb-20"
         >
           <h2 className="text-4xl sm:text-5xl font-bold text-slate-100 mb-6 tracking-tight">
-            About Me
+            {t.about.title}
           </h2>
           <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
-            Learn more about my background, experience, and passion for Machine Learning and AI.
+            {t.about.subtitle}
           </p>
         </motion.div>
 
@@ -53,26 +56,19 @@ const About = () => {
               </div>
             </div>
 
-            <h3 className="text-2xl font-semibold text-slate-100 mb-8">My Background</h3>
+            <h3 className="text-2xl font-semibold text-slate-100 mb-8">{t.about.myBackground}</h3>
             <div className="space-y-6 text-slate-300 leading-relaxed">
               <p>
-                Hello! I&apos;m {PORTFOLIO_DATA.name}, a Machine Learning Engineer with +3 years of experience specializing 
-                in AI technologies. Based in Buenos Aires, Argentina, I have a passion for applying machine learning 
-                to solve complex problems and create innovative solutions.
+                {t.about.bio.intro.replace('{name}', PORTFOLIO_DATA.name)}
               </p>
               <p>
-                My expertise spans Python, SQL, machine learning frameworks like TensorFlow, Scikit-learn, and 
-                Keras, along with deployment technologies including Docker, AWS, FastAPI, and Streamlit. I&apos;ve 
-                worked on diverse projects from credit risk analysis to multimodal ML systems.
+                {t.about.bio.expertise}
               </p>
               <p>
-                I&apos;m also skilled in full stack development with React, JavaScript, Next.js, and modern web technologies, 
-                enabling me to build complete AI-powered applications from backend models to user interfaces.
+                {t.about.bio.fullstack}
               </p>
               <p>
-                Currently, I&apos;m enhancing AI models through coding and prompt engineering at Scale AI, while 
-                contributing to real-world ML engineering projects. I hold a degree in Software Engineering 
-                from UADE and am multilingual (Spanish, English C1, Japanese N2).
+                {t.about.bio.current}
               </p>
             </div>
           </motion.div>
@@ -85,31 +81,31 @@ const About = () => {
             viewport={{ once: true }}
             className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 border border-slate-700"
           >
-            <h3 className="text-2xl font-bold text-slate-100 mb-6">Quick Facts</h3>
+            <h3 className="text-2xl font-bold text-slate-100 mb-6">{t.about.quickFacts}</h3>
             <div className="space-y-4">
               <div className="flex items-center">
                 <span className="w-3 h-3 bg-blue-400 rounded-full mr-4"></span>
-                <span className="text-slate-300">3+ years ML experience</span>
+                <span className="text-slate-300">{t.about.facts.experience}</span>
               </div>
               <div className="flex items-center">
                 <span className="w-3 h-3 bg-purple-400 rounded-full mr-4"></span>
-                <span className="text-slate-300">Based in Buenos Aires, Argentina</span>
+                <span className="text-slate-300">{t.about.facts.location}</span>
               </div>
               <div className="flex items-center">
                 <span className="w-3 h-3 bg-red-400 rounded-full mr-4"></span>
-                <span className="text-slate-300">Degree in Software Engineering</span>
+                <span className="text-slate-300">{t.about.facts.education}</span>
               </div>
               <div className="flex items-center">
                 <span className="w-3 h-3 bg-green-400 rounded-full mr-4"></span>
-                <span className="text-slate-300">Multilingual (Spanish, English, Japanese)</span>
+                <span className="text-slate-300">{t.about.facts.languages}</span>
               </div>
               <div className="flex items-center">
                 <span className="w-3 h-3 bg-orange-400 rounded-full mr-4"></span>
-                <span className="text-slate-300">ML Engineer / Software Engineer</span>
+                <span className="text-slate-300">{t.about.facts.role}</span>
               </div>
               <div className="flex items-center">
                 <span className="w-3 h-3 bg-cyan-400 rounded-full mr-4"></span>
-                <span className="text-slate-300">Full Stack Developer</span>
+                <span className="text-slate-300">{t.about.facts.fullStack}</span>
               </div>
             </div>
           </motion.div>
@@ -123,7 +119,7 @@ const About = () => {
           viewport={{ once: true }}
           className="mb-16"
         >
-          <h3 className="text-3xl font-bold text-slate-100 mb-10 text-center">Skills & Technologies</h3>
+          <h3 className="text-3xl font-bold text-slate-100 mb-10 text-center">{t.about.skillsAndTechnologies}</h3>
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
             {SKILLS.map((skill, index) => (
               <motion.div

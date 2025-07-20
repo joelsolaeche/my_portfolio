@@ -4,8 +4,11 @@ import React from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { PORTFOLIO_DATA } from '@/lib/constants';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const Hero = () => {
+  const { t } = useLanguage();
+  
   return (
     <section id="hero" className="relative h-screen flex items-center justify-center px-6 lg:px-8 overflow-hidden">
       {/* Background Image */}
@@ -22,7 +25,7 @@ const Hero = () => {
         <div className="absolute inset-0 bg-black/70"></div>
       </div>
       
-      <div className="relative z-10 max-w-5xl mx-auto">
+      <div className="relative z-10 max-w-5xl mx-auto pt-24">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Profile Image Section */}
           <motion.div
@@ -71,7 +74,7 @@ const Hero = () => {
               transition={{ duration: 0.6, delay: 0.5 }}
               className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-6 tracking-tight"
             >
-              Hello, I&apos;m{' '}
+              {t.hero.greeting}{' '}
               <span className="text-blue-400">
                 {PORTFOLIO_DATA.name}
               </span>
@@ -92,7 +95,7 @@ const Hero = () => {
               transition={{ duration: 0.6, delay: 0.9 }}
               className="text-lg text-slate-300 mb-8 leading-relaxed max-w-lg"
             >
-              {PORTFOLIO_DATA.description}. Let&apos;s create something exceptional together.
+              {t.hero.description}{t.hero.additionalText}
             </motion.p>
 
             {/* Action Buttons */}
@@ -106,14 +109,14 @@ const Hero = () => {
                 onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
                 className="px-8 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-black shadow-lg hover:shadow-xl transform hover:scale-105"
               >
-                View My Work
+                {t.hero.viewWork}
               </button>
               
               <button
                 onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
                 className="px-8 py-3 border-2 border-slate-300 text-slate-300 rounded-lg font-medium hover:border-blue-400 hover:text-blue-400 hover:bg-blue-400/10 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-black backdrop-blur-sm"
               >
-                Get In Touch
+                {t.hero.getInTouch}
               </button>
             </motion.div>
           </motion.div>
