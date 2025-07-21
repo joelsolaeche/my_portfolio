@@ -290,4 +290,110 @@ export const PROJECTS = [
     github: 'https://github.com/joelsolaeche',
     demo: '#',
   },
+  {
+    id: 5,
+    title: 'Home Credit Default Risk Prediction',
+    titleJa: 'ホームクレジットデフォルトリスク予測',
+    description: 'Complete ML pipeline with interactive Streamlit dashboard for predicting loan default risk with 75%+ accuracy, featuring real-time predictions and business intelligence',
+    descriptionJa: 'リアルタイム予測とビジネスインテリジェンスを特徴とする、75%以上の精度でローンデフォルトリスクを予測するインタラクティブなStreamlitダッシュボード付き完全MLパイプライン',
+    detailedDescription: 'Advanced machine learning solution with professional web interface for financial risk assessment, featuring live model training, interactive visualizations, and business intelligence dashboard',
+    technologies: ['Python', 'Scikit-learn', 'LightGBM', 'Streamlit', 'Plotly', 'Pandas', 'NumPy', 'Jupyter'],
+    image: '/images/projects/demo_home_credit.png',
+    github: 'https://github.com/joelsolaeche/home_credit_pipeline',
+    demo: 'https://joelsolaeche-home-credit-pipeline-streamlit-app-axfgds.streamlit.app/',
+    impact: {
+      businessProblem: 'Financial institutions need to predict loan default risk to reduce losses while maintaining access to credit. The challenge involves analyzing 246K+ loan applications with 122 features to identify potential defaulters.',
+      technicalAchievement: 'Built end-to-end ML pipeline achieving 75.5% AUC-ROC with LightGBM, comprehensive EDA revealing key business insights, and production-ready modular architecture with multiple model comparison.',
+      results: [
+        '75.5% AUC-ROC with optimized LightGBM model',
+        '~25% improvement over baseline risk assessment',
+        'Identifies 8 out of 10 potential defaults accurately',
+        '246K+ training samples processed with 122 features',
+        'Complete automated ML pipeline from raw data to predictions',
+        '$11.9M+ net benefit improvement over random selection',
+        'External credit scores identified as strongest predictors'
+      ]
+    },
+    impactJa: {
+      businessProblem: '金融機関は、信用へのアクセスを維持しながら損失を削減するため、ローンデフォルトリスクを予測する必要があります。122の特徴を持つ246K+のローン申請を分析して潜在的なデフォルターを識別する課題です。',
+      technicalAchievement: 'LightGBMで75.5% AUC-ROCを達成するエンドツーエンドMLパイプライン、重要なビジネス洞察を明らかにする包括的EDA、複数モデル比較による本番対応モジュラーアーキテクチャを構築。',
+      results: [
+        '最適化されたLightGBMモデルで75.5% AUC-ROC',
+        'ベースラインリスク評価から約25%の改善',
+        '潜在的デフォルトの10のうち8を正確に特定',
+        '122の特徴を持つ246K+のトレーニングサンプルを処理',
+        '生データから予測までの完全自動MLパイプライン',
+        'ランダム選択より$11.9M+の純利益改善',
+        '外部信用スコアが最強の予測因子として特定'
+      ]
+    },
+    architecture: {
+      before: [
+        'Manual risk assessment → Subjective and time-consuming',
+        'Basic credit scoring → Limited feature analysis',
+        'Simple statistical models → 70% baseline accuracy',
+        'Separate data processing → No pipeline automation',
+        'Total: Inconsistent, slow, and error-prone process'
+      ],
+      after: [
+        'Automated ML pipeline → End-to-end feature engineering',
+        'Advanced ensemble methods → LightGBM + hyperparameter tuning',
+        'Comprehensive EDA → 122 features analyzed systematically',
+        'Production-ready architecture → Modular, scalable design',
+        'Total: 75.5% AUC-ROC with automated, reproducible results'
+      ]
+    },
+    architectureJa: {
+      before: [
+        '手動リスク評価 → 主観的で時間がかかる',
+        '基本的クレジットスコアリング → 限定的特徴分析',
+        'シンプルな統計モデル → 70%ベースライン精度',
+        '個別データ処理 → パイプライン自動化なし',
+        '合計：一貫性のない、低速で、エラーの多いプロセス'
+      ],
+      after: [
+        '自動MLパイプライン → エンドツーエンド特徴量エンジニアリング',
+        '高度なアンサンブル手法 → LightGBM + ハイパーパラメータチューニング',
+        '包括的EDA → 122特徴を体系的に分析',
+        '本番対応アーキテクチャ → モジュラー、スケーラブル設計',
+        '合計：自動化、再現可能な結果で75.5% AUC-ROC'
+      ]
+    },
+         features: [
+       'Interactive Streamlit Dashboard: Professional web interface with real-time model training and predictions',
+       'Live Loan Predictor: Adjust customer parameters and see instant risk assessment with business recommendations',
+       'Advanced ML Pipeline: Multiple model comparison (Logistic Regression → Random Forest → LightGBM)',
+       'Business Intelligence Hub: Risk segmentation, financial impact calculator, and portfolio optimization',
+       'Real-time Visualizations: ROC curves, feature importance analysis, and cross-validation results',
+       'Executive Summary Dashboard: Key performance metrics and technology stack overview',
+       'Interactive Data Exploration: Dynamic histograms, scatter plots, and correlation heatmaps',
+       'Production-Ready Architecture: Modular sklearn pipelines with comprehensive documentation'
+     ],
+         featuresJa: [
+       'インタラクティブStreamlitダッシュボード：リアルタイムモデル訓練と予測を備えたプロフェッショナルWebインターフェース',
+       'ライブローン予測器：顧客パラメータを調整し、ビジネス推奨事項付きの即座のリスク評価を確認',
+       '高度MLパイプライン：複数モデル比較（Logistic Regression → Random Forest → LightGBM）',
+       'ビジネスインテリジェンスハブ：リスクセグメンテーション、財務インパクト計算機、ポートフォリオ最適化',
+       'リアルタイム可視化：ROC曲線、特徴量重要度分析、交差検証結果',
+       'エグゼクティブサマリーダッシュボード：主要パフォーマンス指標とテクノロジースタック概要',
+       'インタラクティブデータ探索：動的ヒストグラム、散布図、相関ヒートマップ',
+       '本番対応アーキテクチャ：包括的ドキュメンテーション付きモジュラーsklearnパイプライン'
+     ],
+         highlights: [
+       'Interactive Dashboard: Professional Streamlit interface perfect for live demonstrations and stakeholder presentations',
+       'Financial Impact: $11.9M+ net benefit with 75.5% AUC-ROC accuracy and 25% improvement over baseline',
+       'Real-time Predictions: Live loan predictor enabling instant risk assessment for different customer profiles',
+       'Business Intelligence: Executive summary, risk segmentation, and portfolio optimization insights',
+       'Technical Excellence: Complete ML pipeline with automated feature engineering and multi-model comparison',
+       'Production Ready: Modular architecture with comprehensive documentation and deployment capabilities'
+     ],
+         highlightsJa: [
+       'インタラクティブダッシュボード：ライブデモンストレーションとステークホルダープレゼンテーションに最適なプロフェッショナルStreamlitインターフェース',
+       '財務インパクト：75.5% AUC-ROC精度とベースラインから25%改善で$11.9M+の純利益',
+       'リアルタイム予測：異なる顧客プロファイルに対する即座のリスク評価を可能にするライブローン予測器',
+       'ビジネスインテリジェンス：エグゼクティブサマリー、リスクセグメンテーション、ポートフォリオ最適化洞察',
+       '技術的卓越性：自動特徴量エンジニアリングと複数モデル比較による完全MLパイプライン',
+       '本番対応：包括的ドキュメンテーションとデプロイメント機能付きモジュラーアーキテクチャ'
+     ]
+  },
 ] as const; 

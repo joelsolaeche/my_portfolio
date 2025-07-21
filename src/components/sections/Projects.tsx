@@ -148,12 +148,21 @@ const Projects = () => {
                           className="mr-2 brightness-0 invert opacity-80 group-hover:opacity-100 transition-opacity duration-200"
                           style={{ filter: 'brightness(0) invert(1) sepia(1) saturate(3) hue-rotate(200deg)' }}
                         />
+                      ) : project.demo.includes('streamlit.app') ? (
+                        <Image 
+                          src="/images/profile/stream_lite_logo.png" 
+                          alt="Streamlit" 
+                          width={16}
+                          height={16}
+                          className="mr-2 opacity-80 group-hover:opacity-100 transition-opacity duration-200"
+                        />
                       ) : (
                         <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                         </svg>
                       )}
-                      {project.demo.includes('railway.app') ? t.projects.viewDemo : t.projects.liveDemo}
+                      {project.demo.includes('railway.app') ? t.projects.viewDemo : 
+                       project.demo.includes('streamlit.app') ? 'Interactive Dashboard' : t.projects.liveDemo}
                     </motion.a>
                   )}
                 </div>
