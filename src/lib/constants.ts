@@ -164,14 +164,109 @@ export const PROJECTS = [
   },
   {
     id: 2,
-    title: 'Multimodal E-Commerce Classifier',
-    titleJa: 'マルチモーダルEコマース分類器',
-    description: 'Machine learning model that classifies e-commerce products by integrating NLP and Computer Vision',
-    descriptionJa: 'NLPとComputer Visionを統合してeコマース製品を分類する機械学習モデル',
-    technologies: ['Python', 'Hugging Face', 'Computer Vision', 'NLP', 'Deep Learning'],
-    image: '/placeholder-project-2.jpg',
-    github: 'https://github.com/joelsolaeche',
-    demo: '#',
+    title: 'Multimodal E-Commerce Product Classification System',
+    titleJa: 'マルチモーダルEコマース製品分類システム',
+    description: 'Advanced multimodal ML system with professional Next.js demo combining computer vision and NLP for automated product categorization, achieving 85%+ accuracy across 49K+ products',
+    descriptionJa: 'コンピュータビジョンとNLPを組み合わせた自動製品分類のための高度なマルチモーダルMLシステム。49K+製品で85%以上の精度を達成するプロフェッショナルなNext.jsデモ付き',
+    detailedDescription: 'State-of-the-art multimodal classification system with professional demo frontend that automatically categorizes BestBuy products using both product images and text descriptions, demonstrating superior performance over single-modality approaches',
+    technologies: ['Next.js', 'TypeScript', 'FastAPI', 'TensorFlow', 'ResNet50', 'BERT', 'Vision Transformer', 'Tailwind CSS', 'Python'],
+    image: '/images/projects/nlp_ecommerce.png',
+    github: 'https://github.com/joelsolaeche/Multimodal_E-commerce_Product_Classification_System',
+    demo: 'https://multimodal-ecommerce-demo.vercel.app',
+    impact: {
+      businessProblem: 'E-commerce platforms struggle with accurate product categorization across vast inventories, leading to poor search results, misplaced products, and reduced customer satisfaction. Manual categorization is time-consuming, inconsistent, and unable to scale with growing product catalogs.',
+      technicalAchievement: 'Built comprehensive multimodal AI system achieving 85%+ accuracy by combining computer vision and NLP models, with professional Next.js demo frontend showcasing 12+ ML architectures including ResNet, Vision Transformers, and BERT for real-time product classification.',
+      results: [
+        '85%+ accuracy with multimodal fusion vs 82% vision-only and 79% text-only',
+        '12+ ML architectures implemented and compared (ResNet, ViT, BERT, ConvNeXt)',
+        '49K+ products processed across 4K+ categories from BestBuy dataset',
+        'Professional demo frontend with interactive visualizations and real-time predictions',
+        'Superior performance over single-modality approaches by 3-6%',
+        'Real-time classification with instant prediction confidence scores',
+        'Production-ready FastAPI backend with structured logging and error handling'
+      ]
+    },
+    impactJa: {
+      businessProblem: 'Eコマースプラットフォームは膨大な在庫の正確な製品分類に苦戦し、検索結果の悪化、製品の誤配置、顧客満足度の低下を招いています。手動分類は時間がかかり、一貫性がなく、増大する製品カタログに対応できません。',
+      technicalAchievement: 'コンピュータビジョンとNLPモデルを組み合わせて85%以上の精度を達成する包括的マルチモーダルAIシステムを構築。リアルタイム製品分類のためのResNet、Vision Transformers、BERTを含む12以上のMLアーキテクチャを紹介するプロフェッショナルなNext.jsデモフロントエンド付き。',
+      results: [
+        'マルチモーダル融合で85%以上の精度（ビジョンのみ82%、テキストのみ79%と比較）',
+        '12以上のMLアーキテクチャを実装・比較（ResNet、ViT、BERT、ConvNeXt）',
+        'BestBuyデータセットから4K+カテゴリにわたる49K+製品を処理',
+        'インタラクティブな可視化とリアルタイム予測を備えたプロフェッショナルなデモフロントエンド',
+        '単一モダリティアプローチより3-6%優れたパフォーマンス',
+        '即座の予測信頼度スコア付きリアルタイム分類',
+        '構造化ログとエラーハンドリングを備えた本番対応FastAPIバックエンド'
+      ]
+    },
+    architecture: {
+      before: [
+        'Manual product categorization → Time-consuming and inconsistent',
+        'Single-modality classification → Limited accuracy (79-82%)',
+        'No interactive demonstration → Static results only',
+        'Basic ML approaches → Simple models with limited features',
+        'Total: Inefficient, inaccurate, and non-scalable classification process'
+      ],
+      after: [
+        'Multimodal AI fusion → Computer vision + NLP with 85%+ accuracy',
+        'Professional demo frontend → Interactive Next.js application with real-time predictions',
+        '12+ ML architectures → ResNet, ViT, BERT, ConvNeXt, Swin Transformer comparison',
+        'Production API backend → FastAPI with structured logging and error handling',
+        'Total: Advanced, accurate, and scalable multimodal classification system'
+      ]
+    },
+    architectureJa: {
+      before: [
+        '手動製品分類 → 時間がかかり一貫性がない',
+        '単一モダリティ分類 → 限定的精度（79-82%）',
+        'インタラクティブなデモンストレーションなし → 静的結果のみ',
+        '基本的MLアプローチ → 限定的機能を持つシンプルなモデル',
+        '合計：非効率、不正確、非スケーラブルな分類プロセス'
+      ],
+      after: [
+        'マルチモーダルAI融合 → コンピュータビジョン + NLPで85%以上の精度',
+        'プロフェッショナルなデモフロントエンド → リアルタイム予測付きインタラクティブNext.jsアプリケーション',
+        '12以上のMLアーキテクチャ → ResNet、ViT、BERT、ConvNeXt、Swin Transformer比較',
+        '本番APIbackend → 構造化ログとエラーハンドリング付きFastAPI',
+        '合計：高度、正確、スケーラブルなマルチモーダル分類システム'
+      ]
+    },
+    features: [
+      'Professional Demo Frontend: Next.js application with Tailwind CSS, interactive visualizations, and responsive design',
+      'Multimodal AI Architecture: Combines computer vision (ResNet, ViT, ConvNeXt) with NLP (BERT, MiniLM) models',
+      'Real-time Classification: Interactive demo with image upload and text input for instant predictions',
+      'Performance Analytics Dashboard: Interactive charts showing model comparisons and category performance',
+      'Model Explorer: Detailed view of 12+ ML architectures with performance metrics and technical specifications',
+      'Production API Backend: FastAPI server with structured logging, error handling, and async support',
+      'Advanced ML Comparison: Classical ML, Deep Learning, and Multimodal fusion approaches evaluated',
+      'Scalable Data Processing: Handles 49K+ products across 4K+ categories with efficient embedding storage'
+    ],
+    featuresJa: [
+      'プロフェッショナルなデモフロントエンド：Tailwind CSS、インタラクティブな可視化、レスポンシブデザインを備えたNext.jsアプリケーション',
+      'マルチモーダルAIアーキテクチャ：コンピュータビジョン（ResNet、ViT、ConvNeXt）とNLP（BERT、MiniLM）モデルを組み合わせ',
+      'リアルタイム分類：画像アップロードとテキスト入力による即座の予測のためのインタラクティブデモ',
+      'パフォーマンス分析ダッシュボード：モデル比較とカテゴリパフォーマンスを示すインタラクティブチャート',
+      'モデルエクスプローラー：パフォーマンス指標と技術仕様を備えた12以上のMLアーキテクチャの詳細ビュー',
+      '本番APIバックエンド：構造化ログ、エラーハンドリング、非同期サポート付きFastAPIサーバー',
+      '高度ML比較：古典的ML、深層学習、マルチモーダル融合アプローチを評価',
+      'スケーラブルデータ処理：効率的な埋め込みストレージで4K+カテゴリにわたる49K+製品を処理'
+    ],
+    highlights: [
+      'Multimodal AI Innovation: 85%+ accuracy combining computer vision and NLP, outperforming single-modality approaches',
+      'Professional Full-Stack Demo: Modern Next.js frontend with FastAPI backend showcasing production-ready development',
+      'Comprehensive ML Research: 12+ architectures implemented including ResNet, Vision Transformers, and BERT models',
+      'Interactive Data Science: Real-time visualizations, performance analytics, and model comparison dashboards',
+      'Production Engineering: Scalable architecture with proper logging, error handling, and API documentation',
+      'Industry-Scale Dataset: 49K+ products across 4K+ categories demonstrating real-world applicability'
+    ],
+    highlightsJa: [
+      'マルチモーダルAI革新：コンピュータビジョンとNLPを組み合わせて85%以上の精度を実現、単一モダリティアプローチを上回る性能',
+      'プロフェッショナルなフルスタックデモ：本番対応開発を紹介するFastAPIバックエンド付きモダンNext.jsフロントエンド',
+      '包括的ML研究：ResNet、Vision Transformers、BERTモデルを含む12以上のアーキテクチャを実装',
+      'インタラクティブなデータサイエンス：リアルタイム可視化、パフォーマンス分析、モデル比較ダッシュボード',
+      '本番エンジニアリング：適切なログ記録、エラーハンドリング、APIドキュメンテーション付きスケーラブルアーキテクチャ',
+      '業界スケールデータセット：実世界の適用性を実証する4K+カテゴリにわたる49K+製品'
+    ]
   },
   {
     id: 3,
