@@ -383,8 +383,8 @@ export const PROJECTS = [
     detailedDescription: 'Comprehensive AI-powered platform that transforms business image processing workflows through intelligent automation, modern user experience, and scalable microservices architecture',
     technologies: ['Next.js', 'TypeScript', 'FastAPI', 'TensorFlow', 'ResNet50', 'PostgreSQL', 'Redis', 'Docker', 'TailwindCSS'],
     image: '/images/projects/demo_ai_classifier.png',
-    github: 'https://github.com/joelsolaeche/ai_classifier_web_app',
-    demo: 'https://ai-classifier-web-f7irj7098-slashys-projects.vercel.app/',
+    github: 'https://github.com/joelsolaeche/ai_classifier',
+    demo: 'https://ai-classifier-nine.vercel.app/',
     impact: {
       businessProblem: 'Companies with large image collections face significant challenges: manual image sorting is time-consuming and error-prone, inconsistent categorization across teams, scalability issues with growing datasets, and high operational costs for manual classification.',
       technicalAchievement: 'Built enterprise-grade AI platform achieving 85%+ accuracy with ResNet50, 95% time reduction in processing workflows, real-time classification with <2 second response times, and scalable microservices architecture handling 100+ images per minute.',
