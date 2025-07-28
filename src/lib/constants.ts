@@ -172,7 +172,7 @@ export const PROJECTS = [
     technologies: ['Next.js', 'TypeScript', 'FastAPI', 'TensorFlow', 'ResNet50', 'BERT', 'Vision Transformer', 'Tailwind CSS', 'Python'],
     image: '/images/projects/nlp_ecommerce.png',
     github: 'https://github.com/joelsolaeche/Multimodal_E-commerce_Product_Classification_System',
-    demo: 'https://multimodal-ecommerce-demo.vercel.app',
+    demo: 'https://multimodalecommercenlpitems.vercel.app/',
     impact: {
       businessProblem: 'E-commerce platforms struggle with accurate product categorization across vast inventories, leading to poor search results, misplaced products, and reduced customer satisfaction. Manual categorization is time-consuming, inconsistent, and unable to scale with growing product catalogs.',
       technicalAchievement: 'Built comprehensive multimodal AI system achieving 85%+ accuracy by combining computer vision and NLP models, with professional Next.js demo frontend showcasing 12+ ML architectures including ResNet, Vision Transformers, and BERT for real-time product classification.',
