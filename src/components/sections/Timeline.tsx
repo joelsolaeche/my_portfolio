@@ -8,28 +8,62 @@ import { useLanguage } from '@/contexts/LanguageContext';
 const EXPERIENCE = [
   {
     id: 1,
-    title: 'AI Trainer & Developer',
-    company: 'Scale AI',
-    logo: '/images/companies/scale_icon.png',
-    period: 'Oct 2024 - Present',
-    location: 'United States (Remote)',
+    title: 'AI Engineer',
+    company: 'Algolabs AI',
+    logo: '/images/companies/algolabs-icon.png',
+    period: 'Oct 2025 - Present',
+    location: 'Argentina (Remote)',
     description: [
-      'Enhanced AI models through coding, image-based learning, and prompt engineering',
-      'Guiding AI agents through software development tasks with multi-turn prompt sequences',
-      'Contributed to real-world project GitHub repositories for bug fixing and feature improvements',
-      'Specialized in Reinforcement Learning from Human Feedback (RLHF) to fine-tune AI understanding'
+      'Developed and optimized computer vision algorithms for image and video detection, classification, and segmentation',
+      'Developed a computer vision system and full-stack application with Flask for warehouse robots to recognize and match product positions using YOLO-based object detection',
+      'Implemented and trained deep learning models using CNNs and other modern architectures',
+      'Prepared and preprocessed datasets, including data cleaning, labeling, and augmentation',
+      'Evaluated and fine-tuned model performance through accuracy and efficiency metrics',
+      'Integrated trained models into testing and production environments',
+      'Collaborated with senior and junior engineers within agile workflows (Scrum/Kanban)',
+      'Participated in code reviews and contributed technical improvement proposals'
     ],
     descriptionJa: [
-      'コーディング、画像ベース学習、プロンプトエンジニアリングを通じてAIモデルを改善',
-      'マルチターンプロンプトシーケンスでAIエージェントをソフトウェア開発タスクに導く',
-      'バグ修正と機能改善のため実世界のプロジェクトGitHubリポジトリに貢献',
-      '人間フィードバックからの強化学習（RLHF）を専門とし、AI理解を微調整'
+      '画像およびビデオの検出、分類、セグメンテーション用のコンピュータビジョンアルゴリズムを開発・最適化',
+      'YOLOベースのオブジェクト検出を使用して製品位置を認識・照合する倉庫ロボット向けのコンピュータビジョンシステムとFlaskフルスタックアプリケーションを開発',
+      'CNNおよび他の最新アーキテクチャを使用したディープラーニングモデルの実装とトレーニング',
+      'データクリーニング、ラベリング、拡張を含むデータセットの準備と前処理',
+      '精度と効率メトリクスを通じたモデルパフォーマンスの評価と微調整',
+      'トレーニング済みモデルをテスト環境と本番環境に統合',
+      'アジャイルワークフロー（Scrum/Kanban）内でシニアおよびジュニアエンジニアと協力',
+      'コードレビューに参加し、技術改善提案に貢献'
     ],
-    technologies: ['Python', 'Docker', 'Prompt Engineering', 'LLM Agents', 'GitHub', 'Cursor'],
+    technologies: ['TensorFlow', 'PyTorch', 'OpenCV', 'OpenVINO', 'NVIDIA SDK', 'TensorRT', 'Jetson Nano', 'DeepStream', 'Docker', 'Git', 'Flask', 'YOLO'],
     isActive: true
   },
   {
     id: 2,
+    title: 'AI Trainer & Developer',
+    company: 'Scale AI',
+    logo: '/images/companies/scale_icon.png',
+    period: 'Aug 2024 - Sep 2025',
+    location: 'United States (Remote)',
+    description: [
+      'Enhanced AI code assistants (Claude Code, Copilot, Codex, Gemini Code Assist) through multi-turn prompt engineering and rubric-based evaluation',
+      'Designed context-engineered prompts and evaluation frameworks for AI agents performing refactoring, debugging, and documentation tasks',
+      'Guided specialized LLM agents through real-world coding workflows and repository improvements, contributing to AI-assisted SDLC research',
+      'Configured and Dockerized repositories for automated testing and reproducible environments with GitHub integration',
+      'Prototyped rule-based, command-driven AI workflows using Cursor and MCP (Model Context Protocol) concepts',
+      'Collaborated in RLHF pipeline to improve AI understanding of structured reasoning, text, and code contexts'
+    ],
+    descriptionJa: [
+      'マルチターンプロンプトエンジニアリングとルーブリックベース評価によりAIコードアシスタント（Claude Code、Copilot、Codex、Gemini Code Assist）を改善',
+      'リファクタリング、デバッグ、ドキュメンテーションタスクを実行するAIエージェント向けのコンテキストエンジニアリングプロンプトと評価フレームワークを設計',
+      '実世界のコーディングワークフローとリポジトリ改善を通じて特化型LLMエージェントを指導し、AI支援SDLCリサーチに貢献',
+      '自動テストと再現可能な環境のためにリポジトリを設定・Docker化し、GitHub統合を実装',
+      'CursorとMCP（Model Context Protocol）概念を使用してルールベースでコマンド駆動のAIワークフローをプロトタイプ化',
+      '構造化された推論、テキスト、コードコンテキストのAI理解を向上させるためRLHFパイプラインで協力'
+    ],
+    technologies: ['Python', 'Docker', 'GitHub', 'Cursor', 'FastAPI', 'Prompt Engineering', 'RLHF', 'Devcontainers', 'MCP', 'LLM Agents'],
+    isActive: false
+  },
+  {
+    id: 3,
     title: 'Machine Learning Engineer',
     company: 'Anyone AI',
     logo: '/images/companies/anyone_ai_logo.jpg',
@@ -37,21 +71,25 @@ const EXPERIENCE = [
     location: 'United States (Remote)',
     description: [
       'Hands-on program with <2% acceptance rate for high-demand ML engineering projects',
-      'Built ELT pipeline for e-commerce data analysis with seasonal insights',
-      'Developed Home Credit Risk Prediction model with >0.72 AUC ROC score',
-      'Created multimodal ML system integrating NLP and Computer Vision for e-commerce classification'
+      'Built LLM-based recruitment tool using LangChain and GPT-4/Gemini with RAG system, vector embeddings, and ChromaDB for intelligent job matching and cover letter generation',
+      'Developed e-commerce data pipeline with ELT architecture for seasonal trend analysis and insights extraction',
+      'Created Home Credit Risk model processing 350K+ transactions with supervised learning (XGBoost, LightGBM), achieving AUC ROC >0.72',
+      'Built multimodal ML system integrating NLP and Computer Vision for e-commerce product classification using pre-trained models',
+      'Deployed AI-powered image classifier web app with FastAPI for real-time object recognition'
     ],
     descriptionJa: [
       '高需要ML工学プロジェクト向け2%未満合格率の実践プログラム',
-      '季節的インサイトを含むeコマースデータ分析用ELTパイプラインを構築',
-      '0.72以上のAUC ROCスコアでHome Credit Risk Predictionモデルを開発',
-      'eコマース分類のためNLPとComputer Visionを統合したマルチモーダルMLシステムを作成'
+      'LangChainとGPT-4/Geminiを使用し、RAGシステム、ベクトル埋め込み、ChromaDBを活用した求人マッチングとカバーレター生成のためのLLMベース採用ツールを構築',
+      '季節的トレンド分析とインサイト抽出のためのELTアーキテクチャによるeコマースデータパイプラインを開発',
+      '35万以上のトランザクションを処理し、教師あり学習（XGBoost、LightGBM）でAUC ROC >0.72を達成したHome Creditリスクモデルを作成',
+      '事前学習済みモデルを使用してNLPとComputer Visionを統合したeコマース製品分類用マルチモーダルMLシステムを構築',
+      'リアルタイムオブジェクト認識のためのFastAPIを使用したAI搭載画像分類器Webアプリをデプロイ'
     ],
-    technologies: ['Python', 'SQL', 'TensorFlow', 'Scikit-learn', 'AWS', 'FastAPI', 'Streamlit'],
+    technologies: ['Python', 'LangChain', 'OpenAI API', 'ChromaDB', 'FastAPI', 'Streamlit', 'TensorFlow', 'Scikit-learn', 'Pandas', 'AWS', 'Docker', 'Chainlit'],
     isActive: false
   },
   {
-    id: 3,
+    id: 4,
     title: 'Development Team Member',
     company: 'Helte Co., Ltd',
     logo: '/images/companies/heltesail_logo.jpg',

@@ -58,6 +58,112 @@ export const SKILLS = [
 export const PROJECTS = [
   {
     id: 1,
+    title: 'LLM-Based Recruitment Tool',
+    titleJa: 'LLMベース採用支援ツール',
+    description: 'Intelligent job-matching application powered by LangChain, GPT-4/Gemini, and RAG system with ChromaDB for semantic candidate-job matching and automated cover letter generation',
+    descriptionJa: 'LangChain、GPT-4/Gemini、ChromaDBを活用したRAGシステムによる意味的候補者・求人マッチングと自動カバーレター生成を実現するインテリジェント採用支援アプリケーション',
+    detailedDescription: 'Advanced recruitment platform leveraging LLMs and vector embeddings to revolutionize job matching through AI-powered resume analysis, semantic search, and personalized assistant agents',
+    technologies: ['LangChain', 'OpenAI GPT-4', 'Gemini', 'ChromaDB', 'Chainlit', 'Python', 'FastAPI', 'Docker', 'RAG', 'Vector Embeddings'],
+    image: '/images/projects/LLM-based_home_screen.png',
+    github: 'https://github.com/joelsolaeche/llm-based-recruitment-tool',
+    demo: '#',
+    impact: {
+      businessProblem: 'Traditional recruitment processes struggle with inefficient candidate-job matching, time-consuming manual resume screening, subjective evaluation criteria, and inability to process large volumes of applications effectively. Recruiters spend 23 hours on average to hire a single candidate.',
+      technicalAchievement: 'Built intelligent multi-agent recruitment system using LangChain and RAG architecture with ChromaDB vector database, implementing three specialized AI assistants (ChatGPT clone, Jobs Finder with semantic search, and Agentic system with cover letter generation). Achieved semantic job matching with PDF resume processing and conversation memory management.',
+      results: [
+        '3 specialized AI assistants for different recruitment workflows',
+        'Semantic search across job listings using vector embeddings',
+        'Automatic PDF resume processing and candidate profile generation',
+        'RAG-powered job matching with context-aware recommendations',
+        'Personalized cover letter generation based on candidate profiles',
+        'Multi-LLM support (OpenAI GPT-4 and Google Gemini)',
+        'Real-time conversational interface with memory management'
+      ]
+    },
+    impactJa: {
+      businessProblem: '従来の採用プロセスは、非効率的な候補者・求人マッチング、時間のかかる手動履歴書スクリーニング、主観的評価基準、大量の応募を効果的に処理できない問題を抱えています。採用担当者は平均23時間を1人の候補者採用に費やしています。',
+      technicalAchievement: 'LangChainとRAGアーキテクチャ、ChromaDBベクトルデータベースを使用したインテリジェントマルチエージェント採用システムを構築。3つの特化型AIアシスタント（ChatGPTクローン、意味検索付きジョブファインダー、カバーレター生成付きエージェントシステム）を実装。PDF履歴書処理と会話メモリ管理による意味的求人マッチングを実現。',
+      results: [
+        '異なる採用ワークフロー向けの3つの特化型AIアシスタント',
+        'ベクトル埋め込みを使用した求人リストの意味検索',
+        '自動PDF履歴書処理と候補者プロフィール生成',
+        'コンテキスト認識推奨付きRAG駆動求人マッチング',
+        '候補者プロフィールに基づくパーソナライズドカバーレター生成',
+        'マルチLLMサポート（OpenAI GPT-4とGoogle Gemini）',
+        'メモリ管理付きリアルタイム会話インターフェース'
+      ]
+    },
+    architecture: {
+      before: [
+        'Manual resume screening → 2-4 hours per position',
+        'Keyword-based matching → 60-70% relevance accuracy',
+        'Generic job recommendations → Poor candidate fit',
+        'Manual cover letter review → Time-consuming process',
+        'Total: 23+ hours average time-to-hire per candidate'
+      ],
+      after: [
+        'AI-powered resume analysis → <2 minutes processing',
+        'Semantic vector search → 85%+ relevance accuracy',
+        'RAG-based recommendations → Context-aware job matching',
+        'Automated cover letter generation → Personalized content',
+        'Total: 90%+ time reduction in initial screening process'
+      ]
+    },
+    architectureJa: {
+      before: [
+        '手動履歴書スクリーニング → ポジションあたり2-4時間',
+        'キーワードベースマッチング → 60-70%の関連性精度',
+        '一般的な求人推奨 → 候補者適合性が低い',
+        '手動カバーレターレビュー → 時間のかかるプロセス',
+        '合計：候補者あたり平均採用時間23時間以上'
+      ],
+      after: [
+        'AI駆動履歴書分析 → 2分未満の処理',
+        '意味的ベクトル検索 → 85%以上の関連性精度',
+        'RAGベース推奨 → コンテキスト認識求人マッチング',
+        '自動カバーレター生成 → パーソナライズドコンテンツ',
+        '合計：初期スクリーニングプロセスで90%以上の時間削減'
+      ]
+    },
+    features: [
+      'Multi-Assistant System: Three specialized AI agents (ChatGPT clone, Jobs Finder, Agentic system)',
+      'RAG Architecture: Retrieval-Augmented Generation with ChromaDB vector database',
+      'PDF Resume Processing: Automatic text extraction and candidate profile summarization',
+      'Semantic Job Search: Vector-based matching using sentence transformers',
+      'Conversation Memory: Context-aware chat with full conversation history',
+      'Multi-LLM Provider: Factory pattern supporting OpenAI and Google Gemini',
+      'Cover Letter Generation: Personalized content based on candidate and job data',
+      'Production Ready: Docker containerization, error handling, and comprehensive testing'
+    ],
+    featuresJa: [
+      'マルチアシスタントシステム：3つの特化型AIエージェント（ChatGPTクローン、ジョブファインダー、エージェントシステム）',
+      'RAGアーキテクチャ：ChromaDBベクトルデータベースを使用したRetrieval-Augmented Generation',
+      'PDF履歴書処理：自動テキスト抽出と候補者プロフィール要約',
+      '意味的求人検索：文変換器を使用したベクトルベースマッチング',
+      '会話メモリ：完全な会話履歴を持つコンテキスト認識チャット',
+      'マルチLLMプロバイダー：OpenAIとGoogle Geminiをサポートするファクトリパターン',
+      'カバーレター生成：候補者と求人データに基づくパーソナライズドコンテンツ',
+      '本番対応：Dockerコンテナ化、エラーハンドリング、包括的テスト'
+    ],
+    highlights: [
+      'Advanced AI/ML Stack: LangChain, RAG, Vector Embeddings, Multi-LLM support',
+      'Intelligent Automation: 90%+ reduction in manual screening time',
+      'Semantic Understanding: Vector-based job matching with 85%+ relevance',
+      'Production Engineering: Docker, comprehensive testing, factory pattern design',
+      'Modern Architecture: Microservices, async processing, scalable design',
+      'End-to-End Solution: Resume processing to cover letter generation'
+    ],
+    highlightsJa: [
+      '高度AI/MLスタック：LangChain、RAG、ベクトル埋め込み、マルチLLMサポート',
+      'インテリジェント自動化：手動スクリーニング時間90%以上削減',
+      '意味的理解：85%以上の関連性を持つベクトルベース求人マッチング',
+      '本番エンジニアリング：Docker、包括的テスト、ファクトリパターン設計',
+      'モダンアーキテクチャ：Microservices、非同期処理、スケーラブル設計',
+      'エンドツーエンドソリューション：履歴書処理からカバーレター生成まで'
+    ]
+  },
+  {
+    id: 2,
     title: 'Credit Risk Analysis Predictor',
     titleJa: '信用リスク分析予測システム',
     description: 'ML model to predict default risk using supervised learning, deep learning, and financial data modeling',
@@ -163,7 +269,7 @@ export const PROJECTS = [
     ]
   },
   {
-    id: 2,
+    id: 3,
     title: 'Multimodal E-Commerce Product Classification System',
     titleJa: 'マルチモーダルEコマース製品分類システム',
     description: 'Advanced multimodal ML system with professional Next.js demo combining computer vision and NLP for automated product categorization, achieving 85%+ accuracy across 49K+ products',
@@ -269,7 +375,7 @@ export const PROJECTS = [
     ]
   },
   {
-    id: 3,
+    id: 4,
     title: 'E-Commerce Data Pipeline ELT',
     titleJa: 'Eコマースデータパイプライン ELT',
     description: 'Built an ELT pipeline to analyze seasonal e-commerce data and extract holiday-driven purchase insights orchestrated with Apache Airflow',
@@ -375,7 +481,7 @@ export const PROJECTS = [
     ]
   },
   {
-    id: 4,
+    id: 5,
     title: 'AI Vision Classifier',
     titleJa: 'AI画像分類システム',
     description: 'Enterprise-grade full-stack application with ResNet50 AI model for automated image classification across 1000+ categories, featuring 95% time reduction and real-time processing',
@@ -481,7 +587,7 @@ export const PROJECTS = [
     ]
   },
   {
-    id: 5,
+    id: 6,
     title: 'Home Credit Default Risk Prediction',
     titleJa: 'ホームクレジットデフォルトリスク予測',
     description: 'Complete ML pipeline with interactive Streamlit dashboard for predicting loan default risk with 75%+ accuracy, featuring real-time predictions and business intelligence',
