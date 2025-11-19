@@ -7,10 +7,10 @@ import { PORTFOLIO_DATA } from '@/lib/constants';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 const Hero = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   
   return (
-    <section id="hero" className="relative h-screen flex items-center justify-center px-6 lg:px-8 overflow-hidden">
+    <section id="hero" className="relative min-h-screen flex items-center justify-center px-8 lg:px-12 overflow-hidden py-24">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -118,6 +118,49 @@ const Hero = () => {
               >
                 {t.hero.getInTouch}
               </button>
+            </motion.div>
+
+            {/* Resume Download Button */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 1.3 }}
+              className="mt-6 flex flex-col sm:flex-row gap-3 justify-center lg:justify-start"
+            >
+              <a
+                href="/resumes/Joel_Solaeche_Resume_EN.pdf"
+                download
+                className="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-slate-800/80 text-slate-200 rounded-lg font-medium hover:bg-slate-700 hover:text-white transition-all duration-200 backdrop-blur-sm border border-slate-600 hover:border-blue-400 group"
+              >
+                <svg className="w-5 h-5 group-hover:animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                <span>📄 EN Resume</span>
+              </a>
+              
+              <a
+                href="/resumes/Joel_Solaeche_Resume_JP.pdf"
+                download
+                className="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-slate-800/80 text-slate-200 rounded-lg font-medium hover:bg-slate-700 hover:text-white transition-all duration-200 backdrop-blur-sm border border-slate-600 hover:border-blue-400 group"
+              >
+                <svg className="w-5 h-5 group-hover:animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                <span>📄 JP 履歴書</span>
+              </a>
+              
+              {language === 'ja' && (
+                <a
+                  href="/resumes/Joel_Solaeche_Rirekisho_JP.pdf"
+                  download
+                  className="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-slate-800/80 text-slate-200 rounded-lg font-medium hover:bg-slate-700 hover:text-white transition-all duration-200 backdrop-blur-sm border border-slate-600 hover:border-purple-400 group"
+                >
+                  <svg className="w-5 h-5 group-hover:animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                  <span>💼 職務経歴書</span>
+                </a>
+              )}
             </motion.div>
           </motion.div>
         </div>

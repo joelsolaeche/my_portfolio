@@ -15,7 +15,7 @@ const Header = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['hero', 'about', 'timeline', 'projects', 'contact'];
+      const sections = ['hero', 'about', 'timeline', 'achievements', 'projects', 'contact'];
       const scrollPosition = window.scrollY + 100;
       const heroSection = document.getElementById('hero');
       
@@ -63,6 +63,7 @@ const Header = () => {
     { name: t.nav.home, href: '#hero' },
     { name: t.nav.about, href: '#about' },
     { name: t.nav.experience, href: '#timeline' },
+    { name: t.nav.achievements, href: '#achievements' },
     { name: t.nav.projects, href: '#projects' },
     { name: t.nav.contact, href: '#contact' },
   ];

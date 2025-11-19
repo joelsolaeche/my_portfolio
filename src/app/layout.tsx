@@ -11,14 +11,14 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Joel Solaeche - Machine Learning Engineer",
-  description: "Portfolio of Joel Solaeche, a Machine Learning Engineer with +3 years of experience specializing in AI technologies. Also skilled in full stack development with React, JavaScript, and modern web technologies.",
-  keywords: ["Machine Learning Engineer", "AI", "Python", "TensorFlow", "Deep Learning", "Joel Solaeche", "Software Developer", "React", "JavaScript"],
+  title: "Joel Solaeche - AI Engineer",
+  description: "Portfolio of Joel Solaeche, an AI Engineer with +3 years of experience specializing in AI technologies. Also skilled in full stack development with React, JavaScript, and modern web technologies.",
+  keywords: ["AI Engineer", "Machine Learning", "AI", "Python", "TensorFlow", "Deep Learning", "Joel Solaeche", "Software Developer", "React", "JavaScript"],
   authors: [{ name: "Joel Solaeche" }],
   creator: "Joel Solaeche",
   openGraph: {
-    title: "Joel Solaeche - Machine Learning Engineer",
-    description: "Machine Learning Engineer with +3 years of experience specializing in AI technologies",
+    title: "Joel Solaeche - AI Engineer",
+    description: "AI Engineer with +3 years of experience specializing in AI technologies",
     url: "https://joelsolaeche.com",
     siteName: "Joel Solaeche Portfolio",
     type: "website",
@@ -26,8 +26,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Joel Solaeche - Machine Learning Engineer",
-    description: "Machine Learning Engineer with +3 years of experience specializing in AI technologies",
+    title: "Joel Solaeche - AI Engineer",
+    description: "AI Engineer with +3 years of experience specializing in AI technologies",
     creator: "@joelsolaeche",
   },
   robots: {

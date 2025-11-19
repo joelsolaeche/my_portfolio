@@ -2,14 +2,15 @@ export const NAVIGATION_ITEMS = [
   { name: 'Home', href: '#hero' },
   { name: 'About', href: '#about' },
   { name: 'Experience', href: '#timeline' },
+  { name: 'Achievements', href: '#achievements' },
   { name: 'Projects', href: '#projects' },
   { name: 'Contact', href: '#contact' },
 ] as const;
 
 export const PORTFOLIO_DATA = {
   name: 'Joel Solaeche',
-  title: 'Machine Learning Engineer',
-  description: 'Machine Learning Engineer with +3 years of experience specializing in AI technologies. Also skilled in full stack development with React, JavaScript, and modern web technologies',
+  title: 'AI Engineer',
+  description: 'AI Engineer with +3 years of experience specializing in AI technologies. Also skilled in full stack development with React, JavaScript, and modern web technologies',
   location: 'Buenos Aires, Argentina',
   email: 'joel_solaeche@hotmail.com',
   github: 'https://github.com/joelsolaeche',

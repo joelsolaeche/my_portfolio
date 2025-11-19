@@ -23,7 +23,7 @@ const Projects = () => {
   };
 
   return (
-    <section id="projects" className="relative bg-slate-800 py-24 px-6 lg:px-8">
+    <section id="projects" className="relative bg-slate-800 py-32 px-8 lg:px-12">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <motion.div

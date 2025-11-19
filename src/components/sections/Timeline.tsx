@@ -64,7 +64,7 @@ const EXPERIENCE = [
   },
   {
     id: 3,
-    title: 'Machine Learning Engineer',
+    title: 'AI Engineer',
     company: 'Anyone AI',
     logo: '/images/companies/anyone_ai_logo.jpg',
     period: 'Nov 2024 - Mar 2025',
@@ -113,10 +113,10 @@ const EXPERIENCE = [
 ];
 
 const Timeline = () => {
-  const { language, t } = useLanguage();
+  const { t, language } = useLanguage();
   
   return (
-    <section id="timeline" className="relative bg-slate-800 py-24 px-6 lg:px-8">
+    <section id="timeline" className="relative bg-slate-800 py-32 px-8 lg:px-12">
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}
         <motion.div

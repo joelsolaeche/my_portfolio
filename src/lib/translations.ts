@@ -7,16 +7,18 @@ export const translations = {
       home: 'Home',
       about: 'About',
       experience: 'Experience',
+      achievements: 'Achievements',
       projects: 'Projects',
       contact: 'Contact'
     },
     // Hero Section
     hero: {
       greeting: "Hello, I'm",
-      description: 'Machine Learning Engineer with +3 years of experience specializing in AI technologies. Also skilled in full stack development with React, JavaScript, and modern web technologies',
+      description: 'AI Engineer with +3 years of experience specializing in AI technologies. Also skilled in full stack development with React, JavaScript, and modern web technologies',
       additionalText: ". Let's create something exceptional together.",
       viewWork: 'View My Work',
-      getInTouch: 'Get In Touch'
+      getInTouch: 'Get In Touch',
+      downloadResume: 'Download Resume'
     },
     // About Section
     about: {
@@ -26,7 +28,7 @@ export const translations = {
       quickFacts: 'Quick Facts',
       skillsAndTechnologies: 'Skills & Technologies',
       bio: {
-        intro: `Hello! I'm {name}, a Machine Learning Engineer with +3 years of experience specializing in AI technologies. Based in Buenos Aires, Argentina, I have a passion for applying machine learning to solve complex problems and create innovative solutions.`,
+        intro: `Hello! I'm {name}, an AI Engineer with +3 years of experience specializing in AI technologies. Based in Buenos Aires, Argentina, I have a passion for applying machine learning to solve complex problems and create innovative solutions.`,
         expertise: `My expertise spans Python, SQL, machine learning frameworks like TensorFlow, Scikit-learn, and Keras, along with deployment technologies including Docker, AWS, FastAPI, and Streamlit. I've worked on diverse projects from credit risk analysis to multimodal ML systems.`,
         fullstack: `I'm also skilled in full stack development with React, JavaScript, Next.js, and modern web technologies, enabling me to build complete AI-powered applications from backend models to user interfaces.`,
         current: `Currently, I'm enhancing AI models through coding and prompt engineering at Scale AI, while contributing to real-world ML engineering projects. I hold a degree in Software Engineering from UADE and am multilingual (Spanish, English C1, Japanese N2).`
@@ -93,7 +95,9 @@ export const translations = {
       responseTime: 'Response Time',
       responseTimeText: 'Within 24 hours',
       whatsappText: 'Click WhatsApp to send me a direct message!',
-      copyright: 'Built with Next.js, TypeScript, and Tailwind CSS.'
+      copyright: 'Built with Next.js, TypeScript, and Tailwind CSS.',
+      downloadResume: 'Download Resume',
+      resumeDescription: 'Get my resume in English or Japanese format'
     }
   },
   ja: {
@@ -102,6 +106,7 @@ export const translations = {
       home: 'ホーム',
       about: '私について',
       experience: '経験',
+      achievements: '実績',
       projects: 'プロジェクト',
       contact: 'お問い合わせ'
     },
@@ -111,7 +116,8 @@ export const translations = {
       description: 'AI技術を専門とする3年以上の経験を持つ機械学習エンジニア。React、JavaScript、最新のWeb技術を使ったフルスタック開発も得意としています',
       additionalText: '。一緒に素晴らしいものを創造しましょう。',
       viewWork: '作品を見る',
-      getInTouch: 'お問い合わせ'
+      getInTouch: 'お問い合わせ',
+      downloadResume: '履歴書ダウンロード'
     },
     // About Section
     about: {
@@ -187,8 +193,10 @@ export const translations = {
       location: '所在地',
       responseTime: '返信時間',
       responseTimeText: '24時間以内',
-      whatsappText: 'WhatsAppをクリックして直接メッセージを送信してください！',
-      copyright: 'Next.js、TypeScript、Tailwind CSSで構築。'
+      whatsappText: 'WhatsAppをクリックして直接メッセージを送信！',
+      copyright: 'Next.js、TypeScript、Tailwind CSSで構築。',
+      downloadResume: '履歴書ダウンロード',
+      resumeDescription: '英語または日本語形式で履歴書を取得'
     }
   }
 } as const; 

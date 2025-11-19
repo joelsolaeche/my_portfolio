@@ -6,7 +6,7 @@ import { PORTFOLIO_DATA } from '@/lib/constants';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 const Contact = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -62,17 +62,17 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="relative bg-black py-24 px-6 lg:px-8">
-      <div className="max-w-6xl mx-auto">
+    <section id="contact" className="relative bg-black py-32 px-8 lg:px-12">
+      <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-20"
+          className="text-center mb-24"
         >
-          <h2 className="text-4xl sm:text-5xl font-bold text-slate-100 mb-6 tracking-tight">
+          <h2 className="text-5xl sm:text-6xl font-bold text-slate-100 mb-8 tracking-tight">
             {t.contact.title}
           </h2>
           <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
@@ -227,6 +227,53 @@ const Contact = () => {
                     <p className="font-medium text-slate-200">{t.contact.responseTimeText}</p>
                   </div>
                 </div>
+              </div>
+            </div>
+
+            {/* Resume Download */}
+            <div className="bg-gradient-to-br from-blue-900/20 to-purple-900/20 rounded-2xl p-8 border border-blue-500/30">
+              <h3 className="text-xl font-bold text-slate-100 mb-4 flex items-center gap-2">
+                <svg className="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                {t.contact.downloadResume || 'Download Resume'}
+              </h3>
+              <p className="text-slate-400 text-sm mb-6">
+                {t.contact.resumeDescription || 'Get my resume in English or Japanese format'}
+              </p>
+              <div className={`grid grid-cols-1 ${language === 'ja' ? 'sm:grid-cols-3' : 'sm:grid-cols-2'} gap-3`}>
+                <a
+                  href="/resumes/Joel_Solaeche_Resume_EN.pdf"
+                  download
+                  className="flex items-center justify-center gap-2 px-5 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-all duration-200 group"
+                >
+                  <svg className="w-5 h-5 group-hover:animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
+                  </svg>
+                  <span>English Resume</span>
+                </a>
+                <a
+                  href="/resumes/Joel_Solaeche_Resume_JP.pdf"
+                  download
+                  className="flex items-center justify-center gap-2 px-5 py-3 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-700 transition-all duration-200 group"
+                >
+                  <svg className="w-5 h-5 group-hover:animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
+                  </svg>
+                  <span>日本語履歴書</span>
+                </a>
+                {language === 'ja' && (
+                  <a
+                    href="/resumes/Joel_Solaeche_Rirekisho_JP.pdf"
+                    download
+                    className="flex items-center justify-center gap-2 px-5 py-3 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-all duration-200 group"
+                  >
+                    <svg className="w-5 h-5 group-hover:animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
+                    </svg>
+                    <span>職務経歴書</span>
+                  </a>
+                )}
               </div>
             </div>
 

@@ -9,17 +9,17 @@ const About = () => {
   const { t } = useLanguage();
   
   return (
-    <section id="about" className="relative bg-slate-900 py-24 px-6 lg:px-8">
-      <div className="max-w-6xl mx-auto">
+    <section id="about" className="relative bg-slate-900 py-32 px-8 lg:px-12">
+      <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-20"
+          className="text-center mb-24"
         >
-          <h2 className="text-4xl sm:text-5xl font-bold text-slate-100 mb-6 tracking-tight">
+          <h2 className="text-5xl sm:text-6xl font-bold text-slate-100 mb-8 tracking-tight">
             {t.about.title}
           </h2>
           <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
