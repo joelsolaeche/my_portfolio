@@ -5,12 +5,13 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 
-type AchievementCategory = 'all' | 'awards' | 'technical' | 'impact' | 'recognition';
+type AchievementCategory = 'all' | 'awards' | 'technical' | 'impact' | 'recognition' | 'language';
 
 interface Achievement {
   id: number;
   category: AchievementCategory[];
   icon: string;
+  iconImage?: string; // Optional path to icon image (for flags, etc.)
   title: string;
   titleJa: string;
   description: string;
@@ -56,6 +57,38 @@ const ACHIEVEMENTS: Achievement[] = [
     linkTextJa: '推薦状を見る (PDF)',
     date: 'Sep 2024',
     image: '/images/achievements/recommendation_letter.png'
+  },
+  {
+    id: 11,
+    category: ['recognition', 'technical'],
+    icon: '🎓',
+    title: 'Anyone AI Machine Learning Certificate',
+    titleJa: 'Anyone AI 機械学習修了証',
+    description: 'Completed rigorous Machine Learning Engineering program from Anyone AI Elite program, mastering advanced ML algorithms, model deployment, and production systems',
+    descriptionJa: 'Anyone AIエリートプログラムの厳格な機械学習エンジニアリングプログラムを修了し、高度なMLアルゴリズム、モデルデプロイメント、本番システムを習得',
+    metric: 'Elite ML Program',
+    metricJa: 'エリートMLプログラム',
+    link: '/images/achievements/AY24-05 - Certificate _ Joel Solaeche2x.pdf',
+    linkText: 'View Certificate (PDF)',
+    linkTextJa: '証明書を見る (PDF)',
+    date: 'May 2025',
+    image: '/images/achievements/AY24-05 - Certificate _ Joel Solaeche@2x.png'
+  },
+  {
+    id: 12,
+    category: ['recognition', 'technical'],
+    icon: '🤖',
+    title: 'LLM-Based Applications Development Certificate',
+    titleJa: 'LLMベースアプリケーション開発修了証',
+    description: 'Certified in developing production-ready LLM applications, covering RAG architecture, prompt engineering, vector databases, and agentic AI systems',
+    descriptionJa: '本番対応LLMアプリケーション開発の認定を取得。RAGアーキテクチャ、プロンプトエンジニアリング、ベクトルデータベース、エージェントAIシステムを網羅',
+    metric: 'LLM Development',
+    metricJa: 'LLM開発',
+    link: '/images/achievements/Developing LLM-Based Apps _ Joel Andres Solaeche.pdf',
+    linkText: 'View Certificate (PDF)',
+    linkTextJa: '証明書を見る (PDF)',
+    date: 'Nov 2025',
+    image: '/images/achievements/Developing LLM-Based Apps _ Joel Andres Solaeche.png'
   },
   {
     id: 3,
@@ -152,6 +185,64 @@ const ACHIEVEMENTS: Achievement[] = [
     metric: '40% Growth',
     metricJa: '40%成長',
     date: 'Nov 2024'
+  },
+  {
+    id: 13,
+    category: ['language'],
+    icon: '🇯🇵',
+    iconImage: '/icons/japan.png',
+    title: 'JLPT N2 - Japanese Language Proficiency',
+    titleJa: 'JLPT N2 - 日本語能力試験',
+    description: 'Achieved N2 level certification in Japanese Language Proficiency Test, demonstrating advanced business-level Japanese communication skills',
+    descriptionJa: '日本語能力試験N2レベルの認定を取得し、ビジネスレベルの高度な日本語コミュニケーション能力を証明',
+    metric: 'N2 Level',
+    metricJa: 'N2レベル',
+    date: 'Aug 2022'
+  },
+  {
+    id: 14,
+    category: ['language'],
+    icon: '🇬🇧',
+    iconImage: '/icons/united-states.png',
+    title: 'Cambridge First B2 - English Proficiency',
+    titleJa: 'ケンブリッジ英検B2 - 英語能力',
+    description: 'Earned Cambridge First Certificate (B2) demonstrating upper-intermediate English proficiency in professional and academic contexts',
+    descriptionJa: 'ケンブリッジ英検B2を取得し、専門的および学術的な文脈での中上級英語能力を証明',
+    metric: 'B2 Level',
+    metricJa: 'B2レベル',
+    date: 'Dec 2021'
+  },
+  {
+    id: 15,
+    category: ['language'],
+    icon: '🌍',
+    title: 'EF SET C1 - Advanced English Certificate',
+    titleJa: 'EF SET C1 - 上級英語認定',
+    description: 'Achieved C1 Advanced level on EF SET English Certificate, demonstrating proficient command of English in complex professional situations',
+    descriptionJa: 'EF SET英語認定でC1上級レベルを達成し、複雑な専門的状況での熟練した英語運用能力を証明',
+    metric: 'C1 Advanced',
+    metricJa: 'C1上級',
+    link: '/images/achievements/EF SET Certificate.pdf',
+    linkText: 'View Certificate (PDF)',
+    linkTextJa: '証明書を見る (PDF)',
+    date: 'Apr 2023',
+    image: '/images/achievements/efset-preview.png'
+  },
+  {
+    id: 16,
+    category: ['language'],
+    icon: '🗣️',
+    title: 'Smalltalk C1 - English Speaking Level Test',
+    titleJa: 'Smalltalk C1 - 英語スピーキングレベルテスト',
+    description: 'Certified C1 Advanced level in English speaking proficiency through Smalltalk assessment, demonstrating fluent verbal communication skills',
+    descriptionJa: 'Smalltalk評価でC1上級レベルの英語スピーキング能力認定を取得し、流暢な口頭コミュニケーションスキルを証明',
+    metric: 'C1 Speaking',
+    metricJa: 'C1スピーキング',
+    link: '/images/achievements/0b7c9260.pdf',
+    linkText: 'View Certificate (PDF)',
+    linkTextJa: '証明書を見る (PDF)',
+    date: 'Apr 2023',
+    image: '/images/achievements/smalltalk-preview.png'
   }
 ];
 
@@ -160,7 +251,8 @@ const CATEGORIES = [
   { id: 'awards' as AchievementCategory, label: 'Awards', labelJa: '受賞歴', icon: '🏆' },
   { id: 'technical' as AchievementCategory, label: 'Technical', labelJa: '技術的', icon: '⚙️' },
   { id: 'impact' as AchievementCategory, label: 'Impact', labelJa: 'インパクト', icon: '🚀' },
-  { id: 'recognition' as AchievementCategory, label: 'Recognition', labelJa: '評価', icon: '🎓' }
+  { id: 'recognition' as AchievementCategory, label: 'Recognition', labelJa: '評価', icon: '🎓' },
+  { id: 'language' as AchievementCategory, label: 'Language', labelJa: '言語', icon: '🌐' }
 ];
 
 const Achievements = () => {
@@ -172,8 +264,8 @@ const Achievements = () => {
   const helteRecognitions = ACHIEVEMENTS.filter(a => a.id === 1 || a.id === 2);
   const otherAchievements = ACHIEVEMENTS.filter(a => a.id !== 1 && a.id !== 2);
 
-  const filteredAchievements = activeCategory === 'all' 
-    ? otherAchievements 
+  const filteredAchievements = activeCategory === 'all'
+    ? otherAchievements
     : otherAchievements.filter(achievement => achievement.category.includes(activeCategory));
 
   // Show Helte carousel only when 'all', 'awards', or 'recognition' categories are active
@@ -182,7 +274,7 @@ const Achievements = () => {
   // Auto-play carousel
   React.useEffect(() => {
     if (!showHelteCarousel) return;
-    
+
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % helteRecognitions.length);
     }, 10000); // Change slide every 10 seconds
@@ -213,8 +305,8 @@ const Achievements = () => {
             {language === 'ja' ? '実績・成果' : 'Achievements'}
           </h2>
           <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
-            {language === 'ja' 
-              ? 'インパクトのある成果と技術的達成の軌跡' 
+            {language === 'ja'
+              ? 'インパクトのある成果と技術的達成の軌跡'
               : 'A track record of impactful results and technical excellence'}
           </p>
         </motion.div>
@@ -231,11 +323,10 @@ const Achievements = () => {
             <button
               key={category.id}
               onClick={() => setActiveCategory(category.id)}
-              className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 flex items-center gap-2 ${
-                activeCategory === category.id
-                  ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg scale-105'
-                  : 'bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white'
-              }`}
+              className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 flex items-center gap-2 ${activeCategory === category.id
+                ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg scale-105'
+                : 'bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white'
+                }`}
             >
               <span className="text-xl">{category.icon}</span>
               <span>{language === 'ja' ? category.labelJa : category.label}</span>
@@ -258,7 +349,7 @@ const Achievements = () => {
             <div className="relative w-full">
               {/* Carousel Container */}
               <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700">
-                <div 
+                <div
                   className="flex transition-transform duration-500 ease-in-out"
                   style={{ transform: `translateX(-${currentSlide * 100}%)` }}
                 >
@@ -276,7 +367,7 @@ const Achievements = () => {
                           />
                         </div>
                       )}
-                      
+
                       {/* Content */}
                       <div className="p-8 md:p-10">
                         <div className="flex items-start justify-between mb-4">
@@ -310,10 +401,10 @@ const Achievements = () => {
                             className="inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors duration-200 font-medium group/link"
                           >
                             <span>{language === 'ja' ? achievement.linkTextJa : achievement.linkText}</span>
-                            <svg 
-                              className="w-5 h-5 ml-2 transform group-hover/link:translate-x-1 transition-transform duration-200" 
-                              fill="none" 
-                              stroke="currentColor" 
+                            <svg
+                              className="w-5 h-5 ml-2 transform group-hover/link:translate-x-1 transition-transform duration-200"
+                              fill="none"
+                              stroke="currentColor"
                               viewBox="0 0 24 24"
                             >
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
@@ -351,11 +442,10 @@ const Achievements = () => {
                     <button
                       key={index}
                       onClick={() => setCurrentSlide(index)}
-                      className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                        currentSlide === index 
-                          ? 'bg-blue-400 w-8' 
-                          : 'bg-slate-600 hover:bg-slate-500'
-                      }`}
+                      className={`w-2 h-2 rounded-full transition-all duration-300 ${currentSlide === index
+                        ? 'bg-blue-400 w-8'
+                        : 'bg-slate-600 hover:bg-slate-500'
+                        }`}
                       aria-label={`Go to slide ${index + 1}`}
                     />
                   ))}
@@ -391,7 +481,19 @@ const Achievements = () => {
               <div className="p-6">
                 {/* Icon & Date */}
                 <div className="flex items-start justify-between mb-4">
-                  <div className="text-5xl">{achievement.icon}</div>
+                  {achievement.iconImage ? (
+                    <div className="w-12 h-12 relative">
+                      <Image
+                        src={achievement.iconImage}
+                        alt={achievement.title}
+                        width={48}
+                        height={48}
+                        className="object-contain"
+                      />
+                    </div>
+                  ) : (
+                    <div className="text-5xl">{achievement.icon}</div>
+                  )}
                   <span className="text-xs text-slate-500 bg-slate-800 px-3 py-1 rounded-full">
                     {achievement.date}
                   </span>
@@ -402,37 +504,37 @@ const Achievements = () => {
                   {language === 'ja' ? achievement.titleJa : achievement.title}
                 </h3>
 
-              {/* Description */}
-              <p className="text-slate-300 mb-4 leading-relaxed text-sm">
-                {language === 'ja' ? achievement.descriptionJa : achievement.description}
-              </p>
+                {/* Description */}
+                <p className="text-slate-300 mb-4 leading-relaxed text-sm">
+                  {language === 'ja' ? achievement.descriptionJa : achievement.description}
+                </p>
 
-              {/* Metric Badge */}
-              {achievement.metric && (
-                <div className="inline-block bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-500/30 text-blue-400 px-4 py-2 rounded-lg text-sm font-semibold mb-4">
-                  {language === 'ja' ? achievement.metricJa : achievement.metric}
-                </div>
-              )}
+                {/* Metric Badge */}
+                {achievement.metric && (
+                  <div className="inline-block bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-500/30 text-blue-400 px-4 py-2 rounded-lg text-sm font-semibold mb-4">
+                    {language === 'ja' ? achievement.metricJa : achievement.metric}
+                  </div>
+                )}
 
-              {/* Link */}
-              {achievement.link && (
-                <a
-                  href={achievement.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors duration-200 text-sm font-medium group/link"
-                >
-                  <span>{language === 'ja' ? achievement.linkTextJa : achievement.linkText}</span>
-                  <svg 
-                    className="w-4 h-4 ml-1 transform group-hover/link:translate-x-1 transition-transform duration-200" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    viewBox="0 0 24 24"
+                {/* Link */}
+                {achievement.link && (
+                  <a
+                    href={achievement.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center text-blue-400 hover:text-blue-300 transition-colors duration-200 text-sm font-medium group/link mt-4"
                   >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                  </svg>
-                </a>
-              )}
+                    <span>{language === 'ja' ? achievement.linkTextJa : achievement.linkText}</span>
+                    <svg
+                      className="w-4 h-4 ml-1 transform group-hover/link:translate-x-1 transition-transform duration-200"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                  </a>
+                )}
               </div>
             </motion.div>
           ))}
