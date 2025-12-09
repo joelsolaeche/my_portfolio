@@ -44,13 +44,21 @@ const Header = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const handleNavClick = (href: string) => {
-    setIsMenuOpen(false);
+  const handleNavClick = (e: React.MouseEvent<HTMLButtonElement>, href: string) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
     if (href.startsWith('#')) {
       const element = document.getElementById(href.slice(1));
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+        // Close menu first, then scroll after a brief delay to ensure menu closes
+        setIsMenuOpen(false);
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
       }
+    } else {
+      setIsMenuOpen(false);
     }
   };
 
@@ -107,7 +115,7 @@ const Header = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
                 <button
-                  onClick={() => handleNavClick(item.href)}
+                  onClick={(e) => handleNavClick(e, item.href)}
                   className={`rounded-md font-medium transition-all duration-500 ${
                     isInHero 
                       ? 'px-4 py-2 text-base' 
@@ -194,33 +202,36 @@ const Header = () => {
       </div>
 
       {/* Mobile Navigation */}
-      <motion.div
-        initial={{ opacity: 0, height: 0 }}
-        animate={{ 
-          opacity: isMenuOpen ? 1 : 0, 
-          height: isMenuOpen ? 'auto' : 0 
-        }}
-        transition={{ duration: 0.3 }}
-        className={`md:hidden overflow-hidden transition-all duration-500 ${
-          isInHero ? 'bg-black/60' : 'bg-black/80'
-        }`}
-      >
-        <div className="px-2 pt-2 pb-3 space-y-1">
-          {navItems.map((item) => (
-            <button
-              key={item.name}
-              onClick={() => handleNavClick(item.href)}
-              className={`block w-full text-left px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${
-                activeSection === item.href
-                  ? 'text-blue-400 bg-blue-500/10'
-                  : 'text-slate-300 hover:text-slate-100 hover:bg-slate-800/50'
-              }`}
-            >
-              {item.name}
-            </button>
-          ))}
-        </div>
-      </motion.div>
+      {isMenuOpen && (
+        <motion.div
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ 
+            opacity: 1, 
+            height: 'auto' 
+          }}
+          exit={{ opacity: 0, height: 0 }}
+          transition={{ duration: 0.3 }}
+          className={`md:hidden overflow-hidden transition-all duration-500 ${
+            isInHero ? 'bg-black/60' : 'bg-black/80'
+          } backdrop-blur-lg`}
+        >
+          <div className="px-2 pt-2 pb-3 space-y-1">
+            {navItems.map((item) => (
+              <button
+                key={item.name}
+                onClick={(e) => handleNavClick(e, item.href)}
+                className={`block w-full text-left px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${
+                  activeSection === item.href
+                    ? 'text-blue-400 bg-blue-500/10'
+                    : 'text-slate-300 hover:text-slate-100 hover:bg-slate-800/50'
+                } touch-manipulation`}
+              >
+                {item.name}
+              </button>
+            ))}
+          </div>
+        </motion.div>
+      )}
     </motion.header>
   );
 };
