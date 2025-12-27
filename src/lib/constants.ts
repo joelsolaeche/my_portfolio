@@ -59,6 +59,112 @@ export const SKILLS = [
 export const PROJECTS = [
   {
     id: 1,
+    title: 'AI-Powered Shopping Assistant',
+    titleJa: 'AI駆動ショッピングアシスタント',
+    description: 'Production-ready conversational AI system for intelligent e-commerce customer service using LangGraph, LangChain, and Model Context Protocol (MCP) with web search capabilities',
+    descriptionJa: 'LangGraph、LangChain、Model Context Protocol（MCP）とWeb検索機能を使用したインテリジェントなeコマースカスタマーサービス向け本番対応会話AIシステム',
+    detailedDescription: 'Advanced AI shopping assistant revolutionizing e-commerce customer service with natural language understanding, contextual conversations, and intelligent web integration',
+    technologies: ['LangChain', 'LangGraph', 'OpenAI GPT-4o-mini', 'Chroma', 'HuggingFace', 'Brave Search API', 'MCP', 'Streamlit', 'Python', 'Pandas', 'Agents'],
+    image: '/images/projects/AI_assistant_agent.png',
+    github: 'https://github.com/joelsolaeche/AI-Powered-Shopping-Assistant',
+    demo: '#',
+    impact: {
+      businessProblem: 'Traditional e-commerce platforms struggle with generic search results that don\'t understand natural language, disconnected shopping experiences across product discovery and purchase, overwhelming customer support teams with routine inquiries, and lack of personalization based on purchase history.',
+      technicalAchievement: 'Built intelligent conversational AI system using LangGraph state machine orchestration with GPT-4o-mini, semantic product search over 49,688 products using vector embeddings, and 6 Brave Search MCP tools for real-time web integration. Achieved 100% test coverage with 26 passing tests.',
+      results: [
+        '49,688 products searchable via semantic vector embeddings',
+        'Natural language understanding for intuitive product discovery',
+        '6 Brave Search tools: web, news, video, images, local, AI summaries',
+        'Real-time cart management with session persistence',
+        'Intelligent escalation to human support for sensitive operations',
+        'Human-in-the-loop approval workflow for refunds and account issues',
+        '100% test coverage with comprehensive integration tests'
+      ]
+    },
+    impactJa: {
+      businessProblem: '従来のeコマースプラットフォームは、自然言語を理解しない一般的な検索結果、製品発見と購入にわたる分断されたショッピング体験、日常的な問い合わせで圧倒されるカスタマーサポートチーム、購入履歴に基づくパーソナライゼーションの欠如に苦戦しています。',
+      technicalAchievement: 'GPT-4o-miniを使用したLangGraphステートマシンオーケストレーション、ベクトル埋め込みによる49,688製品の意味検索、リアルタイムWeb統合のための6つのBrave Search MCPツールを使用したインテリジェントな会話AIシステムを構築。26のテストが通過し100%のテストカバレッジを達成。',
+      results: [
+        '意味的ベクトル埋め込みによる49,688製品の検索可能化',
+        '直感的な製品発見のための自然言語理解',
+        '6つのBrave Searchツール：Web、ニュース、動画、画像、ローカル、AIサマリー',
+        'セッション永続化によるリアルタイムカート管理',
+        '機密操作のための人間サポートへのインテリジェントなエスカレーション',
+        '払い戻しとアカウント問題のための人間参加型承認ワークフロー',
+        '包括的統合テストによる100%テストカバレッジ'
+      ]
+    },
+    architecture: {
+      before: [
+        'Generic keyword search → Poor natural language understanding',
+        'Disconnected product discovery → Separate from shopping cart',
+        'Manual customer support → All inquiries require human intervention',
+        'No web integration → Limited to static catalog data',
+        'Total: Fragmented experience with high support costs'
+      ],
+      after: [
+        'Semantic vector search → Natural language product discovery',
+        'LangGraph state machine → Contextual conversation flow management',
+        'Intelligent escalation → Automated handling with human-in-the-loop',
+        'MCP web integration → Real-time Brave Search across 6 tools',
+        'Total: Unified AI-powered experience with 26/26 tests passing'
+      ]
+    },
+    architectureJa: {
+      before: [
+        '一般的キーワード検索 → 自然言語理解が不十分',
+        '分断された製品発見 → ショッピングカートとの分離',
+        '手動カスタマーサポート → すべての問い合わせが人間の介入を必要',
+        'Web統合なし → 静的カタログデータに限定',
+        '合計：高いサポートコストを伴う断片化された体験'
+      ],
+      after: [
+        '意味的ベクトル検索 → 自然言語製品発見',
+        'LangGraphステートマシン → コンテキスト認識会話フロー管理',
+        'インテリジェントなエスカレーション → 人間参加型自動処理',
+        'MCP Web統合 → 6つのツールにわたるリアルタイムBrave Search',
+        '合計：26/26テスト通過によるAI駆動統合体験'
+      ]
+    },
+    features: [
+      'Intelligent Product Search: Semantic vector search with HuggingFace embeddings over 49,688 products',
+      'Smart Shopping Cart: Add, remove, update quantities with session persistence',
+      'Web Search Integration: 6 Brave Search MCP tools (web, news, video, images, local, AI summaries)',
+      'Customer Support Escalation: Automatic detection and human-in-the-loop approval workflow',
+      'LangGraph State Machine: Contextual conversation orchestration with memory',
+      'Multi-Agent Architecture: Separate sales and support assistants with specialized tools',
+      'Purchase History Analysis: Personalized recommendations based on past orders',
+      'Production Ready: 100% test coverage with 26 comprehensive tests'
+    ],
+    featuresJa: [
+      'インテリジェントな製品検索：49,688製品にわたるHuggingFace埋め込みを使用した意味的ベクトル検索',
+      'スマートショッピングカート：セッション永続化による追加、削除、数量更新',
+      'Web検索統合：6つのBrave Search MCPツール（Web、ニュース、動画、画像、ローカル、AIサマリー）',
+      'カスタマーサポートエスカレーション：自動検出と人間参加型承認ワークフロー',
+      'LangGraphステートマシン：メモリ付きコンテキスト認識会話オーケストレーション',
+      'マルチエージェントアーキテクチャ：特化ツールを持つ独立した販売およびサポートアシスタント',
+      '購入履歴分析：過去の注文に基づくパーソナライズド推奨',
+      '本番対応：26の包括的テストによる100%テストカバレッジ'
+    ],
+    highlights: [
+      'Advanced AI Stack: LangChain, LangGraph, MCP integration with GPT-4o-mini',
+      'Semantic Search: 49,688 products with vector embeddings for natural language queries',
+      'Production Quality: 100% test coverage with comprehensive integration testing',
+      'Hybrid Intelligence: Combines product catalog with real-time web search',
+      'Modern Architecture: State machine orchestration with human-in-the-loop workflows',
+      'Complete Solution: End-to-end system from product search to customer support'
+    ],
+    highlightsJa: [
+      '高度AIスタック：GPT-4o-miniとのLangChain、LangGraph、MCP統合',
+      '意味検索：自然言語クエリのためのベクトル埋め込みによる49,688製品',
+      '本番品質：包括的統合テストによる100%テストカバレッジ',
+      'ハイブリッドインテリジェンス：製品カタログとリアルタイムWeb検索の組み合わせ',
+      'モダンアーキテクチャ：人間参加型ワークフローによるステートマシンオーケストレーション',
+      '完全ソリューション：製品検索からカスタマーサポートまでのエンドツーエンドシステム'
+    ]
+  },
+  {
+    id: 2,
     title: 'LLM-Based Recruitment Tool',
     titleJa: 'LLMベース採用支援ツール',
     description: 'Intelligent job-matching application powered by LangChain, GPT-4/Gemini, and RAG system with ChromaDB for semantic candidate-job matching and automated cover letter generation',
@@ -164,7 +270,7 @@ export const PROJECTS = [
     ]
   },
   {
-    id: 2,
+    id: 3,
     title: 'Credit Risk Analysis Predictor',
     titleJa: '信用リスク分析予測システム',
     description: 'ML model to predict default risk using supervised learning, deep learning, and financial data modeling',
@@ -270,7 +376,7 @@ export const PROJECTS = [
     ]
   },
   {
-    id: 3,
+    id: 4,
     title: 'Multimodal E-Commerce Product Classification System',
     titleJa: 'マルチモーダルEコマース製品分類システム',
     description: 'Advanced multimodal ML system with professional Next.js demo combining computer vision and NLP for automated product categorization, achieving 85%+ accuracy across 49K+ products',
@@ -376,7 +482,7 @@ export const PROJECTS = [
     ]
   },
   {
-    id: 4,
+    id: 5,
     title: 'E-Commerce Data Pipeline ELT',
     titleJa: 'Eコマースデータパイプライン ELT',
     description: 'Built an ELT pipeline to analyze seasonal e-commerce data and extract holiday-driven purchase insights orchestrated with Apache Airflow',
@@ -482,7 +588,7 @@ export const PROJECTS = [
     ]
   },
   {
-    id: 5,
+    id: 6,
     title: 'AI Vision Classifier',
     titleJa: 'AI画像分類システム',
     description: 'Enterprise-grade full-stack application with ResNet50 AI model for automated image classification across 1000+ categories, featuring 95% time reduction and real-time processing',
@@ -588,7 +694,7 @@ export const PROJECTS = [
     ]
   },
   {
-    id: 6,
+    id: 7,
     title: 'Home Credit Default Risk Prediction',
     titleJa: 'ホームクレジットデフォルトリスク予測',
     description: 'Complete ML pipeline with interactive Streamlit dashboard for predicting loan default risk with 75%+ accuracy, featuring real-time predictions and business intelligence',
