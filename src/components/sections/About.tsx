@@ -2,8 +2,9 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { PORTFOLIO_DATA, SKILLS } from '@/lib/constants';
+import { PORTFOLIO_DATA } from '@/lib/constants';
 import { useLanguage } from '@/contexts/LanguageContext';
+import SkillsCarousel from '@/components/ui/SkillsCarousel';
 
 const About = () => {
   const { t } = useLanguage();
@@ -111,7 +112,7 @@ const About = () => {
           </motion.div>
         </div>
 
-        {/* Skills Grid */}
+        {/* Skills Carousel */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -120,25 +121,7 @@ const About = () => {
           className="mb-16"
         >
           <h3 className="text-3xl font-bold text-slate-100 mb-10 text-center">{t.about.skillsAndTechnologies}</h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
-            {SKILLS.map((skill, index) => (
-              <motion.div
-                key={skill.name}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: 0.8 + index * 0.03 }}
-                viewport={{ once: true }}
-                className="group bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl p-6 text-center border border-slate-700 hover:border-blue-400 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-blue-500/10"
-              >
-                <div className="text-3xl mb-3 group-hover:scale-110 transition-transform duration-300">
-                  {skill.icon}
-                </div>
-                <span className="text-slate-200 font-medium text-sm leading-tight block">
-                  {skill.name}
-                </span>
-              </motion.div>
-            ))}
-          </div>
+          <SkillsCarousel />
         </motion.div>
       </div>
       

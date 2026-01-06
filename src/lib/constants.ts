@@ -19,41 +19,71 @@ export const PORTFOLIO_DATA = {
 } as const;
 
 export const SKILLS = [
-  // ML/AI Focus (Primary)
-  { name: 'Python', icon: '🐍' },
-  { name: 'Machine Learning', icon: '🤖' },
-  { name: 'Deep Learning', icon: '🧠' },
-  { name: 'TensorFlow', icon: '🔥' },
-  { name: 'Scikit-learn', icon: '📊' },
-  { name: 'Keras', icon: '⚡' },
-  { name: 'Computer Vision', icon: '👁️' },
-  { name: 'NLP', icon: '💬' },
-  { name: 'LLMs', icon: '🗣️' },
-  { name: 'Transformers', icon: '🔄' },
-  { name: 'Hugging Face', icon: '🤗' },
-  { name: 'Langchain', icon: '🔗' },
+  // AI & Machine Learning
+  { name: 'Python', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg', category: 'AI' },
+  { name: 'TensorFlow', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tensorflow/tensorflow-original.svg', category: 'AI' },
+  { name: 'PyTorch', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pytorch/pytorch-original.svg', category: 'AI' },
+  { name: 'Scikit-learn', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/scikitlearn/scikitlearn-original.svg', category: 'AI' },
+  { name: 'Keras', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/keras/keras-original.svg', category: 'AI' },
+  { name: 'Pandas', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pandas/pandas-original.svg', category: 'AI' },
+  { name: 'NumPy', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/numpy/numpy-original.svg', category: 'AI' },
+  { name: 'Matplotlib', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/matplotlib/matplotlib-original.svg', category: 'AI' },
+  { name: 'Seaborn', icon: '/images/stack/seaborn-1.svg', category: 'AI' },
+  { name: 'Hugging Face', icon: '🤗', category: 'AI' },
+  { name: 'LangChain', icon: '/images/stack/langchain-color.png', category: 'AI' },
+  { name: 'OpenAI API', icon: '/images/stack/openai.svg', category: 'AI' },
+  { name: 'LLMs', icon: '🗣️', category: 'AI' },
+  { name: 'RAG', icon: '🔗', category: 'AI' },
+  { name: 'Agents', icon: '🤖', category: 'AI' },
+  { name: 'Transformers', icon: '🔄', category: 'AI' },
+  { name: 'Computer Vision', icon: '👁️', category: 'AI' },
+  { name: 'NLP', icon: '📝', category: 'AI' },
+  { name: 'Data Science', icon: '📊', category: 'AI' },
+  { name: 'Deep Learning', icon: '🧠', category: 'AI' },
+  { name: 'Machine Learning', icon: '🤖', category: 'AI' },
+  { name: 'YOLO11', icon: '/images/stack/ultra.avif', category: 'AI' },
+  { name: 'Prompt Engineering', icon: '💡', category: 'AI' },
   
-  // Development & Infrastructure
-  { name: 'Docker', icon: '🐳' },
-  { name: 'AWS', icon: '☁️' },
-  { name: 'FastAPI', icon: '⚡' },
-  { name: 'Flask', icon: '🌶️' },
-  { name: 'SQL', icon: '🗄️' },
-  { name: 'Redis', icon: '🔴' },
-  { name: 'Airflow', icon: '🌊' },
-  { name: 'Pandas', icon: '🐼' },
-  { name: 'NumPy', icon: '🔢' },
-  { name: 'Matplotlib', icon: '📈' },
-  { name: 'Seaborn', icon: '📉' },
-  { name: 'Git & GitHub', icon: '🔧' },
-  { name : 'Streamlit', icon: '🎯'},
+
+  // Cloud & DevOps
+  { name: 'Docker', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg', category: 'DevOps' },
+  { name: 'AWS', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg', category: 'DevOps' },
+  { name: 'Git', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg', category: 'DevOps' },
+  { name: 'GitHub', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg', category: 'DevOps' },
+  { name: 'Airflow', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/apacheairflow/apacheairflow-original.svg', category: 'DevOps' },
   
-  // Full Stack (Secondary)
-  { name: 'React', icon: '⚛️' },
-  { name: 'JavaScript', icon: '🟡' },
-  { name: 'Next.js', icon: '▲' },
-  { name: 'Tailwind CSS', icon: '🎨' },
-  { name: 'MySQL', icon: '🐬' },
+  // Backend & APIs
+  { name: 'FastAPI', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastapi/fastapi-original.svg', category: 'Backend' },
+  { name: 'Flask', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flask/flask-original.svg', category: 'Backend' },
+  { name: 'Spring Boot', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg', category: 'Backend' },
+  { name: 'Chainlit', icon: '/images/stack/chainlit.svg', category: 'Backend' },
+  { name: 'Node.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg', category: 'Backend' },
+  
+  // Databases
+  { name: 'MySQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg', category: 'Database' },
+  { name: 'PostgreSQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg', category: 'Database' },
+  { name: 'Redis', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg', category: 'Database' },
+  { name: 'MongoDB', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg', category: 'Database' },
+  { name: 'ChromaDB', icon: '/images/stack/chromadb.png', category: 'Database' },
+  
+  // Frontend Development
+  { name: 'React', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg', category: 'Frontend' },
+  { name: 'Next.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg', category: 'Frontend' },
+  { name: 'JavaScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg', category: 'Frontend' },
+  { name: 'TypeScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg', category: 'Frontend' },
+  { name: 'Tailwind CSS', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg', category: 'Frontend' },
+  { name: 'HTML5', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg', category: 'Frontend' },
+  { name: 'Streamlit', icon: '/images/stack/streamlit-icon.webp', category: 'Frontend' },
+  { name: 'CSS3', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg', category: 'Frontend' },
+] as const;
+
+export const SKILL_CATEGORIES = [
+  { id: 'All', label: 'All', color: 'blue' },
+  { id: 'AI', label: 'AI & ML', color: 'purple' },
+  { id: 'Frontend', label: 'Frontend', color: 'cyan' },
+  { id: 'Backend', label: 'Backend', color: 'green' },
+  { id: 'Database', label: 'Database', color: 'orange' },
+  { id: 'DevOps', label: 'DevOps', color: 'red' },
 ] as const;
 
 export const PROJECTS = [
