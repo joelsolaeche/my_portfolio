@@ -116,20 +116,20 @@ const Timeline = () => {
   const { t, language } = useLanguage();
   
   return (
-    <section id="timeline" className="relative bg-slate-800 py-32 px-8 lg:px-12">
-      <div className="max-w-6xl mx-auto">
+    <section id="timeline" className="relative bg-zinc-800/50 py-24 px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-20"
+          className="text-center mb-16"
         >
-          <h2 className="text-4xl sm:text-5xl font-bold text-slate-100 mb-6 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-bold text-zinc-100 mb-4 tracking-tight">
             {t.timeline.title}
           </h2>
-          <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base text-zinc-400 max-w-2xl mx-auto leading-relaxed">
             {t.timeline.subtitle}
           </p>
         </motion.div>
@@ -137,36 +137,34 @@ const Timeline = () => {
         {/* Timeline */}
         <div className="relative">
           {/* Timeline line */}
-          <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-400 via-purple-400 to-green-400"></div>
+          <div className="absolute left-6 top-0 bottom-0 w-px bg-zinc-700"></div>
           
           {/* Timeline items */}
-          <div className="space-y-12">
+          <div className="space-y-8">
             {EXPERIENCE.map((exp, index) => (
               <motion.div
                 key={exp.id}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.2 }}
+                transition={{ duration: 0.6, delay: index * 0.15 }}
                 viewport={{ once: true }}
-                className={`relative flex items-center ${
-                  index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-                }`}
+                className="relative flex items-start"
               >
                 {/* Timeline marker */}
-                <div className="absolute left-6 w-6 h-6 bg-gradient-to-br from-blue-400 to-purple-400 rounded-full border-4 border-slate-800 z-10 flex items-center justify-center">
+                <div className="absolute left-4 w-4 h-4 bg-zinc-900 rounded-full border-2 border-blue-400 z-10 flex items-center justify-center">
                   {exp.isActive && (
-                    <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+                    <div className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-pulse"></div>
                   )}
                 </div>
 
                 {/* Content card */}
-                <div className={`flex-1 ${index % 2 === 0 ? 'md:ml-20' : 'md:mr-20'} ml-20`}>
-                  <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl p-8 border border-slate-700 hover:border-blue-400 transition-all duration-300 hover:scale-105 shadow-lg">
+                <div className="flex-1 ml-14">
+                  <div className="bg-zinc-900/80 rounded-xl p-6 border border-zinc-700/50 hover:border-zinc-600 transition-colors duration-200">
                     {/* Header with Company Logo */}
                     <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-4">
-                      <div className="flex items-center space-x-4 mb-4 sm:mb-0">
+                      <div className="flex items-center gap-3 mb-3 sm:mb-0">
                         {/* Company Logo */}
-                        <div className="relative w-16 h-16 rounded-xl overflow-hidden border-2 border-slate-600 bg-white p-2 flex-shrink-0">
+                        <div className="relative w-12 h-12 rounded-lg overflow-hidden border border-zinc-600 bg-white p-1.5 flex-shrink-0">
                           <Image
                             src={exp.logo}
                             alt={`${exp.company} logo`}
@@ -177,44 +175,44 @@ const Timeline = () => {
                         
                         {/* Title and Company */}
                         <div>
-                          <h3 className="text-2xl font-bold text-slate-100 mb-1">
+                          <h3 className="text-lg font-semibold text-zinc-100">
                             {exp.title}
                           </h3>
-                          <p className="text-lg text-blue-400 font-medium">
+                          <p className="text-sm text-blue-400 font-medium">
                             {exp.company}
                           </p>
                         </div>
                       </div>
                       
                       {/* Period and Location */}
-                      <div className="text-right">
-                        <p className="text-slate-300 font-medium">
+                      <div className="text-left sm:text-right">
+                        <p className="text-zinc-300 text-sm font-medium">
                           {exp.period.replace('Present', t.timeline.present)}
                         </p>
-                        <p className="text-slate-400 text-sm">
+                        <p className="text-zinc-500 text-xs">
                           {exp.location}
                         </p>
                       </div>
                     </div>
 
                     {/* Description */}
-                    <div className="mb-6">
-                      <ul className="space-y-2">
+                    <div className="mb-4">
+                      <ul className="space-y-1.5">
                         {(language === 'ja' && exp.descriptionJa ? exp.descriptionJa : exp.description).map((item, idx) => (
                           <li key={idx} className="flex items-start">
-                            <span className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                            <span className="text-slate-300 leading-relaxed">{item}</span>
+                            <span className="w-1.5 h-1.5 bg-zinc-500 rounded-full mt-2 mr-2.5 flex-shrink-0"></span>
+                            <span className="text-zinc-400 text-sm leading-relaxed">{item}</span>
                           </li>
                         ))}
                       </ul>
                     </div>
 
                     {/* Technologies */}
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-1.5">
                       {exp.technologies.map((tech) => (
                         <span
                           key={tech}
-                          className="px-3 py-1 bg-blue-500/10 text-blue-400 rounded-full text-sm font-medium border border-blue-500/20"
+                          className="px-2 py-0.5 bg-zinc-800 text-zinc-400 rounded text-xs font-medium border border-zinc-700/50"
                         >
                           {tech}
                         </span>
@@ -228,12 +226,8 @@ const Timeline = () => {
         </div>
       </div>
       
-      {/* Diagonal divider for next section */}
-      <div className="absolute bottom-0 left-0 w-full overflow-hidden">
-        <svg className="relative block w-full h-20" viewBox="0 0 1200 120" preserveAspectRatio="none">
-          <path d="M0,0 L600,120 L1200,0 L1200,120 L0,120 Z" fill="#1e293b" />
-        </svg>
-      </div>
+      {/* Clean divider */}
+      <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-zinc-700 to-transparent"></div>
     </section>
   );
 };
