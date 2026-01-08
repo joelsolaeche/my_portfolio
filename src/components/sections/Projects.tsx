@@ -23,93 +23,84 @@ const Projects = () => {
   };
 
   return (
-    <section id="projects" className="relative bg-slate-800 py-32 px-8 lg:px-12">
-      <div className="max-w-7xl mx-auto">
+    <section id="projects" className="relative bg-slate-800/30 py-24 px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-20"
+          className="text-center mb-14"
         >
-          <h2 className="text-4xl sm:text-5xl font-bold text-slate-100 mb-6 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-bold text-slate-100 mb-4 tracking-tight">
             {t.projects.title}
           </h2>
-          <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base text-slate-400 max-w-2xl mx-auto leading-relaxed">
             {t.projects.subtitle}
           </p>
         </motion.div>
 
         {/* Projects Grid */}
-        <div className="grid lg:grid-cols-2 gap-8 mb-16">
+        <div className="grid lg:grid-cols-2 gap-6 mb-12">
           {PROJECTS.map((project, index) => (
             <motion.div
               key={project.id}
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.2 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
               onClick={() => openProjectModal(project)}
-              className="group bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-slate-700 hover:border-blue-400 hover:scale-105 cursor-pointer"
+              className="group bg-slate-800/50 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden border border-slate-700/50 hover:border-slate-600 cursor-pointer"
             >
               {/* Project Image */}
               <div className="relative overflow-hidden">
-                <div className="h-48 bg-slate-900 relative">
+                <div className="h-44 bg-slate-900 relative">
                   <Image 
                     src={project.image} 
                     alt={project.title}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="object-cover"
                   />
                 </div>
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300"></div>
+                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors duration-200"></div>
                 
                 {/* Click indicator */}
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out">
-                  <div className="relative">
-                    {/* Blur background */}
-                    <div className="absolute inset-0 bg-black/30 backdrop-blur-md rounded-xl"></div>
-                    
-                    {/* Glassmorphic button */}
-                    <div className="relative bg-white/10 backdrop-blur-lg border border-white/20 px-6 py-3 rounded-xl shadow-2xl">
-                      <div className="flex items-center space-x-2 text-white">
-                        <svg className="w-5 h-5 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                        </svg>
-                        <span className="font-semibold text-sm tracking-wide">{t.projects.viewDetails}</span>
-                        <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
-                      </div>
-                      
-                      {/* Shimmer effect */}
-                      <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-transparent via-white/10 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out"></div>
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                  <div className="bg-black/50 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/10">
+                    <div className="flex items-center space-x-2 text-white">
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                      </svg>
+                      <span className="font-medium text-sm">{t.projects.viewDetails}</span>
                     </div>
                   </div>
                 </div>
               </div>
               
               {/* Project Content */}
-              <div className="p-8">
-                <h3 className="text-2xl font-bold text-slate-100 mb-3 group-hover:text-blue-400 transition-colors duration-300">
+              <div className="p-5">
+                <h3 className="text-lg font-semibold text-slate-100 mb-2 group-hover:text-blue-400 transition-colors duration-200">
                   {language === 'ja' && project.titleJa ? project.titleJa : project.title}
                 </h3>
-                <p className="text-slate-300 mb-6 leading-relaxed">
+                <p className="text-slate-400 mb-4 text-sm leading-relaxed line-clamp-2">
                   {language === 'ja' && project.descriptionJa ? project.descriptionJa : project.description}
                 </p>
                 
                 {/* Technologies */}
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {project.technologies.map((tech) => (
+                <div className="flex flex-wrap gap-1.5 mb-4">
+                  {project.technologies.slice(0, 5).map((tech) => (
                     <span
                       key={tech}
-                      className="px-3 py-1 bg-blue-500/10 text-blue-400 rounded-full text-sm font-medium border border-blue-500/20"
+                      className="px-2 py-0.5 bg-slate-700/50 text-slate-400 rounded text-xs font-medium"
                     >
                       {tech}
                     </span>
                   ))}
+                  {project.technologies.length > 5 && (
+                    <span className="px-2 py-0.5 text-slate-500 text-xs">+{project.technologies.length - 5}</span>
+                  )}
                 </div>
                 
                 {/* Project Links */}
@@ -182,26 +173,24 @@ const Projects = () => {
 
         {/* Call to Action */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
           viewport={{ once: true }}
-          className="text-center bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-12 border border-slate-700"
+          className="text-center bg-slate-800/50 rounded-xl p-8 border border-slate-700/50"
         >
-          <h3 className="text-3xl font-bold text-white mb-4">
+          <h3 className="text-xl font-semibold text-slate-100 mb-2">
             {t.projects.moreProjects}
           </h3>
-          <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+          <p className="text-sm text-slate-400 mb-5 max-w-xl mx-auto">
             {t.projects.moreProjectsDesc}
           </p>
-          <motion.button
+          <button
             onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="inline-block bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-300 shadow-lg"
+            className="inline-block bg-blue-600 text-white px-5 py-2 rounded-lg text-sm font-medium hover:bg-blue-500 transition-colors duration-200"
           >
             {t.projects.collaborate}
-          </motion.button>
+          </button>
         </motion.div>
       </div>
       
@@ -214,12 +203,8 @@ const Projects = () => {
         />
       )}
       
-      {/* Wave divider for final section */}
-      <div className="absolute bottom-0 left-0 w-full overflow-hidden">
-        <svg className="relative block w-full h-20" viewBox="0 0 1200 120" preserveAspectRatio="none">
-          <path d="M0,60 Q300,0 600,60 Q900,120 1200,60 L1200,120 L0,120 Z" fill="#0f172a" />
-        </svg>
-      </div>
+      {/* Clean divider */}
+      <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-slate-700 to-transparent"></div>
     </section>
   );
 };

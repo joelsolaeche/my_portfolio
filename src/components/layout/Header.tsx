@@ -81,24 +81,24 @@ const Header = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-out border-b ${
         isInHero 
-          ? 'bg-transparent' 
-          : 'bg-black/80 backdrop-blur-lg'
+          ? 'bg-transparent border-transparent' 
+          : 'bg-black/90 backdrop-blur-md border-slate-800/50'
       }`}
     >
       <div className="max-w-5xl mx-auto px-6 lg:px-8">
-        <div className={`flex justify-between items-center transition-all duration-500 ease-in-out ${
-          isInHero ? 'h-20' : 'h-12'
+        <div className={`flex justify-between items-center transition-all duration-300 ease-out ${
+          isInHero ? 'h-18' : 'h-14'
         }`}>
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2">
+          <Link href="/" className="flex items-center">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
-              className={`font-medium text-slate-300 tracking-tight hover:text-slate-100 transition-all duration-500 ${
-                isInHero ? 'text-xl' : 'text-base'
+              className={`font-semibold text-slate-100 tracking-tight hover:text-white transition-colors duration-200 ${
+                isInHero ? 'text-lg' : 'text-base'
               }`}
             >
               {PORTFOLIO_DATA.name}
@@ -116,14 +116,14 @@ const Header = () => {
               >
                 <button
                   onClick={(e) => handleNavClick(e, item.href)}
-                  className={`rounded-md font-medium transition-all duration-500 ${
+                  className={`rounded-md font-medium transition-all duration-200 ${
                     isInHero 
-                      ? 'px-4 py-2 text-base' 
+                      ? 'px-3.5 py-2 text-sm' 
                       : 'px-3 py-1.5 text-sm'
                   } ${
                     activeSection === item.href
-                      ? 'text-blue-400 bg-blue-500/10'
-                      : 'text-slate-300 hover:text-slate-100 hover:bg-slate-800/50'
+                      ? 'text-blue-400'
+                      : 'text-slate-400 hover:text-slate-100'
                   }`}
                 >
                   {item.name}
@@ -137,11 +137,11 @@ const Header = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.6 }}
               onClick={toggleLanguage}
-              className={`ml-2 rounded-md font-medium transition-all duration-500 flex items-center space-x-2 ${
+              className={`ml-4 rounded-md font-medium transition-all duration-200 flex items-center gap-1.5 ${
                 isInHero 
-                  ? 'px-4 py-2 text-base' 
-                  : 'px-3 py-1.5 text-sm'
-              } text-slate-300 hover:text-slate-100 hover:bg-slate-800/50 border border-slate-600/30 hover:border-blue-400/50`}
+                  ? 'px-3 py-1.5 text-sm' 
+                  : 'px-2.5 py-1 text-sm'
+              } text-slate-400 hover:text-slate-100 border border-slate-700/50 hover:border-slate-600`}
             >
               <div className="flex items-center space-x-1">
                 {language === 'en' ? (

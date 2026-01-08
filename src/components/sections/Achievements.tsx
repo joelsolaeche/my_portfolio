@@ -291,20 +291,20 @@ const Achievements = () => {
   };
 
   return (
-    <section id="achievements" className="relative bg-slate-900 py-32 px-8 lg:px-12">
-      <div className="max-w-7xl mx-auto">
+    <section id="achievements" className="relative bg-slate-900 py-24 px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-20"
+          className="text-center mb-14"
         >
-          <h2 className="text-5xl sm:text-6xl font-bold text-slate-100 mb-8 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-bold text-slate-100 mb-4 tracking-tight">
             {language === 'ja' ? '実績・成果' : 'Achievements'}
           </h2>
-          <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base text-slate-400 max-w-2xl mx-auto leading-relaxed">
             {language === 'ja'
               ? 'インパクトのある成果と技術的達成の軌跡'
               : 'A track record of impactful results and technical excellence'}
@@ -317,18 +317,18 @@ const Achievements = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="flex flex-wrap justify-center gap-3 mb-12"
+          className="flex flex-wrap justify-center gap-2 mb-10"
         >
           {CATEGORIES.map((category) => (
             <button
               key={category.id}
               onClick={() => setActiveCategory(category.id)}
-              className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 flex items-center gap-2 ${activeCategory === category.id
-                ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg scale-105'
-                : 'bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white'
+              className={`px-4 py-1.5 rounded-full text-sm transition-colors duration-200 flex items-center gap-1.5 border ${activeCategory === category.id
+                ? 'bg-slate-700 text-slate-100 border-slate-600'
+                : 'bg-transparent text-slate-400 border-slate-700/50 hover:text-slate-300 hover:border-slate-600'
                 }`}
             >
-              <span className="text-xl">{category.icon}</span>
+              <span className="text-sm">{category.icon}</span>
               <span>{language === 'ja' ? category.labelJa : category.label}</span>
             </button>
           ))}
@@ -341,14 +341,14 @@ const Achievements = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="mb-12"
+            className="mb-10"
           >
-            <h3 className="text-2xl font-bold text-slate-100 mb-6 text-center">
+            <h3 className="text-lg font-semibold text-slate-100 mb-4 text-center">
               {language === 'ja' ? 'Helte 認定実績' : 'Helte Recognitions'}
             </h3>
             <div className="relative w-full">
               {/* Carousel Container */}
-              <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700">
+              <div className="relative overflow-hidden rounded-xl bg-slate-800/50 border border-slate-700/50">
                 <div
                   className="flex transition-transform duration-500 ease-in-out"
                   style={{ transform: `translateX(-${currentSlide * 100}%)` }}
@@ -357,7 +357,7 @@ const Achievements = () => {
                     <div key={achievement.id} className="min-w-full">
                       {/* Image */}
                       {achievement.image && (
-                        <div className="relative w-full h-[500px] md:h-[600px] lg:h-[700px] bg-slate-900">
+                        <div className="relative w-full h-[350px] md:h-[400px] lg:h-[450px] bg-slate-900">
                           <Image
                             src={achievement.image}
                             alt={achievement.title}
@@ -369,25 +369,25 @@ const Achievements = () => {
                       )}
 
                       {/* Content */}
-                      <div className="p-8 md:p-10">
-                        <div className="flex items-start justify-between mb-4">
-                          <div className="text-5xl">{achievement.icon}</div>
-                          <span className="text-xs text-slate-500 bg-slate-800 px-3 py-1 rounded-full">
+                      <div className="p-6">
+                        <div className="flex items-start justify-between mb-3">
+                          <div className="text-3xl">{achievement.icon}</div>
+                          <span className="text-xs text-slate-500 bg-slate-800 px-2 py-0.5 rounded-full">
                             {achievement.date}
                           </span>
                         </div>
 
-                        <h3 className="text-2xl md:text-3xl font-bold text-slate-100 mb-4">
+                        <h3 className="text-lg font-semibold text-slate-100 mb-2">
                           {language === 'ja' ? achievement.titleJa : achievement.title}
                         </h3>
 
-                        <p className="text-slate-300 mb-6 leading-relaxed text-base md:text-lg">
+                        <p className="text-slate-400 mb-4 leading-relaxed text-sm">
                           {language === 'ja' ? achievement.descriptionJa : achievement.description}
                         </p>
 
                         {achievement.metric && (
-                          <div className="mb-6">
-                            <div className="inline-block bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-500/30 text-blue-400 px-5 py-2 rounded-lg text-sm font-semibold">
+                          <div className="mb-4">
+                            <div className="inline-block bg-blue-500/10 border border-blue-500/20 text-blue-400 px-3 py-1 rounded-lg text-xs font-medium">
                               {language === 'ja' ? achievement.metricJa : achievement.metric}
                             </div>
                           </div>
@@ -398,11 +398,11 @@ const Achievements = () => {
                             href={achievement.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors duration-200 font-medium group/link"
+                            className="inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors duration-200 text-sm"
                           >
                             <span>{language === 'ja' ? achievement.linkTextJa : achievement.linkText}</span>
                             <svg
-                              className="w-5 h-5 ml-2 transform group-hover/link:translate-x-1 transition-transform duration-200"
+                              className="w-4 h-4 ml-1"
                               fill="none"
                               stroke="currentColor"
                               viewBox="0 0 24 24"
@@ -419,19 +419,19 @@ const Achievements = () => {
                 {/* Navigation Arrows */}
                 <button
                   onClick={prevSlide}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-slate-800/80 hover:bg-slate-700 text-white p-3 rounded-full backdrop-blur-sm transition-all duration-300 z-10"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 bg-slate-800/80 hover:bg-slate-700 text-white p-2 rounded-full backdrop-blur-sm transition-colors duration-200 z-10"
                   aria-label="Previous slide"
                 >
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                   </svg>
                 </button>
                 <button
                   onClick={nextSlide}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-slate-800/80 hover:bg-slate-700 text-white p-3 rounded-full backdrop-blur-sm transition-all duration-300 z-10"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 bg-slate-800/80 hover:bg-slate-700 text-white p-2 rounded-full backdrop-blur-sm transition-colors duration-200 z-10"
                   aria-label="Next slide"
                 >
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
                 </button>
@@ -456,62 +456,62 @@ const Achievements = () => {
         )}
 
         {/* Other Achievements Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
           {filteredAchievements.map((achievement, index) => (
             <motion.div
               key={achievement.id}
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ duration: 0.4, delay: index * 0.05 }}
               viewport={{ once: true }}
-              className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl overflow-hidden border border-slate-700 hover:border-blue-400 transition-all duration-300 hover:scale-105 shadow-lg group"
+              className="bg-slate-800/50 rounded-xl overflow-hidden border border-slate-700/50 hover:border-slate-600 transition-colors duration-200 group"
             >
               {/* Image if available */}
               {achievement.image && (
-                <div className="relative w-full h-48 bg-slate-900">
+                <div className="relative w-full h-36 bg-slate-900">
                   <Image
                     src={achievement.image}
                     alt={achievement.title}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="object-cover"
                   />
                 </div>
               )}
 
-              <div className="p-6">
+              <div className="p-5">
                 {/* Icon & Date */}
-                <div className="flex items-start justify-between mb-4">
+                <div className="flex items-start justify-between mb-3">
                   {achievement.iconImage ? (
-                    <div className="w-12 h-12 relative">
+                    <div className="w-10 h-10 relative">
                       <Image
                         src={achievement.iconImage}
                         alt={achievement.title}
-                        width={48}
-                        height={48}
+                        width={40}
+                        height={40}
                         className="object-contain"
                       />
                     </div>
                   ) : (
-                    <div className="text-5xl">{achievement.icon}</div>
+                    <div className="text-3xl">{achievement.icon}</div>
                   )}
-                  <span className="text-xs text-slate-500 bg-slate-800 px-3 py-1 rounded-full">
+                  <span className="text-xs text-slate-500 bg-slate-800 px-2 py-0.5 rounded-full">
                     {achievement.date}
                   </span>
                 </div>
 
                 {/* Title */}
-                <h3 className="text-xl font-bold text-slate-100 mb-3 group-hover:text-blue-400 transition-colors duration-300">
+                <h3 className="text-base font-semibold text-slate-100 mb-2">
                   {language === 'ja' ? achievement.titleJa : achievement.title}
                 </h3>
 
                 {/* Description */}
-                <p className="text-slate-300 mb-4 leading-relaxed text-sm">
+                <p className="text-slate-400 mb-3 leading-relaxed text-sm line-clamp-3">
                   {language === 'ja' ? achievement.descriptionJa : achievement.description}
                 </p>
 
                 {/* Metric Badge */}
                 {achievement.metric && (
-                  <div className="inline-block bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-500/30 text-blue-400 px-4 py-2 rounded-lg text-sm font-semibold mb-4">
+                  <div className="inline-block bg-blue-500/10 border border-blue-500/20 text-blue-400 px-2.5 py-1 rounded-lg text-xs font-medium mb-3">
                     {language === 'ja' ? achievement.metricJa : achievement.metric}
                   </div>
                 )}
@@ -522,11 +522,11 @@ const Achievements = () => {
                     href={achievement.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center text-blue-400 hover:text-blue-300 transition-colors duration-200 text-sm font-medium group/link mt-4"
+                    className="flex items-center text-blue-400 hover:text-blue-300 transition-colors duration-200 text-sm mt-2"
                   >
                     <span>{language === 'ja' ? achievement.linkTextJa : achievement.linkText}</span>
                     <svg
-                      className="w-4 h-4 ml-1 transform group-hover/link:translate-x-1 transition-transform duration-200"
+                      className="w-3.5 h-3.5 ml-1"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -542,11 +542,11 @@ const Achievements = () => {
 
         {/* Stats Summary */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
-          className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6"
+          className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4"
         >
           {[
             { value: '9+', label: 'Key Achievements', labelJa: '主要実績' },
@@ -556,16 +556,16 @@ const Achievements = () => {
           ].map((stat, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.4, delay: index * 0.05 }}
               viewport={{ once: true }}
-              className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl p-6 text-center border border-slate-700"
+              className="bg-slate-800/50 rounded-lg p-4 text-center border border-slate-700/50"
             >
-              <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 mb-2">
+              <div className="text-xl font-bold text-blue-400 mb-1">
                 {stat.value}
               </div>
-              <div className="text-sm text-slate-400">
+              <div className="text-xs text-slate-500">
                 {language === 'ja' ? stat.labelJa : stat.label}
               </div>
             </motion.div>
