@@ -10,6 +10,7 @@ const EXPERIENCE = [
     id: 1,
     title: 'AI Engineer',
     company: 'Algolabs AI',
+    companyColor: '#22d3ee',
     logo: '/images/companies/algolabs-icon.png',
     period: 'Oct 2025 - Present',
     location: 'Argentina (Remote)',
@@ -40,6 +41,7 @@ const EXPERIENCE = [
     id: 2,
     title: 'AI Trainer & Developer',
     company: 'Scale AI',
+    companyColor: '#c084fc',
     logo: '/images/companies/scale_icon.png',
     period: 'Aug 2024 - Sep 2025',
     location: 'United States (Remote)',
@@ -66,6 +68,7 @@ const EXPERIENCE = [
     id: 3,
     title: 'AI Engineer',
     company: 'Anyone AI',
+    companyColor: '#60a5fa',
     logo: '/images/companies/anyone_ai_logo.jpg',
     period: 'Nov 2024 - Mar 2025',
     location: 'United States (Remote)',
@@ -92,6 +95,7 @@ const EXPERIENCE = [
     id: 4,
     title: 'Development Team Member',
     company: 'Helte Co., Ltd',
+    companyColor: '#4ade80',
     logo: '/images/companies/heltesail_logo.jpg',
     period: 'Aug 2024 - Nov 2024',
     location: 'Tokyo, Japan (Remote)',
@@ -137,7 +141,7 @@ const Timeline = () => {
         {/* Timeline */}
         <div className="relative">
           {/* Timeline line */}
-          <div className="absolute left-4 top-0 bottom-0 w-px bg-slate-700"></div>
+          <div className="absolute left-[18px] top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 via-purple-500 to-cyan-500 rounded-full"></div>
           
           {/* Timeline items */}
           <div className="space-y-8">
@@ -151,9 +155,9 @@ const Timeline = () => {
                 className="relative flex items-start"
               >
                 {/* Timeline marker */}
-                <div className="absolute left-4 w-4 h-4 bg-slate-900 rounded-full border-2 border-blue-400 z-10 flex items-center justify-center">
+                <div className="absolute left-2 w-5 h-5 bg-slate-900 rounded-full border-2 border-blue-400 z-10 flex items-center justify-center">
                   {exp.isActive && (
-                    <div className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-pulse"></div>
+                    <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
                   )}
                 </div>
 
@@ -178,7 +182,10 @@ const Timeline = () => {
                           <h3 className="text-lg font-semibold text-slate-100 mb-0.5">
                             {exp.title}
                           </h3>
-                          <p className="text-sm text-blue-400 font-medium">
+                          <p 
+                            className="text-sm font-medium"
+                            style={{ color: exp.companyColor }}
+                          >
                             {exp.company}
                           </p>
                         </div>

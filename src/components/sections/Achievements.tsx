@@ -247,12 +247,12 @@ const ACHIEVEMENTS: Achievement[] = [
 ];
 
 const CATEGORIES = [
-  { id: 'all' as AchievementCategory, label: 'All', labelJa: 'すべて', icon: '🌟' },
-  { id: 'awards' as AchievementCategory, label: 'Awards', labelJa: '受賞歴', icon: '🏆' },
-  { id: 'technical' as AchievementCategory, label: 'Technical', labelJa: '技術的', icon: '⚙️' },
-  { id: 'impact' as AchievementCategory, label: 'Impact', labelJa: 'インパクト', icon: '🚀' },
-  { id: 'recognition' as AchievementCategory, label: 'Recognition', labelJa: '評価', icon: '🎓' },
-  { id: 'language' as AchievementCategory, label: 'Language', labelJa: '言語', icon: '🌐' }
+  { id: 'all' as AchievementCategory, label: 'All', labelJa: 'すべて', icon: '🌟', color: 'blue' },
+  { id: 'awards' as AchievementCategory, label: 'Awards', labelJa: '受賞歴', icon: '🏆', color: 'yellow' },
+  { id: 'technical' as AchievementCategory, label: 'Technical', labelJa: '技術的', icon: '⚙️', color: 'cyan' },
+  { id: 'impact' as AchievementCategory, label: 'Impact', labelJa: 'インパクト', icon: '🚀', color: 'purple' },
+  { id: 'recognition' as AchievementCategory, label: 'Recognition', labelJa: '評価', icon: '🎓', color: 'green' },
+  { id: 'language' as AchievementCategory, label: 'Language', labelJa: '言語', icon: '🌐', color: 'orange' }
 ];
 
 const Achievements = () => {
@@ -319,19 +319,41 @@ const Achievements = () => {
           viewport={{ once: true }}
           className="flex flex-wrap justify-center gap-2 mb-10"
         >
-          {CATEGORIES.map((category) => (
-            <button
-              key={category.id}
-              onClick={() => setActiveCategory(category.id)}
-              className={`px-4 py-1.5 rounded-full text-sm transition-colors duration-200 flex items-center gap-1.5 border ${activeCategory === category.id
-                ? 'bg-slate-700 text-slate-100 border-slate-600'
-                : 'bg-transparent text-slate-400 border-slate-700/50 hover:text-slate-300 hover:border-slate-600'
-                }`}
-            >
-              <span className="text-sm">{category.icon}</span>
-              <span>{language === 'ja' ? category.labelJa : category.label}</span>
-            </button>
-          ))}
+          {CATEGORIES.map((category) => {
+            const isActive = activeCategory === category.id;
+            const colorStyles = {
+              blue: isActive 
+                ? 'bg-blue-600/30 text-blue-300 border-blue-500/40' 
+                : 'bg-blue-600/10 text-blue-400 border-blue-500/20 hover:bg-blue-600/20',
+              yellow: isActive 
+                ? 'bg-yellow-600/30 text-yellow-300 border-yellow-500/40' 
+                : 'bg-yellow-600/10 text-yellow-400 border-yellow-500/20 hover:bg-yellow-600/20',
+              cyan: isActive 
+                ? 'bg-cyan-600/30 text-cyan-300 border-cyan-500/40' 
+                : 'bg-cyan-600/10 text-cyan-400 border-cyan-500/20 hover:bg-cyan-600/20',
+              purple: isActive 
+                ? 'bg-purple-600/30 text-purple-300 border-purple-500/40' 
+                : 'bg-purple-600/10 text-purple-400 border-purple-500/20 hover:bg-purple-600/20',
+              green: isActive 
+                ? 'bg-green-600/30 text-green-300 border-green-500/40' 
+                : 'bg-green-600/10 text-green-400 border-green-500/20 hover:bg-green-600/20',
+              orange: isActive 
+                ? 'bg-orange-600/30 text-orange-300 border-orange-500/40' 
+                : 'bg-orange-600/10 text-orange-400 border-orange-500/20 hover:bg-orange-600/20',
+            };
+            const style = colorStyles[category.color as keyof typeof colorStyles] || colorStyles.blue;
+            
+            return (
+              <button
+                key={category.id}
+                onClick={() => setActiveCategory(category.id)}
+                className={`px-4 py-1.5 rounded-full text-sm transition-colors duration-200 flex items-center gap-1.5 border ${style}`}
+              >
+                <span className="text-sm">{category.icon}</span>
+                <span>{language === 'ja' ? category.labelJa : category.label}</span>
+              </button>
+            );
+          })}
         </motion.div>
 
         {/* Helte Recognition Carousel */}

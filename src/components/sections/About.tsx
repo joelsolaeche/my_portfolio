@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { PORTFOLIO_DATA } from '@/lib/constants';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -39,21 +40,16 @@ const About = () => {
           >
             {/* Profile Image */}
             <div className="flex justify-center mb-8 lg:justify-start">
-              <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-blue-400 shadow-lg">
-                {/* Replace this with your actual profile image */}
-                <div className="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                  <span className="text-4xl">👨‍💻</span>
-                </div>
-                {/* 
-                Uncomment this when you add your profile picture:
+              <div className="relative w-40 h-40 rounded-full overflow-hidden border-4 border-blue-400 shadow-lg">
                 <Image
-                  src="/images/profile/profile-pic.jpg"
+                  src="/images/profile/prof_pic.jpg"
                   alt="Joel Solaeche Profile Picture"
                   fill
+                  sizes="160px"
                   className="object-cover"
+                  quality={100}
                   priority
                 />
-                */}
               </div>
             </div>
 
