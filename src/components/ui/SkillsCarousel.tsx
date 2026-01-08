@@ -13,18 +13,6 @@ const SkillsCarousel = () => {
     ? SKILLS 
     : SKILLS.filter(skill => skill.category === activeCategory);
 
-  const getColorClasses = (color: string, isActive: boolean) => {
-    const colors = {
-      blue: isActive ? 'bg-blue-500 text-white' : 'text-blue-400 hover:bg-blue-500/10',
-      purple: isActive ? 'bg-purple-500 text-white' : 'text-purple-400 hover:bg-purple-500/10',
-      cyan: isActive ? 'bg-cyan-500 text-white' : 'text-cyan-400 hover:bg-cyan-500/10',
-      green: isActive ? 'bg-green-500 text-white' : 'text-green-400 hover:bg-green-500/10',
-      orange: isActive ? 'bg-orange-500 text-white' : 'text-orange-400 hover:bg-orange-500/10',
-      red: isActive ? 'bg-red-500 text-white' : 'text-red-400 hover:bg-red-500/10',
-    };
-    return colors[color as keyof typeof colors] || colors.blue;
-  };
-
   return (
     <div className="space-y-8">
       {/* Filter Buttons */}
