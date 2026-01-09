@@ -1,104 +1,58 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, memo, useRef } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence, PanInfo } from 'framer-motion';
 import { PROJECTS } from '@/lib/constants';
 import ProjectModal from '@/components/ui/ProjectModal';
 import { useLanguage } from '@/contexts/LanguageContext';
 
-const Projects = () => {
-  const [selectedProject, setSelectedProject] = useState<(typeof PROJECTS)[number] | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
-  const [direction, setDirection] = useState(0); // -1 for left, 1 for right
-  const [hasAnimated, setHasAnimated] = useState(false);
-  const [isNavigating, setIsNavigating] = useState(false);
-  const { t, language } = useLanguage();
+// Stable slide variants - defined outside component to prevent recreation
+const SLIDE_VARIANTS = {
+  enter: (dir: number) => ({
+    x: dir > 0 ? 300 : -300,
+    opacity: 0,
+  }),
+  center: {
+    x: 0,
+    opacity: 1,
+  },
+  exit: (dir: number) => ({
+    x: dir > 0 ? -300 : 300,
+    opacity: 0,
+  }),
+};
 
-  // Handle responsive detection (carousel only on mobile/tablet < 1024px)
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 1024);
-    };
-    
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+// Memoized ProjectCard component to prevent unnecessary re-renders
+interface ProjectCardProps {
+  project: (typeof PROJECTS)[number];
+  index: number;
+  isCarousel?: boolean;
+  hasAnimated: boolean;
+  onAnimationComplete: () => void;
+  onOpenModal: (project: (typeof PROJECTS)[number]) => void;
+  language: string;
+  t: ReturnType<typeof useLanguage>['t'];
+}
 
-  const totalProjects = PROJECTS.length;
-
-  const openProjectModal = (project: (typeof PROJECTS)[number]) => {
-    setSelectedProject(project);
-    setIsModalOpen(true);
-  };
-
-  const closeProjectModal = () => {
-    setIsModalOpen(false);
-    setSelectedProject(null);
-  };
-
-  const goToPrevious = () => {
-    setIsNavigating(true);
-    setDirection(-1);
-    setCurrentIndex((prev) => (prev === 0 ? totalProjects - 1 : prev - 1));
-  };
-
-  const goToNext = () => {
-    setIsNavigating(true);
-    setDirection(1);
-    setCurrentIndex((prev) => (prev === totalProjects - 1 ? 0 : prev + 1));
-  };
-
-  const goToSlide = (index: number) => {
-    if (index === currentIndex) return;
-    setIsNavigating(true);
-    setDirection(index > currentIndex ? 1 : -1);
-    setCurrentIndex(index);
-  };
-
-  // Handle swipe gestures for touch devices
-  const handleDragEnd = (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
-    const swipeThreshold = 50;
-    if (info.offset.x > swipeThreshold) {
-      goToPrevious();
-    } else if (info.offset.x < -swipeThreshold) {
-      goToNext();
-    }
-  };
-
-  // Reset navigation flag after animation completes
-  const handleAnimationComplete = () => {
-    setIsNavigating(false);
-  };
-
-  // Slide animation variants - smooth transitions for navigation
-  const slideVariants = {
-    enter: (dir: number) => ({
-      x: dir > 0 ? 300 : -300,
-      opacity: 0,
-    }),
-    center: {
-      x: 0,
-      opacity: 1,
-    },
-    exit: (dir: number) => ({
-      x: dir > 0 ? -300 : 300,
-      opacity: 0,
-    }),
-  };
-
-  // Project Card Component
-  const ProjectCard = ({ project, index, isCarousel = false }: { project: (typeof PROJECTS)[number]; index: number; isCarousel?: boolean }) => (
+const ProjectCard = memo(function ProjectCard({ 
+  project, 
+  index, 
+  isCarousel = false, 
+  hasAnimated, 
+  onAnimationComplete, 
+  onOpenModal,
+  language,
+  t 
+}: ProjectCardProps) {
+  return (
     <motion.div
       initial={hasAnimated ? false : { opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: isCarousel ? 0 : index * 0.1 }}
       viewport={{ once: true }}
-      onAnimationComplete={() => !hasAnimated && setHasAnimated(true)}
-      onClick={() => openProjectModal(project)}
+      onAnimationComplete={onAnimationComplete}
+      onClick={() => onOpenModal(project)}
       className="group bg-slate-800/50 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden border border-slate-700/50 hover:border-slate-600 cursor-pointer h-full"
     >
       {/* Project Image */}
@@ -109,6 +63,7 @@ const Projects = () => {
             alt={project.title}
             fill
             className="object-cover"
+            loading={index < 2 ? undefined : "lazy"}
           />
         </div>
         <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors duration-200"></div>
@@ -217,6 +172,94 @@ const Projects = () => {
       </div>
     </motion.div>
   );
+});
+
+const Projects = () => {
+  const [selectedProject, setSelectedProject] = useState<(typeof PROJECTS)[number] | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+  const [direction, setDirection] = useState(0);
+  const [hasAnimated, setHasAnimated] = useState(false);
+  const [isNavigating, setIsNavigating] = useState(false);
+  const { t, language } = useLanguage();
+  
+  // Ref for resize throttling
+  const resizeRafRef = useRef<number | null>(null);
+
+  // Handle responsive detection with throttled resize handler
+  useEffect(() => {
+    const handleResize = () => {
+      if (resizeRafRef.current !== null) return;
+      
+      resizeRafRef.current = requestAnimationFrame(() => {
+        setIsMobile(window.innerWidth < 1024);
+        resizeRafRef.current = null;
+      });
+    };
+    
+    handleResize();
+    window.addEventListener('resize', handleResize, { passive: true });
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      if (resizeRafRef.current !== null) {
+        cancelAnimationFrame(resizeRafRef.current);
+      }
+    };
+  }, []);
+
+  const totalProjects = PROJECTS.length;
+
+  const openProjectModal = useCallback((project: (typeof PROJECTS)[number]) => {
+    setSelectedProject(project);
+    setIsModalOpen(true);
+  }, []);
+
+  const closeProjectModal = useCallback(() => {
+    setIsModalOpen(false);
+    setSelectedProject(null);
+  }, []);
+
+  const goToPrevious = useCallback(() => {
+    setIsNavigating(true);
+    setDirection(-1);
+    setCurrentIndex((prev) => (prev === 0 ? totalProjects - 1 : prev - 1));
+  }, [totalProjects]);
+
+  const goToNext = useCallback(() => {
+    setIsNavigating(true);
+    setDirection(1);
+    setCurrentIndex((prev) => (prev === totalProjects - 1 ? 0 : prev + 1));
+  }, [totalProjects]);
+
+  const goToSlide = useCallback((index: number) => {
+    setCurrentIndex(prev => {
+      if (index === prev) return prev;
+      setIsNavigating(true);
+      setDirection(index > prev ? 1 : -1);
+      return index;
+    });
+  }, []);
+
+  // Handle swipe gestures for touch devices
+  const handleDragEnd = useCallback((event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
+    const swipeThreshold = 50;
+    if (info.offset.x > swipeThreshold) {
+      goToPrevious();
+    } else if (info.offset.x < -swipeThreshold) {
+      goToNext();
+    }
+  }, [goToPrevious, goToNext]);
+
+  // Reset navigation flag after animation completes
+  const handleAnimationComplete = useCallback(() => {
+    setIsNavigating(false);
+  }, []);
+
+  // Memoized callback for animation complete in ProjectCard
+  const handleCardAnimationComplete = useCallback(() => {
+    if (!hasAnimated) setHasAnimated(true);
+  }, [hasAnimated]);
 
   return (
     <section id="projects" className="relative bg-slate-800/30 py-24 px-6 lg:px-8">
@@ -247,7 +290,7 @@ const Projects = () => {
                   <motion.div
                     key={currentIndex}
                     custom={direction}
-                    variants={isNavigating ? slideVariants : undefined}
+                    variants={isNavigating ? SLIDE_VARIANTS : undefined}
                     initial={isNavigating ? "enter" : false}
                     animate="center"
                     exit={isNavigating ? "exit" : undefined}
@@ -263,6 +306,11 @@ const Projects = () => {
                       project={PROJECTS[currentIndex]} 
                       index={currentIndex}
                       isCarousel={true}
+                      hasAnimated={hasAnimated}
+                      onAnimationComplete={handleCardAnimationComplete}
+                      onOpenModal={openProjectModal}
+                      language={language}
+                      t={t}
                     />
                   </motion.div>
                 </AnimatePresence>
@@ -310,7 +358,16 @@ const Projects = () => {
           /* Desktop: Grid View */
           <div className="grid lg:grid-cols-2 gap-6 mb-12">
             {PROJECTS.map((project, index) => (
-              <ProjectCard key={project.id} project={project} index={index} />
+              <ProjectCard 
+                key={project.id} 
+                project={project} 
+                index={index}
+                hasAnimated={hasAnimated}
+                onAnimationComplete={handleCardAnimationComplete}
+                onOpenModal={openProjectModal}
+                language={language}
+                t={t}
+              />
             ))}
           </div>
         )}

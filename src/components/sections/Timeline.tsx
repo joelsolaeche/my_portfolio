@@ -5,6 +5,9 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 
+// Stable transition config - defined outside to prevent recreation
+const ITEM_TRANSITION = { duration: 0.5 };
+
 const EXPERIENCE = [
   {
     id: 1,
@@ -150,7 +153,7 @@ const Timeline = () => {
                 key={exp.id}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                transition={ITEM_TRANSITION}
                 viewport={{ once: true }}
                 className="relative flex items-start"
               >
@@ -174,6 +177,7 @@ const Timeline = () => {
                             alt={`${exp.company} logo`}
                             fill
                             className="object-contain"
+                            loading={index === 0 ? undefined : "lazy"}
                           />
                         </div>
                         

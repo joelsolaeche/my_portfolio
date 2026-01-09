@@ -1,17 +1,64 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useMemo, memo, useCallback } from 'react';
 import { SKILLS, SKILL_CATEGORIES } from '@/lib/constants';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 
+// Memoized individual skill item to prevent re-renders
+interface SkillItemProps {
+  skill: (typeof SKILLS)[number];
+  index: number;
+}
+
+const SkillItem = memo(function SkillItem({ skill, index }: SkillItemProps) {
+  const isEmoji = skill.icon.length <= 4 && !skill.icon.startsWith('http') && !skill.icon.startsWith('/');
+  
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.2, delay: Math.min(index * 0.02, 0.3) }}
+      className="group"
+    >
+      <div className="flex flex-col items-center justify-center w-full h-20 bg-slate-800/50 rounded-lg p-3 border border-slate-700/50 hover:border-slate-600 transition-colors duration-200">
+        <div className="relative w-8 h-8 mb-1.5 flex items-center justify-center">
+          {isEmoji ? (
+            <span className="text-2xl">{skill.icon}</span>
+          ) : (
+            <Image
+              src={skill.icon}
+              alt={`${skill.name} icon`}
+              width={32}
+              height={32}
+              className="object-contain"
+              loading="lazy"
+            />
+          )}
+        </div>
+        <span className="text-slate-300 text-xs text-center leading-tight">
+          {skill.name}
+        </span>
+      </div>
+    </motion.div>
+  );
+});
+
 const SkillsCarousel = () => {
   const [activeCategory, setActiveCategory] = useState('All');
 
-  // Filter skills based on active category
-  const filteredSkills = activeCategory === 'All' 
-    ? SKILLS 
-    : SKILLS.filter(skill => skill.category === activeCategory);
+  // Memoize filtered skills to prevent recalculation on every render
+  const filteredSkills = useMemo(() => 
+    activeCategory === 'All' 
+      ? SKILLS 
+      : SKILLS.filter(skill => skill.category === activeCategory),
+    [activeCategory]
+  );
+
+  // Memoize category click handler
+  const handleCategoryClick = useCallback((categoryId: string) => {
+    setActiveCategory(categoryId);
+  }, []);
 
   return (
     <div className="space-y-6">
@@ -44,7 +91,7 @@ const SkillsCarousel = () => {
           return (
             <button
               key={category.id}
-              onClick={() => setActiveCategory(category.id)}
+              onClick={() => handleCategoryClick(category.id)}
               className={`px-4 py-1.5 rounded-full text-sm transition-colors duration-200 border ${style}`}
             >
               {category.label}
@@ -63,38 +110,9 @@ const SkillsCarousel = () => {
           transition={{ duration: 0.2 }}
           className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-3"
         >
-          {filteredSkills.map((skill, index) => {
-            const isEmoji = skill.icon.length <= 4 && !skill.icon.startsWith('http') && !skill.icon.startsWith('/');
-            
-            return (
-              <motion.div
-                key={skill.name}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.2, delay: index * 0.02 }}
-                className="group"
-              >
-                <div className="flex flex-col items-center justify-center w-full h-20 bg-slate-800/50 rounded-lg p-3 border border-slate-700/50 hover:border-slate-600 transition-colors duration-200">
-                  <div className="relative w-8 h-8 mb-1.5 flex items-center justify-center">
-                    {isEmoji ? (
-                      <span className="text-2xl">{skill.icon}</span>
-                    ) : (
-                      <Image
-                        src={skill.icon}
-                        alt={`${skill.name} icon`}
-                        width={32}
-                        height={32}
-                        className="object-contain"
-                      />
-                    )}
-                  </div>
-                  <span className="text-slate-300 text-xs text-center leading-tight">
-                    {skill.name}
-                  </span>
-                </div>
-              </motion.div>
-            );
-          })}
+          {filteredSkills.map((skill, index) => (
+            <SkillItem key={skill.name} skill={skill} index={index} />
+          ))}
         </motion.div>
       </AnimatePresence>
     </div>

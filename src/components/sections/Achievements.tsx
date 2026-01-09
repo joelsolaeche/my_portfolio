@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useCallback, useMemo, useRef, useEffect } from 'react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence, PanInfo } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 type AchievementCategory = 'all' | 'awards' | 'technical' | 'impact' | 'recognition' | 'language';
@@ -24,6 +24,22 @@ interface Achievement {
   date: string;
   image?: string;
 }
+
+// Stable slide variants - defined outside component to prevent recreation
+const SLIDE_VARIANTS = {
+  enter: (dir: number) => ({
+    x: dir > 0 ? 300 : -300,
+    opacity: 0,
+  }),
+  center: {
+    x: 0,
+    opacity: 1,
+  },
+  exit: (dir: number) => ({
+    x: dir > 0 ? -300 : 300,
+    opacity: 0,
+  }),
+};
 
 const ACHIEVEMENTS: Achievement[] = [
   {
@@ -255,40 +271,72 @@ const CATEGORIES = [
   { id: 'language' as AchievementCategory, label: 'Language', labelJa: '言語', icon: '🌐', color: 'orange' }
 ];
 
+// Pre-filter achievements outside component for stable references
+const HELTE_RECOGNITIONS = ACHIEVEMENTS.filter(a => a.id === 1 || a.id === 2);
+const OTHER_ACHIEVEMENTS = ACHIEVEMENTS.filter(a => a.id !== 1 && a.id !== 2);
+
 const Achievements = () => {
   const { language } = useLanguage();
   const [activeCategory, setActiveCategory] = useState<AchievementCategory>('all');
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [direction, setDirection] = useState(0);
+  
+  // Use ref to avoid re-creating interval callback
+  const slideRef = useRef(currentSlide);
+  slideRef.current = currentSlide;
 
-  // Separate Helte recognitions (id 1 and 2) for carousel
-  const helteRecognitions = ACHIEVEMENTS.filter(a => a.id === 1 || a.id === 2);
-  const otherAchievements = ACHIEVEMENTS.filter(a => a.id !== 1 && a.id !== 2);
-
-  const filteredAchievements = activeCategory === 'all'
-    ? otherAchievements
-    : otherAchievements.filter(achievement => achievement.category.includes(activeCategory));
+  // Memoize filtered achievements
+  const filteredAchievements = useMemo(() => 
+    activeCategory === 'all'
+      ? OTHER_ACHIEVEMENTS
+      : OTHER_ACHIEVEMENTS.filter(achievement => achievement.category.includes(activeCategory)),
+    [activeCategory]
+  );
 
   // Show Helte carousel only when 'all', 'awards', or 'recognition' categories are active
   const showHelteCarousel = activeCategory === 'all' || activeCategory === 'awards' || activeCategory === 'recognition';
 
-  // Auto-play carousel
-  React.useEffect(() => {
+  // Auto-play carousel with stable callback
+  useEffect(() => {
     if (!showHelteCarousel) return;
 
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % helteRecognitions.length);
-    }, 10000); // Change slide every 10 seconds
+      setDirection(1);
+      setCurrentSlide((prev) => (prev + 1) % HELTE_RECOGNITIONS.length);
+    }, 10000);
 
     return () => clearInterval(interval);
-  }, [showHelteCarousel, helteRecognitions.length]);
+  }, [showHelteCarousel]);
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % helteRecognitions.length);
-  };
+  const nextSlide = useCallback(() => {
+    setDirection(1);
+    setCurrentSlide((prev) => (prev + 1) % HELTE_RECOGNITIONS.length);
+  }, []);
 
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + helteRecognitions.length) % helteRecognitions.length);
-  };
+  const prevSlide = useCallback(() => {
+    setDirection(-1);
+    setCurrentSlide((prev) => (prev - 1 + HELTE_RECOGNITIONS.length) % HELTE_RECOGNITIONS.length);
+  }, []);
+
+  // Handle swipe gestures for touch devices - memoized
+  const handleDragEnd = useCallback((event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
+    const swipeThreshold = 50;
+    if (info.offset.x > swipeThreshold) {
+      prevSlide();
+    } else if (info.offset.x < -swipeThreshold) {
+      nextSlide();
+    }
+  }, [prevSlide, nextSlide]);
+
+  // Memoized slide select handler
+  const handleSlideSelect = useCallback((index: number) => {
+    setCurrentSlide(index);
+  }, []);
+
+  // Memoized category change handler
+  const handleCategoryChange = useCallback((categoryId: AchievementCategory) => {
+    setActiveCategory(categoryId);
+  }, []);
 
   return (
     <section id="achievements" className="relative bg-slate-900 py-24 px-6 lg:px-8">
@@ -346,7 +394,7 @@ const Achievements = () => {
             return (
               <button
                 key={category.id}
-                onClick={() => setActiveCategory(category.id)}
+                onClick={() => handleCategoryChange(category.id)}
                 className={`px-4 py-1.5 rounded-full text-sm transition-colors duration-200 flex items-center gap-1.5 border ${style}`}
               >
                 <span className="text-sm">{category.icon}</span>
@@ -371,72 +419,87 @@ const Achievements = () => {
             <div className="relative w-full">
               {/* Carousel Container */}
               <div className="relative overflow-hidden rounded-xl bg-slate-800/50 border border-slate-700/50">
-                <div
-                  className="flex transition-transform duration-500 ease-in-out"
-                  style={{ transform: `translateX(-${currentSlide * 100}%)` }}
-                >
-                  {helteRecognitions.map((achievement) => (
-                    <div key={achievement.id} className="min-w-full">
-                      {/* Image */}
-                      {achievement.image && (
-                        <div className="relative w-full h-[350px] md:h-[400px] lg:h-[450px] bg-slate-900">
-                          <Image
-                            src={achievement.image}
-                            alt={achievement.title}
-                            fill
-                            className={achievement.id === 1 ? "object-contain" : "object-cover"}
-                            priority={achievement.id === 1}
-                          />
-                        </div>
-                      )}
-
-                      {/* Content */}
-                      <div className="p-6">
-                        <div className="flex items-start justify-between mb-3">
-                          <div className="text-3xl">{achievement.icon}</div>
-                          <span className="text-xs text-slate-500 bg-slate-800 px-2 py-0.5 rounded-full">
-                            {achievement.date}
-                          </span>
-                        </div>
-
-                        <h3 className="text-lg font-semibold text-slate-100 mb-2">
-                          {language === 'ja' ? achievement.titleJa : achievement.title}
-                        </h3>
-
-                        <p className="text-slate-400 mb-4 leading-relaxed text-sm">
-                          {language === 'ja' ? achievement.descriptionJa : achievement.description}
-                        </p>
-
-                        {achievement.metric && (
-                          <div className="mb-4">
-                            <div className="inline-block bg-blue-500/10 border border-blue-500/20 text-blue-400 px-3 py-1 rounded-lg text-xs font-medium">
-                              {language === 'ja' ? achievement.metricJa : achievement.metric}
+                <AnimatePresence mode="wait" custom={direction} initial={false}>
+                  <motion.div
+                    key={currentSlide}
+                    custom={direction}
+                    variants={SLIDE_VARIANTS}
+                    initial="enter"
+                    animate="center"
+                    exit="exit"
+                    transition={{ duration: 0.35, ease: [0.32, 0.72, 0, 1] }}
+                    drag="x"
+                    dragConstraints={{ left: 0, right: 0 }}
+                    dragElastic={0.15}
+                    onDragEnd={handleDragEnd}
+                    className="cursor-grab active:cursor-grabbing touch-pan-y"
+                  >
+                    {(() => {
+                      const achievement = HELTE_RECOGNITIONS[currentSlide];
+                      return (
+                        <div className="min-w-full">
+                          {/* Image */}
+                          {achievement.image && (
+                            <div className="relative w-full h-[350px] md:h-[400px] lg:h-[450px] bg-slate-900">
+                              <Image
+                                src={achievement.image}
+                                alt={achievement.title}
+                                fill
+                                className={achievement.id === 1 ? "object-contain" : "object-cover"}
+                                priority={achievement.id === 1}
+                              />
                             </div>
-                          </div>
-                        )}
+                          )}
 
-                        {achievement.link && (
-                          <a
-                            href={achievement.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors duration-200 text-sm"
-                          >
-                            <span>{language === 'ja' ? achievement.linkTextJa : achievement.linkText}</span>
-                            <svg
-                              className="w-4 h-4 ml-1"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                            </svg>
-                          </a>
-                        )}
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                          {/* Content */}
+                          <div className="p-6">
+                            <div className="flex items-start justify-between mb-3">
+                              <div className="text-3xl">{achievement.icon}</div>
+                              <span className="text-xs text-slate-500 bg-slate-800 px-2 py-0.5 rounded-full">
+                                {achievement.date}
+                              </span>
+                            </div>
+
+                            <h3 className="text-lg font-semibold text-slate-100 mb-2">
+                              {language === 'ja' ? achievement.titleJa : achievement.title}
+                            </h3>
+
+                            <p className="text-slate-400 mb-4 leading-relaxed text-sm">
+                              {language === 'ja' ? achievement.descriptionJa : achievement.description}
+                            </p>
+
+                            {achievement.metric && (
+                              <div className="mb-4">
+                                <div className="inline-block bg-blue-500/10 border border-blue-500/20 text-blue-400 px-3 py-1 rounded-lg text-xs font-medium">
+                                  {language === 'ja' ? achievement.metricJa : achievement.metric}
+                                </div>
+                              </div>
+                            )}
+
+                            {achievement.link && (
+                              <a
+                                href={achievement.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors duration-200 text-sm"
+                              >
+                                <span>{language === 'ja' ? achievement.linkTextJa : achievement.linkText}</span>
+                                <svg
+                                  className="w-4 h-4 ml-1"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  viewBox="0 0 24 24"
+                                >
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                                </svg>
+                              </a>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })()}
+                  </motion.div>
+                </AnimatePresence>
 
                 {/* Navigation Arrows */}
                 <button
@@ -460,10 +523,10 @@ const Achievements = () => {
 
                 {/* Dots Indicator */}
                 <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-                  {helteRecognitions.map((_, index) => (
+                  {HELTE_RECOGNITIONS.map((_, index) => (
                     <button
                       key={index}
-                      onClick={() => setCurrentSlide(index)}
+                      onClick={() => handleSlideSelect(index)}
                       className={`w-2 h-2 rounded-full transition-all duration-300 ${currentSlide === index
                         ? 'bg-blue-400 w-8'
                         : 'bg-slate-600 hover:bg-slate-500'
@@ -479,12 +542,12 @@ const Achievements = () => {
 
         {/* Other Achievements Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {filteredAchievements.map((achievement, index) => (
+          {filteredAchievements.map((achievement) => (
             <motion.div
               key={achievement.id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: index * 0.05 }}
+              transition={{ duration: 0.4 }}
               viewport={{ once: true }}
               className="bg-slate-800/50 rounded-xl overflow-hidden border border-slate-700/50 hover:border-slate-600 transition-colors duration-200 group"
             >
@@ -496,6 +559,7 @@ const Achievements = () => {
                     alt={achievement.title}
                     fill
                     className="object-cover"
+                    loading="lazy"
                   />
                 </div>
               )}
@@ -511,6 +575,7 @@ const Achievements = () => {
                         width={40}
                         height={40}
                         className="object-contain"
+                        loading="lazy"
                       />
                     </div>
                   ) : (

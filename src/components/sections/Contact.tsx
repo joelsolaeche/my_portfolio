@@ -1,28 +1,33 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { PORTFOLIO_DATA } from '@/lib/constants';
 import { useLanguage } from '@/contexts/LanguageContext';
 
+// Initial form state - defined outside to prevent recreation
+const INITIAL_FORM_STATE = {
+  name: '',
+  email: '',
+  message: ''
+};
+
 const Contact = () => {
   const { t, language } = useLanguage();
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
+  const [formData, setFormData] = useState(INITIAL_FORM_STATE);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
+  // Optimized change handler - avoids creating new object spread on each keystroke
+  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => prev[name as keyof typeof prev] !== value 
+      ? { ...prev, [name]: value }
+      : prev
+    );
+  }, []);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus('idle');
@@ -43,7 +48,7 @@ const Contact = () => {
 
       if (response.ok) {
         setSubmitStatus('success');
-        setFormData({ name: '', email: '', message: '' });
+        setFormData(INITIAL_FORM_STATE);
       } else {
         setSubmitStatus('error');
       }
@@ -52,14 +57,14 @@ const Contact = () => {
     } finally {
       setIsSubmitting(false);
     }
-  };
+  }, [formData]);
 
-  const handleWhatsAppClick = () => {
-    const phone = '5491151073821'; // Remove + and spaces for WhatsApp URL
+  const handleWhatsAppClick = useCallback(() => {
+    const phone = '5491151073821';
     const message = 'Hello Joel! I found your portfolio and would like to connect.';
     const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
-  };
+  }, []);
 
   return (
     <section id="contact" className="relative bg-slate-950 py-24 px-6 lg:px-8">

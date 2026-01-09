@@ -1,50 +1,77 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { PORTFOLIO_DATA } from '@/lib/constants';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { USFlag, JapanFlag } from '@/components/ui/FlagIcons';
 
+// Stable section IDs - defined outside component to prevent recreation
+const SECTION_IDS = ['hero', 'about', 'timeline', 'achievements', 'projects', 'contact'] as const;
+
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
   const [isInHero, setIsInHero] = useState(true);
   const { language, setLanguage, t } = useLanguage();
+  
+  // Use refs for scroll handler to avoid closure issues and re-renders
+  const rafRef = useRef<number | null>(null);
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['hero', 'about', 'timeline', 'achievements', 'projects', 'contact'];
-      const scrollPosition = window.scrollY + 100;
-      const heroSection = document.getElementById('hero');
+      // Skip if scroll position hasn't changed significantly (throttle by ~16ms via rAF)
+      if (rafRef.current !== null) return;
       
-      // Check if we're still in the hero section
-      if (heroSection) {
-        const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
-        setIsInHero(window.scrollY < heroBottom - 200); // 200px buffer before transition
-      }
-
-      // Set active section
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = document.getElementById(sections[i]);
-        if (section && section.offsetTop <= scrollPosition) {
-          setActiveSection(`#${sections[i]}`);
-          break;
+      rafRef.current = requestAnimationFrame(() => {
+        const scrollY = window.scrollY;
+        // Skip update if scroll change is minimal (less than 5px)
+        if (Math.abs(scrollY - lastScrollY.current) < 5) {
+          rafRef.current = null;
+          return;
         }
-      }
+        lastScrollY.current = scrollY;
+        
+        const scrollPosition = scrollY + 100;
+        const heroSection = document.getElementById('hero');
+        
+        // Check if we're still in the hero section
+        if (heroSection) {
+          const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+          const newIsInHero = scrollY < heroBottom - 200;
+          setIsInHero(prev => prev !== newIsInHero ? newIsInHero : prev);
+        }
+
+        // Set active section
+        for (let i = SECTION_IDS.length - 1; i >= 0; i--) {
+          const section = document.getElementById(SECTION_IDS[i]);
+          if (section && section.offsetTop <= scrollPosition) {
+            const newSection = `#${SECTION_IDS[i]}`;
+            setActiveSection(prev => prev !== newSection ? newSection : prev);
+            break;
+          }
+        }
+        rafRef.current = null;
+      });
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll(); // Call once to set initial state
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (rafRef.current !== null) {
+        cancelAnimationFrame(rafRef.current);
+      }
+    };
   }, []);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const toggleMenu = useCallback(() => {
+    setIsMenuOpen(prev => !prev);
+  }, []);
 
-  const handleNavClick = (e: React.MouseEvent<HTMLButtonElement>, href: string) => {
+  const handleNavClick = useCallback((e: React.MouseEvent<HTMLButtonElement>, href: string) => {
     e.preventDefault();
     e.stopPropagation();
     
@@ -60,21 +87,21 @@ const Header = () => {
     } else {
       setIsMenuOpen(false);
     }
-  };
+  }, []);
 
-  const toggleLanguage = () => {
+  const toggleLanguage = useCallback(() => {
     setLanguage(language === 'en' ? 'ja' : 'en');
-  };
+  }, [setLanguage, language]);
 
-  // Navigation items with translations
-  const navItems = [
+  // Navigation items with translations - memoized to prevent recreation
+  const navItems = useMemo(() => [
     { name: t.nav.home, href: '#hero' },
     { name: t.nav.about, href: '#about' },
     { name: t.nav.experience, href: '#timeline' },
     { name: t.nav.achievements, href: '#achievements' },
     { name: t.nav.projects, href: '#projects' },
     { name: t.nav.contact, href: '#contact' },
-  ];
+  ], [t.nav]);
 
   return (
     <motion.header 

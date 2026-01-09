@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react';
 import { Language, translations } from '@/lib/translations';
 
 interface LanguageContextType {
@@ -20,32 +20,33 @@ export const useLanguage = () => {
 };
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [language, setLanguage] = useState<Language>('en');
+  const [language, setLanguageState] = useState<Language>('en');
 
   useEffect(() => {
     // Load saved language preference or detect browser language
     const savedLanguage = localStorage.getItem('preferred-language') as Language;
     if (savedLanguage && (savedLanguage === 'en' || savedLanguage === 'ja')) {
-      setLanguage(savedLanguage);
+      setLanguageState(savedLanguage);
     } else {
       // Detect browser language
       const browserLanguage = navigator.language.toLowerCase();
       if (browserLanguage.startsWith('ja')) {
-        setLanguage('ja');
+        setLanguageState('ja');
       }
     }
   }, []);
 
-  const handleSetLanguage = (lang: Language) => {
-    setLanguage(lang);
+  const handleSetLanguage = useCallback((lang: Language) => {
+    setLanguageState(lang);
     localStorage.setItem('preferred-language', lang);
-  };
+  }, []);
 
-  const value = {
+  // Memoize the context value to prevent unnecessary re-renders
+  const value = useMemo(() => ({
     language,
     setLanguage: handleSetLanguage,
     t: translations[language],
-  };
+  }), [language, handleSetLanguage]);
 
   return (
     <LanguageContext.Provider value={value}>
