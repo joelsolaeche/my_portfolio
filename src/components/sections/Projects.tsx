@@ -12,6 +12,9 @@ const Projects = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const [direction, setDirection] = useState(0); // -1 for left, 1 for right
+  const [hasAnimated, setHasAnimated] = useState(false);
+  const [isNavigating, setIsNavigating] = useState(false);
   const { t, language } = useLanguage();
 
   // Handle responsive detection (carousel only on mobile/tablet < 1024px)
@@ -38,14 +41,21 @@ const Projects = () => {
   };
 
   const goToPrevious = () => {
+    setIsNavigating(true);
+    setDirection(-1);
     setCurrentIndex((prev) => (prev === 0 ? totalProjects - 1 : prev - 1));
   };
 
   const goToNext = () => {
+    setIsNavigating(true);
+    setDirection(1);
     setCurrentIndex((prev) => (prev === totalProjects - 1 ? 0 : prev + 1));
   };
 
   const goToSlide = (index: number) => {
+    if (index === currentIndex) return;
+    setIsNavigating(true);
+    setDirection(index > currentIndex ? 1 : -1);
     setCurrentIndex(index);
   };
 
@@ -59,13 +69,35 @@ const Projects = () => {
     }
   };
 
+  // Reset navigation flag after animation completes
+  const handleAnimationComplete = () => {
+    setIsNavigating(false);
+  };
+
+  // Slide animation variants - smooth transitions for navigation
+  const slideVariants = {
+    enter: (dir: number) => ({
+      x: dir > 0 ? 300 : -300,
+      opacity: 0,
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+    },
+    exit: (dir: number) => ({
+      x: dir > 0 ? -300 : 300,
+      opacity: 0,
+    }),
+  };
+
   // Project Card Component
   const ProjectCard = ({ project, index, isCarousel = false }: { project: (typeof PROJECTS)[number]; index: number; isCarousel?: boolean }) => (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={hasAnimated ? false : { opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: isCarousel ? 0 : index * 0.1 }}
       viewport={{ once: true }}
+      onAnimationComplete={() => !hasAnimated && setHasAnimated(true)}
       onClick={() => openProjectModal(project)}
       className="group bg-slate-800/50 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden border border-slate-700/50 hover:border-slate-600 cursor-pointer h-full"
     >
@@ -211,18 +243,21 @@ const Projects = () => {
             <div className="relative mb-8">
               {/* Swipeable Cards Container */}
               <div className="overflow-hidden">
-                <AnimatePresence mode="wait">
+                <AnimatePresence mode="wait" custom={direction} initial={false}>
                   <motion.div
                     key={currentIndex}
-                    initial={{ opacity: 0, x: 100 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -100 }}
-                    transition={{ duration: 0.3, ease: 'easeInOut' }}
+                    custom={direction}
+                    variants={isNavigating ? slideVariants : undefined}
+                    initial={isNavigating ? "enter" : false}
+                    animate="center"
+                    exit={isNavigating ? "exit" : undefined}
+                    transition={{ duration: 0.35, ease: [0.32, 0.72, 0, 1] }}
+                    onAnimationComplete={handleAnimationComplete}
                     drag="x"
                     dragConstraints={{ left: 0, right: 0 }}
-                    dragElastic={0.2}
+                    dragElastic={0.15}
                     onDragEnd={handleDragEnd}
-                    className="cursor-grab active:cursor-grabbing"
+                    className="cursor-grab active:cursor-grabbing touch-pan-y"
                   >
                     <ProjectCard 
                       project={PROJECTS[currentIndex]} 
