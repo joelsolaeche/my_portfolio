@@ -107,6 +107,22 @@ const ACHIEVEMENTS: Achievement[] = [
     image: '/images/achievements/Developing LLM-Based Apps _ Joel Andres Solaeche.png'
   },
   {
+    id: 17,
+    category: ['recognition', 'technical'],
+    icon: '🤖',
+    title: 'AI Agents Specialization Certificate',
+    titleJa: 'AIエージェント専門修了証',
+    description: 'Certified in building advanced AI agents, covering LangChain, LangGraph, CrewAI, MCP, Tool Use, Human-in-the-Loop, RAG, and multi-agent orchestration systems',
+    descriptionJa: '高度なAIエージェント構築の認定を取得。LangChain、LangGraph、CrewAI、MCP、ツール使用、ヒューマンインザループ、RAG、マルチエージェントオーケストレーションシステムを網羅',
+    metric: 'Agents Specialization',
+    metricJa: 'エージェント専門',
+    link: '/images/achievements/Certificates - Agents _ Joel Andres Solaeche2x.pdf',
+    linkText: 'View Certificate (PDF)',
+    linkTextJa: '証明書を見る (PDF)',
+    date: 'Jan 2026',
+    image: '/images/achievements/Certificates - Agents _ Joel Andres Solaeche@2x.png'
+  },
+  {
     id: 3,
     category: ['recognition', 'technical'],
     icon: '🎓',

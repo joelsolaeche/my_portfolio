@@ -43,6 +43,7 @@ export const SKILLS = [
   { name: 'Machine Learning', icon: '🤖', category: 'AI' },
   { name: 'YOLO11', icon: '/images/stack/ultra.avif', category: 'AI' },
   { name: 'Prompt Engineering', icon: '💡', category: 'AI' },
+  { name: 'LangGraph', icon: '/images/stack/langgraph-color.png', category: 'AI' },
   
 
   // Cloud & DevOps
