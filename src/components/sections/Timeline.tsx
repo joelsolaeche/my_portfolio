@@ -4,18 +4,74 @@ import React from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
-
-// Stable transition config - defined outside to prevent recreation
-const ITEM_TRANSITION = { duration: 0.5 };
+import SectionHeader from '@/components/ui/SectionHeader';
 
 const EXPERIENCE = [
+  {
+    id: 0,
+    title: 'AI Engineer',
+    company: 'Taller Technologies',
+    companyColor: '#ef4444',
+    logo: '/images/companies/taller_technologies_logo.jpg',
+    period: 'Mar 2025 - Present',
+    location: 'United States (Remote)',
+    employmentType: 'Full-time',
+    description: [
+      'Contributing to an agentic operating system platform that orchestrates multiple AI engineering agents for code analysis, document processing, and project setup',
+      'Diagnosed and resolved data persistence bugs in the local dev environment — fixed Docker Compose to bind-mount Firebase Firestore and Storage emulator data across container restarts',
+      'Resolved unintentional spawning of multiple agent instances that caused duplicate operations and state conflicts',
+      'Collaborated on DevOps setup scripts (setup.sh, rebuild.sh) for streamlined onboarding, service rebuilding, and environment variable injection',
+      'Stabilized the Firebase emulator container entrypoint to ensure correct startup sequencing before dependent services come online',
+      'Tested end-to-end flows across Manager and Engineers Next.js dashboards and validated agent task assignment and Firestore output persistence',
+      'Contributed to naming and structural refactors following Clean Architecture conventions (domain/, application/, infrastructure/)',
+      'Investigated and resolved cross-platform Docker volume and file permission differences between macOS and Windows'
+    ],
+    descriptionJa: [
+      'コード分析、ドキュメント処理、プロジェクトセットアップのためのAIエージェントを調整するエージェントOSプラットフォームの開発に貢献',
+      'ローカル開発環境のデータ永続化バグを診断・修正：Firebase FirestoreとStorageエミュレータのデータをコンテナ再起動後も保持するようDocker Composeを修正',
+      '重複操作や状態競合を引き起こす意図しない複数エージェントインスタンスの生成問題を解決',
+      'スムーズなオンボーディングとサービス再構築のためのDevOpsセットアップスクリプト（setup.sh、rebuild.sh）の整備に協力',
+      '依存サービスが起動する前に正しい起動シーケンスを確保するFirebaseエミュレータコンテナのエントリポイントを安定化',
+      'ManagerおよびEngineers Next.jsダッシュボードのエンドツーエンドフローをテストし、エージェントのタスク割り当てとFirestore出力永続化を検証',
+      'クリーンアーキテクチャ規約（domain/、application/、infrastructure/）に従った命名・構造リファクタリングに貢献',
+      'macOSとWindows間のDockerボリュームとファイルパーミッションの差異を調査・解決'
+    ],
+    technologies: ['TypeScript', 'Node.js', 'Next.js', 'Docker', 'Firebase', 'Claude API', 'Pinecone', 'Neo4j', 'InversifyJS', 'Express'],
+    isActive: true
+  },
+  {
+    id: -1,
+    title: 'AI Trainer',
+    company: 'LinkedIn',
+    companyColor: '#0A66C2',
+    logo: '/images/companies/LinkedIn_icon.svg.png',
+    period: 'Apr 2025 - Present',
+    location: 'United States (Remote)',
+    employmentType: 'Part-time · Contract',
+    description: [
+      'Evaluated AI-powered code completion tools across real-world open-source codebases by analyzing repositories and independently deriving ground truth outputs',
+      'Compared leading AI coding assistants on suggestion quality, response latency, and contextual understanding using a defined scoring rubric',
+      'Covered diverse task categories: symbol renaming, bug detection, smart rewrites, multi-file refactors, import resolution, and pattern-based completions',
+      'Documented raw AI outputs verbatim and provided scored comparative analysis across TypeScript, JavaScript, and other languages',
+      'Maintained annotation consistency across dozens of tasks to produce structured data contributing to next-generation AI developer tools'
+    ],
+    descriptionJa: [
+      'オープンソースリポジトリを分析し、独立してグラウンドトゥルース出力を導き出すことで、実際のコードベース上でAIコード補完ツールを評価',
+      '定義されたスコアリングルーブリックを使用して、提案品質、応答レイテンシー、コードベースの文脈理解でAIコーディングアシスタントを比較評価',
+      'シンボルリネーム、バグ検出、スマートリライト、マルチファイルリファクタリング、インポート解決、パターンベース補完など多様なタスクカテゴリを担当',
+      'AIの生出力を逐語的に記録し、TypeScript、JavaScript等の複数言語にわたるスコア付き比較分析を提供',
+      '次世代AIデベロッパーツールの改善に貢献する構造化アノテーションデータを生成するため、数十のタスクにわたって一貫した評価基準を維持'
+    ],
+    technologies: ['TypeScript', 'JavaScript', 'VS Code', 'Code Review', 'AI Evaluation', 'Data Annotation', 'Static Code Analysis'],
+    isActive: true
+  },
   {
     id: 1,
     title: 'AI Engineer',
     company: 'Algolabs AI',
     companyColor: '#22d3ee',
     logo: '/images/companies/algolabs-icon.png',
-    period: 'Oct 2025 - Present',
+    period: 'Oct 2025 - March 2026',
     location: 'Argentina (Remote)',
     description: [
       'Developed and optimized computer vision algorithms for image and video detection, classification, and segmentation',
@@ -38,7 +94,7 @@ const EXPERIENCE = [
       'コードレビューに参加し、技術改善提案に貢献'
     ],
     technologies: ['TensorFlow', 'PyTorch', 'OpenCV', 'OpenVINO', 'NVIDIA SDK', 'TensorRT', 'Jetson Nano', 'DeepStream', 'Docker', 'Git', 'Flask', 'YOLO'],
-    isActive: true
+    isActive: false
   },
   {
     id: 2,
@@ -121,88 +177,94 @@ const EXPERIENCE = [
 
 const Timeline = () => {
   const { t, language } = useLanguage();
-  
-  return (
-    <section id="timeline" className="relative bg-slate-800/50 py-24 px-6 lg:px-8">
-      <div className="max-w-5xl mx-auto">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-14"
-        >
-          <h2 className="text-3xl sm:text-4xl font-bold text-slate-100 mb-4 tracking-tight">
-            {t.timeline.title}
-          </h2>
-          <p className="text-base text-slate-400 max-w-2xl mx-auto leading-relaxed">
-            {t.timeline.subtitle}
-          </p>
-        </motion.div>
 
-        {/* Timeline */}
+  return (
+    <section id="timeline" className="relative py-24 px-6 lg:px-8 section-gradient-overlay" style={{ backgroundColor: '#0c1322' }}>
+      <div className="absolute top-0 right-1/4 w-80 h-80 rounded-full blur-3xl pointer-events-none" style={{ background: 'rgba(21,93,252,0.05)' }} />
+
+      <div className="max-w-5xl mx-auto">
+        <SectionHeader
+          number="02"
+          title={t.timeline.title}
+          subtitle={t.timeline.subtitle}
+        />
+
         <div className="relative">
-          {/* Timeline line */}
-          <div className="absolute left-[18px] top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 via-purple-500 to-cyan-500 rounded-full"></div>
-          
-          {/* Timeline items */}
+          {/* Animated timeline line */}
+          <motion.div
+            initial={{ scaleY: 0 }}
+            whileInView={{ scaleY: 1 }}
+            transition={{ duration: 1.2, ease: 'easeInOut' }}
+            viewport={{ once: true }}
+            style={{ originY: 0 }}
+            className="absolute left-[18px] top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 via-purple-500 to-cyan-500 rounded-full"
+          />
+
           <div className="space-y-8">
             {EXPERIENCE.map((exp, index) => (
               <motion.div
                 key={exp.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={ITEM_TRANSITION}
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.55, delay: index * 0.1 }}
                 viewport={{ once: true }}
                 className="relative flex items-start"
               >
-                {/* Timeline marker */}
-                <div className="absolute left-2 w-5 h-5 bg-slate-900 rounded-full border-2 border-blue-400 z-10 flex items-center justify-center">
+                {/* Timeline dot */}
+                <div className="absolute left-2 w-5 h-5 bg-zinc-950 rounded-full border-2 border-blue-400 z-10 flex items-center justify-center">
                   {exp.isActive && (
-                    <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
+                    <motion.div
+                      animate={{ scale: [1, 1.4, 1], opacity: [1, 0.5, 1] }}
+                      transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                      className="w-2 h-2 bg-blue-400 rounded-full"
+                    />
                   )}
                 </div>
 
-                {/* Content card */}
+                {/* Card with left accent border */}
                 <div className="flex-1 ml-14">
-                  <div className="bg-slate-900/80 rounded-xl p-6 border border-slate-700/50 hover:border-slate-600 transition-colors duration-200">
-                    {/* Header with Company Logo */}
+                  <div
+                    className={`relative rounded-xl p-6 border border-white/[0.07] hover:border-blue-500/20 transition-all duration-300 card-glow overflow-hidden ${
+                      exp.isActive ? 'shadow-[0_0_30px_rgba(21,93,252,0.08)]' : ''
+                    }`}
+                    style={{ backgroundColor: 'rgba(12, 19, 34, 0.85)' }}
+                  >
+                    {/* Left accent stripe */}
+                    <div
+                      className="absolute left-0 top-0 bottom-0 w-0.5 rounded-l-xl"
+                      style={{ backgroundColor: exp.companyColor, opacity: 0.7 }}
+                    />
+
+                    {/* Header */}
                     <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-4">
                       <div className="flex items-center space-x-3 mb-3 sm:mb-0">
-                        {/* Company Logo */}
-                        <div className="relative w-12 h-12 rounded-lg overflow-hidden border border-slate-600 bg-white p-1.5 flex-shrink-0">
+                        <div className="relative w-11 h-11 rounded-lg overflow-hidden border border-zinc-600/50 bg-white p-1 flex-shrink-0">
                           <Image
                             src={exp.logo}
                             alt={`${exp.company} logo`}
                             fill
                             className="object-contain"
-                            loading={index === 0 ? undefined : "lazy"}
+                            loading={index === 0 ? undefined : 'lazy'}
                           />
                         </div>
-                        
-                        {/* Title and Company */}
                         <div>
-                          <h3 className="text-lg font-semibold text-slate-100 mb-0.5">
-                            {exp.title}
-                          </h3>
-                          <p 
-                            className="text-sm font-medium"
-                            style={{ color: exp.companyColor }}
-                          >
+                          <h3 className="text-base font-semibold text-slate-100 mb-0.5">{exp.title}</h3>
+                          <p className="text-sm font-medium" style={{ color: exp.companyColor }}>
                             {exp.company}
                           </p>
                         </div>
                       </div>
-                      
-                      {/* Period and Location */}
-                      <div className="text-right">
-                        <p className="text-slate-300 text-sm font-medium">
-                          {exp.period.replace('Present', t.timeline.present)}
-                        </p>
-                        <p className="text-slate-500 text-xs">
-                          {exp.location}
-                        </p>
+                      <div className="text-right flex-shrink-0">
+                        <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-zinc-800/80 border border-zinc-700/50 mb-1">
+                          {exp.isActive && <div className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />}
+                          <p className="text-slate-300 text-xs font-medium">
+                            {exp.period.replace('Present', t.timeline.present)}
+                          </p>
+                        </div>
+                        {'employmentType' in exp && exp.employmentType && (
+                          <p className="text-zinc-500 text-xs mb-0.5">{exp.employmentType as string}</p>
+                        )}
+                        <p className="text-slate-500 text-xs">{exp.location}</p>
                       </div>
                     </div>
 
@@ -211,19 +273,19 @@ const Timeline = () => {
                       <ul className="space-y-1.5">
                         {(language === 'ja' && exp.descriptionJa ? exp.descriptionJa : exp.description).map((item, idx) => (
                           <li key={idx} className="flex items-start">
-                            <span className="w-1.5 h-1.5 bg-slate-500 rounded-full mt-2 mr-2 flex-shrink-0"></span>
+                            <span className="w-1 h-1 bg-zinc-500 rounded-full mt-2.5 mr-2.5 flex-shrink-0" />
                             <span className="text-slate-400 text-sm leading-relaxed">{item}</span>
                           </li>
                         ))}
                       </ul>
                     </div>
 
-                    {/* Technologies */}
+                    {/* Tech badges */}
                     <div className="flex flex-wrap gap-1.5">
                       {exp.technologies.map((tech) => (
                         <span
                           key={tech}
-                          className="px-2 py-0.5 bg-slate-800 text-slate-400 rounded text-xs font-medium border border-slate-700/50"
+                          className="px-2 py-0.5 bg-gradient-to-r from-zinc-800 to-zinc-800/80 text-slate-400 rounded text-xs font-medium border border-zinc-700/50"
                         >
                           {tech}
                         </span>
@@ -236,11 +298,10 @@ const Timeline = () => {
           </div>
         </div>
       </div>
-      
-      {/* Clean divider */}
-      <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-slate-700 to-transparent"></div>
+
+      <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-zinc-700/50 to-transparent" />
     </section>
   );
 };
 
-export default Timeline; 
+export default Timeline;

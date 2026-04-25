@@ -6,6 +6,7 @@ import { motion, AnimatePresence, PanInfo } from 'framer-motion';
 import { PROJECTS } from '@/lib/constants';
 import ProjectModal from '@/components/ui/ProjectModal';
 import { useLanguage } from '@/contexts/LanguageContext';
+import SectionHeader from '@/components/ui/SectionHeader';
 
 // Stable slide variants - defined outside component to prevent recreation
 const SLIDE_VARIANTS = {
@@ -53,21 +54,22 @@ const ProjectCard = memo(function ProjectCard({
       viewport={{ once: true }}
       onAnimationComplete={onAnimationComplete}
       onClick={() => onOpenModal(project)}
-      className="group bg-slate-800/50 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden border border-slate-700/50 hover:border-slate-600 cursor-pointer h-full"
+      className="group bg-zinc-900/70 rounded-xl transition-all duration-300 overflow-hidden border border-zinc-700/40 hover:border-blue-500/30 cursor-pointer h-full hover:-translate-y-1 hover:shadow-[0_8px_32px_rgba(59,130,246,0.12)]"
     >
       {/* Project Image */}
       <div className="relative overflow-hidden">
-        <div className="h-44 bg-slate-900 relative">
-          <Image 
-            src={project.image} 
+        <div className="h-44 bg-zinc-900 relative">
+          <Image
+            src={project.image}
             alt={project.title}
             fill
-            className="object-cover"
-            loading={index < 2 ? undefined : "lazy"}
+            className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+            loading={index < 2 ? undefined : 'lazy'}
           />
         </div>
-        <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors duration-200"></div>
-        
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/60 via-black/20 to-transparent group-hover:from-zinc-900/40 transition-all duration-300" />
+
         {/* Click indicator */}
         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
           <div className="bg-black/50 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/10">
@@ -81,28 +83,28 @@ const ProjectCard = memo(function ProjectCard({
           </div>
         </div>
       </div>
-      
+
       {/* Project Content */}
       <div className="p-5">
-        <h3 className="text-lg font-semibold text-slate-100 mb-2 group-hover:text-blue-400 transition-colors duration-200">
+        <h3 className="text-base font-semibold text-slate-100 mb-2 group-hover:text-blue-400 transition-colors duration-200">
           {language === 'ja' && project.titleJa ? project.titleJa : project.title}
         </h3>
         <p className="text-slate-400 mb-4 text-sm leading-relaxed line-clamp-2">
           {language === 'ja' && project.descriptionJa ? project.descriptionJa : project.description}
         </p>
-        
-        {/* Technologies */}
+
+        {/* Technologies — gradient badges */}
         <div className="flex flex-wrap gap-1.5 mb-4">
           {project.technologies.slice(0, 5).map((tech) => (
             <span
               key={tech}
-              className="px-2 py-0.5 bg-slate-700/50 text-slate-400 rounded text-xs font-medium"
+              className="px-2 py-0.5 bg-gradient-to-r from-zinc-800 to-zinc-700/80 text-slate-400 rounded text-xs font-medium border border-zinc-600/40"
             >
               {tech}
             </span>
           ))}
           {project.technologies.length > 5 && (
-            <span className="px-2 py-0.5 text-slate-500 text-xs">+{project.technologies.length - 5}</span>
+            <span className="px-2 py-0.5 text-zinc-500 text-xs">+{project.technologies.length - 5}</span>
           )}
         </div>
         
@@ -262,23 +264,14 @@ const Projects = () => {
   }, [hasAnimated]);
 
   return (
-    <section id="projects" className="relative bg-slate-800/30 py-24 px-6 lg:px-8">
+    <section id="projects" className="relative py-24 px-6 lg:px-8 section-gradient-overlay" style={{ backgroundColor: '#0c1322' }}>
+      <div className="absolute top-0 left-1/4 w-80 h-64 rounded-full blur-3xl pointer-events-none" style={{ background: 'rgba(21,93,252,0.06)' }} />
       <div className="max-w-6xl mx-auto">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-14"
-        >
-          <h2 className="text-3xl sm:text-4xl font-bold text-slate-100 mb-4 tracking-tight">
-            {t.projects.title}
-          </h2>
-          <p className="text-base text-slate-400 max-w-2xl mx-auto leading-relaxed">
-            {t.projects.subtitle}
-          </p>
-        </motion.div>
+        <SectionHeader
+          number="04"
+          title={t.projects.title}
+          subtitle={t.projects.subtitle}
+        />
 
         {/* Mobile/Tablet: Carousel View */}
         {isMobile ? (
@@ -378,9 +371,9 @@ const Projects = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
           viewport={{ once: true }}
-          className="text-center bg-slate-800/50 rounded-xl p-8 border border-slate-700/50"
+          className="text-center glass-card rounded-xl p-8 border border-white/[0.06]"
         >
-          <h3 className="text-xl font-semibold text-slate-100 mb-2">
+          <h3 className="text-lg font-semibold text-slate-100 mb-2">
             {t.projects.moreProjects}
           </h3>
           <p className="text-sm text-slate-400 mb-5 max-w-xl mx-auto">
@@ -388,7 +381,7 @@ const Projects = () => {
           </p>
           <button
             onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-            className="inline-block bg-blue-600 text-white px-5 py-2 rounded-lg text-sm font-medium hover:bg-blue-500 transition-colors duration-200"
+            className="inline-block bg-gradient-to-r from-blue-600 to-blue-500 text-white px-5 py-2 rounded-lg text-sm font-medium hover:from-blue-500 hover:to-blue-400 transition-all duration-200 shadow-lg shadow-blue-500/20 cursor-pointer"
           >
             {t.projects.collaborate}
           </button>
@@ -404,8 +397,7 @@ const Projects = () => {
         />
       )}
       
-      {/* Clean divider */}
-      <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-slate-700 to-transparent"></div>
+      <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-zinc-700/50 to-transparent" />
     </section>
   );
 };

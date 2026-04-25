@@ -4,6 +4,7 @@ import React, { useState, useCallback, useMemo, useRef, useEffect } from 'react'
 import Image from 'next/image';
 import { motion, AnimatePresence, PanInfo } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
+import SectionHeader from '@/components/ui/SectionHeader';
 
 type AchievementCategory = 'all' | 'awards' | 'technical' | 'impact' | 'recognition' | 'language';
 
@@ -355,25 +356,16 @@ const Achievements = () => {
   }, []);
 
   return (
-    <section id="achievements" className="relative bg-slate-900 py-24 px-6 lg:px-8">
+    <section id="achievements" className="relative py-24 px-6 lg:px-8 section-gradient-overlay" style={{ backgroundColor: '#080d18' }}>
+      <div className="absolute top-0 right-1/3 w-96 h-72 rounded-full blur-3xl pointer-events-none" style={{ background: 'rgba(152,16,250,0.06)' }} />
       <div className="max-w-6xl mx-auto">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-14"
-        >
-          <h2 className="text-3xl sm:text-4xl font-bold text-slate-100 mb-4 tracking-tight">
-            {language === 'ja' ? '実績・成果' : 'Achievements'}
-          </h2>
-          <p className="text-base text-slate-400 max-w-2xl mx-auto leading-relaxed">
-            {language === 'ja'
-              ? 'インパクトのある成果と技術的達成の軌跡'
-              : 'A track record of impactful results and technical excellence'}
-          </p>
-        </motion.div>
+        <SectionHeader
+          number="03"
+          title={language === 'ja' ? '実績・成果' : 'Achievements'}
+          subtitle={language === 'ja'
+            ? 'インパクトのある成果と技術的達成の軌跡'
+            : 'A track record of impactful results and technical excellence'}
+        />
 
         {/* Category Tabs */}
         <motion.div
@@ -434,7 +426,7 @@ const Achievements = () => {
             </h3>
             <div className="relative w-full">
               {/* Carousel Container */}
-              <div className="relative overflow-hidden rounded-xl bg-slate-800/50 border border-slate-700/50">
+              <div className="relative overflow-hidden rounded-xl bg-zinc-900/70 border border-zinc-700/40">
                 <AnimatePresence mode="wait" custom={direction} initial={false}>
                   <motion.div
                     key={currentSlide}
@@ -486,7 +478,7 @@ const Achievements = () => {
 
                             {achievement.metric && (
                               <div className="mb-4">
-                                <div className="inline-block bg-blue-500/10 border border-blue-500/20 text-blue-400 px-3 py-1 rounded-lg text-xs font-medium">
+                                <div className="inline-block bg-gradient-to-r from-blue-600/20 to-purple-600/20 border border-blue-500/25 text-blue-300 px-3 py-1 rounded-lg text-xs font-medium">
                                   {language === 'ja' ? achievement.metricJa : achievement.metric}
                                 </div>
                               </div>
@@ -565,7 +557,7 @@ const Achievements = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4 }}
               viewport={{ once: true }}
-              className="bg-slate-800/50 rounded-xl overflow-hidden border border-slate-700/50 hover:border-slate-600 transition-colors duration-200 group"
+              className="bg-zinc-900/70 rounded-xl overflow-hidden border border-zinc-700/40 hover:border-zinc-600/60 transition-all duration-300 group card-glow"
             >
               {/* Image if available */}
               {achievement.image && (
@@ -614,7 +606,7 @@ const Achievements = () => {
 
                 {/* Metric Badge */}
                 {achievement.metric && (
-                  <div className="inline-block bg-blue-500/10 border border-blue-500/20 text-blue-400 px-2.5 py-1 rounded-lg text-xs font-medium mb-3">
+                  <div className="inline-block bg-gradient-to-r from-blue-600/20 to-purple-600/20 border border-blue-500/25 text-blue-300 px-2.5 py-1 rounded-lg text-xs font-medium mb-3">
                     {language === 'ja' ? achievement.metricJa : achievement.metric}
                   </div>
                 )}
@@ -644,13 +636,7 @@ const Achievements = () => {
         </div>
 
         {/* Stats Summary */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          viewport={{ once: true }}
-          className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4"
-        >
+        <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
           {[
             { value: '9+', label: 'Key Achievements', labelJa: '主要実績' },
             { value: '$500K+', label: 'Value Created', labelJa: '創出価値' },
@@ -659,21 +645,21 @@ const Achievements = () => {
           ].map((stat, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ duration: 0.4, delay: index * 0.05 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.08 }}
               viewport={{ once: true }}
-              className="bg-slate-800/50 rounded-lg p-4 text-center border border-slate-700/50"
+              className="glass-card rounded-xl p-4 text-center border border-white/[0.06] hover:border-blue-500/20 transition-colors duration-300"
             >
-              <div className="text-xl font-bold text-blue-400 mb-1">
+              <div className="text-2xl font-bold gradient-text-blue mb-1">
                 {stat.value}
               </div>
-              <div className="text-xs text-slate-500">
+              <div className="text-xs text-zinc-500">
                 {language === 'ja' ? stat.labelJa : stat.label}
               </div>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
