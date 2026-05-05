@@ -317,7 +317,7 @@ const Contact = () => {
           className="text-center mt-12 pt-6 border-t border-zinc-800/60"
         >
           <p className="text-zinc-600 text-sm">
-            © 2025 {PORTFOLIO_DATA.name}. {t.contact.copyright}
+            © {new Date().getFullYear()} {PORTFOLIO_DATA.name}. {t.contact.copyright}
           </p>
         </motion.div>
       </div>

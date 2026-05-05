@@ -12,13 +12,13 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "Joel Solaeche - AI Engineer",
-  description: "Portfolio of Joel Solaeche, an AI Engineer with +3 years of experience specializing in AI technologies. Also skilled in full stack development with React, JavaScript, and modern web technologies.",
+  description: "Portfolio of Joel Solaeche, an AI Engineer with 3+ years building ML/AI systems. Also skilled in full stack development with React, JavaScript, and modern web technologies.",
   keywords: ["AI Engineer", "Machine Learning", "AI", "Python", "TensorFlow", "Deep Learning", "Joel Solaeche", "Software Developer", "React", "JavaScript"],
   authors: [{ name: "Joel Solaeche" }],
   creator: "Joel Solaeche",
   openGraph: {
     title: "Joel Solaeche - AI Engineer",
-    description: "AI Engineer with +3 years of experience specializing in AI technologies",
+    description: "AI Engineer with 3+ years building ML/AI systems",
     url: "https://joelsolaeche.com",
     siteName: "Joel Solaeche Portfolio",
     type: "website",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Joel Solaeche - AI Engineer",
-    description: "AI Engineer with +3 years of experience specializing in AI technologies",
+    description: "AI Engineer with 3+ years building ML/AI systems",
     creator: "@joelsolaeche",
   },
   robots: {

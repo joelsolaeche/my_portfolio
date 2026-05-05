@@ -17,7 +17,8 @@ const EXPERIENCE = [
     location: 'United States (Remote)',
     employmentType: 'Full-time',
     description: [
-      'Contributing to an agentic operating system platform that orchestrates multiple AI engineering agents for code analysis, document processing, and project setup',
+      'Contributing to Chiron, an agentic operating system platform that orchestrates multiple AI engineering agents for code analysis, document processing, and project setup',
+      'Concurrently building an AI-native e-learning platform with the team — cohort-based courses with Mux video streaming, interactive quizzes, and an Anthropic-powered AI tutor on Next.js 15 + Supabase (Auth, Postgres, RLS)',
       'Diagnosed and resolved data persistence bugs in the local dev environment — fixed Docker Compose to bind-mount Firebase Firestore and Storage emulator data across container restarts',
       'Resolved unintentional spawning of multiple agent instances that caused duplicate operations and state conflicts',
       'Collaborated on DevOps setup scripts (setup.sh, rebuild.sh) for streamlined onboarding, service rebuilding, and environment variable injection',
@@ -27,7 +28,8 @@ const EXPERIENCE = [
       'Investigated and resolved cross-platform Docker volume and file permission differences between macOS and Windows'
     ],
     descriptionJa: [
-      'コード分析、ドキュメント処理、プロジェクトセットアップのためのAIエージェントを調整するエージェントOSプラットフォームの開発に貢献',
+      'Chironというコード分析、ドキュメント処理、プロジェクトセットアップのための複数のAIエンジニアリングエージェントを調整するエージェント型OSプラットフォームの開発に貢献',
+      'チームメンバーとAIネイティブEラーニングプラットフォームを並行開発—Mux動画ストリーミング、インタラクティブクイズ、AnthropicベースのAIチューターを搭載したコホート型コースをNext.js 15 + Supabase（Auth、Postgres、RLS）で構築',
       'ローカル開発環境のデータ永続化バグを診断・修正：Firebase FirestoreとStorageエミュレータのデータをコンテナ再起動後も保持するようDocker Composeを修正',
       '重複操作や状態競合を引き起こす意図しない複数エージェントインスタンスの生成問題を解決',
       'スムーズなオンボーディングとサービス再構築のためのDevOpsセットアップスクリプト（setup.sh、rebuild.sh）の整備に協力',
@@ -36,7 +38,7 @@ const EXPERIENCE = [
       'クリーンアーキテクチャ規約（domain/、application/、infrastructure/）に従った命名・構造リファクタリングに貢献',
       'macOSとWindows間のDockerボリュームとファイルパーミッションの差異を調査・解決'
     ],
-    technologies: ['TypeScript', 'Node.js', 'Next.js', 'Docker', 'Firebase', 'Claude API', 'Pinecone', 'Neo4j', 'InversifyJS', 'Express'],
+    technologies: ['TypeScript', 'Next.js', 'Node.js', 'Supabase', 'Mux', 'Vercel AI SDK', 'Anthropic', 'Docker', 'Firebase', 'Claude API', 'Pinecone', 'Neo4j', 'InversifyJS'],
     isActive: true
   },
   {
@@ -49,17 +51,17 @@ const EXPERIENCE = [
     location: 'United States (Remote)',
     employmentType: 'Part-time · Contract',
     description: [
-      'Evaluated AI-powered code completion tools across real-world open-source codebases by analyzing repositories and independently deriving ground truth outputs',
+      'Wrote ground-truth code in real open-source repositories to evaluate AI code completion tools, then studied and annotated AI agent behavior across TypeScript, JavaScript, and other languages',
       'Compared leading AI coding assistants on suggestion quality, response latency, and contextual understanding using a defined scoring rubric',
-      'Covered diverse task categories: symbol renaming, bug detection, smart rewrites, multi-file refactors, import resolution, and pattern-based completions',
-      'Documented raw AI outputs verbatim and provided scored comparative analysis across TypeScript, JavaScript, and other languages',
+      'Analyzed AI behavior across diverse task categories: symbol renaming, bug detection, smart rewrites, multi-file refactors, import resolution, and pattern-based completions',
+      'Documented raw AI outputs verbatim and provided scored comparative analysis, identifying strengths, failure modes, and edge cases in agent reasoning',
       'Maintained annotation consistency across dozens of tasks to produce structured data contributing to next-generation AI developer tools'
     ],
     descriptionJa: [
-      'オープンソースリポジトリを分析し、独立してグラウンドトゥルース出力を導き出すことで、実際のコードベース上でAIコード補完ツールを評価',
+      '実際のオープンソースリポジトリでグラウンドトゥルースコードを記述してAIコード補完ツールを評価し、TypeScript、JavaScript等の複数言語にわたるAIエージェントの動作を分析・アノテーション',
       '定義されたスコアリングルーブリックを使用して、提案品質、応答レイテンシー、コードベースの文脈理解でAIコーディングアシスタントを比較評価',
-      'シンボルリネーム、バグ検出、スマートリライト、マルチファイルリファクタリング、インポート解決、パターンベース補完など多様なタスクカテゴリを担当',
-      'AIの生出力を逐語的に記録し、TypeScript、JavaScript等の複数言語にわたるスコア付き比較分析を提供',
+      'シンボルリネーム、バグ検出、スマートリライト、マルチファイルリファクタリング、インポート解決、パターンベース補完など多様なタスクカテゴリにわたるAIの動作を分析',
+      'AIの生出力を逐語的に記録し、エージェント推論の強み、失敗モード、エッジケースを特定するスコア付き比較分析を提供',
       '次世代AIデベロッパーツールの改善に貢献する構造化アノテーションデータを生成するため、数十のタスクにわたって一貫した評価基準を維持'
     ],
     technologies: ['TypeScript', 'JavaScript', 'VS Code', 'Code Review', 'AI Evaluation', 'Data Annotation', 'Static Code Analysis'],
