@@ -240,7 +240,7 @@ const Contact = () => {
                   <span>English</span>
                 </a>
                 <a
-                  href="/resumes/Joel_Solaeche_Resume_JP.pdf"
+                  href="/resumes/Joel_Solaeche_%E5%B1%A5%E6%AD%B4%E6%9B%B8.pdf"
                   download
                   className="flex items-center justify-center gap-2 px-3 py-2 bg-purple-600/15 text-purple-400 rounded-lg text-sm font-medium hover:bg-purple-600/25 transition-colors duration-200 border border-purple-500/20 cursor-pointer"
                 >
@@ -251,7 +251,7 @@ const Contact = () => {
                 </a>
                 {language === 'ja' && (
                   <a
-                    href="/resumes/Joel_Solaeche_Rirekisho_JP.pdf"
+                    href="/resumes/Joel_Solaeche_%E8%81%B7%E5%8B%99%E7%B5%8C%E6%AD%B4%E6%9B%B8.pdf"
                     download
                     className="flex items-center justify-center gap-2 px-3 py-2 bg-green-600/15 text-green-400 rounded-lg text-sm font-medium hover:bg-green-600/25 transition-colors duration-200 border border-green-500/20 cursor-pointer"
                   >

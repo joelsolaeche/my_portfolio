@@ -175,7 +175,7 @@ const Hero = () => {
                 <span>EN Resume</span>
               </a>
               <a
-                href="/resumes/Joel_Solaeche_Resume_JP.pdf"
+                href="/resumes/Joel_Solaeche_%E5%B1%A5%E6%AD%B4%E6%9B%B8.pdf"
                 download
                 className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-zinc-900/80 text-slate-300 rounded-lg text-sm font-medium hover:bg-zinc-800 hover:text-white transition-colors duration-200 border border-zinc-700 hover:border-zinc-600 cursor-pointer"
               >
@@ -186,7 +186,7 @@ const Hero = () => {
               </a>
               {language === 'ja' && (
                 <a
-                  href="/resumes/Joel_Solaeche_Rirekisho_JP.pdf"
+                  href="/resumes/Joel_Solaeche_%E8%81%B7%E5%8B%99%E7%B5%8C%E6%AD%B4%E6%9B%B8.pdf"
                   download
                   className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-zinc-900/80 text-slate-300 rounded-lg text-sm font-medium hover:bg-zinc-800 hover:text-white transition-colors duration-200 border border-zinc-700 hover:border-zinc-600 cursor-pointer"
                 >
