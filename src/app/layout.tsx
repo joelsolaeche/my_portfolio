@@ -13,7 +13,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Joel Solaeche - AI Engineer",
   description: "Portfolio of Joel Solaeche, an AI Engineer with 3+ years building ML/AI systems. Also skilled in full stack development with React, JavaScript, and modern web technologies.",
-  keywords: ["AI Engineer", "Machine Learning", "AI", "Python", "TensorFlow", "Deep Learning", "Joel Solaeche", "Software Developer", "React", "JavaScript"],
+  keywords: ["AI Engineer", "Machine Learning", "AI", "Python", "TensorFlow", "Deep Learning", "Joel Solaeche", "Software Developer", "React", "JavaScript", "JLPT N1", "Japanese Speaking Engineer"],
   authors: [{ name: "Joel Solaeche" }],
   creator: "Joel Solaeche",
   openGraph: {

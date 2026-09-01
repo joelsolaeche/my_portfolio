@@ -220,14 +220,27 @@ const ACHIEVEMENTS: Achievement[] = [
     date: 'Nov 2024'
   },
   {
+    id: 18,
+    category: ['language'],
+    icon: '🇯🇵',
+    iconImage: '/icons/japan.png',
+    title: 'JLPT N1 - Japanese Language Proficiency',
+    titleJa: 'JLPT N1 - 日本語能力試験',
+    description: 'Passed N1, the highest level of the JLPT, certifying full command of Japanese in professional, technical, and academic settings',
+    descriptionJa: '日本語能力試験の最上級N1に合格し、ビジネス・技術・学術的な場面での完全な日本語運用能力を証明',
+    metric: 'N1 - Highest Level',
+    metricJa: 'N1（最上級）',
+    date: 'Jul 2026'
+  },
+  {
     id: 13,
     category: ['language'],
     icon: '🇯🇵',
     iconImage: '/icons/japan.png',
     title: 'JLPT N2 - Japanese Language Proficiency',
     titleJa: 'JLPT N2 - 日本語能力試験',
-    description: 'Achieved N2 level certification in Japanese Language Proficiency Test, demonstrating advanced business-level Japanese communication skills',
-    descriptionJa: '日本語能力試験N2レベルの認定を取得し、ビジネスレベルの高度な日本語コミュニケーション能力を証明',
+    description: 'Earned N2 certification in the Japanese Language Proficiency Test, the business-level milestone on the way to N1',
+    descriptionJa: '日本語能力試験N2レベルの認定を取得。N1へと進む過程でのビジネスレベルのマイルストーン',
     metric: 'N2 Level',
     metricJa: 'N2レベル',
     date: 'Aug 2022'

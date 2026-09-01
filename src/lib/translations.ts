@@ -31,13 +31,13 @@ export const translations = {
         intro: `Hello! I'm {name}, an AI Engineer with 3+ years building ML/AI systems. Based in Buenos Aires, Argentina, I have a passion for applying machine learning to solve complex problems and create innovative solutions.`,
         expertise: `My expertise spans Python, SQL, machine learning frameworks like TensorFlow, Scikit-learn, and Keras, along with deployment technologies including Docker, AWS, FastAPI, and Streamlit. I've worked on diverse projects from credit risk analysis to multimodal ML systems.`,
         fullstack: `I'm also skilled in full stack development with React, JavaScript, Next.js, and modern web technologies, enabling me to build complete AI-powered applications from backend models to user interfaces.`,
-        current: `Currently, I'm working as an AI Engineer at Taller Technologies, contributing to an agentic operating system platform that orchestrates multiple AI engineering agents for code analysis, document processing, and project setup. Previously at Algolabs AI, I built a smart pallet recognition system using YOLO-based object detection that enables warehouse robots to identify and match product positions in real-time. I hold a degree in Software Engineering from UADE University (Argentine University of Enterprise) and am multilingual (Spanish, English C1, Japanese N2).`
+        current: `Currently, I'm working as an AI Engineer at Taller Technologies, contributing to an agentic operating system platform that orchestrates multiple AI engineering agents for code analysis, document processing, and project setup. Previously at Algolabs AI, I built a smart pallet recognition system using YOLO-based object detection that enables warehouse robots to identify and match product positions in real-time. I hold a degree in Software Engineering from UADE University (Argentine University of Enterprise) and am multilingual (Spanish, English C1, Japanese JLPT N1).`
       },
       facts: {
         experience: '3+ years ML experience',
         location: 'Based in Buenos Aires, Argentina',
         education: 'Degree in Software Engineering',
-        languages: 'Multilingual (Spanish, English, Japanese)',
+        languages: 'Multilingual (Spanish, English C1, Japanese N1)',
         role: 'ML Engineer / Software Engineer',
         fullStack: 'Full Stack Developer'
       }
@@ -130,13 +130,13 @@ export const translations = {
         intro: `こんにちは！私は{name}、ML/AIシステムを3年以上構築してきたAIエンジニアです。アルゼンチンのブエノスアイレス在住で、機械学習を使って複雑な問題を解決し、革新的なソリューションを作ることに情熱を注いでいます。`,
         expertise: `私の専門知識は、Python、SQL、TensorFlow、Scikit-learn、Kerasなどの機械学習フレームワーク、そしてDocker、AWS、FastAPI、Streamlitなどのデプロイメント技術に及びます。信用リスク分析からマルチモーダルMLシステムまで、多様なプロジェクトに取り組んできました。`,
         fullstack: `また、React、JavaScript、Next.js、現代的なWeb技術を使ったフルスタック開発にも習熟しており、バックエンドモデルからユーザーインターフェースまで、完全なAI駆動アプリケーションを構築できます。`,
-        current: `現在はTaller TechnologiesでAIエンジニアとして、コード分析、ドキュメント処理、プロジェクトセットアップのために複数のAIエンジニアリングエージェントを調整するエージェント型OSプラットフォームの開発に貢献しています。以前はAlgolabs AIで、YOLOベースのオブジェクト検出を使用して、倉庫ロボットがリアルタイムで製品位置を識別・照合できるスマートパレット認識システムを構築しました。UADE大学（アルゼンチン企業大学）でソフトウェア工学の学位を取得し、多言語話者（スペイン語、英語C1、日本語N2）です。`
+        current: `現在はTaller TechnologiesでAIエンジニアとして、コード分析、ドキュメント処理、プロジェクトセットアップのために複数のAIエンジニアリングエージェントを調整するエージェント型OSプラットフォームの開発に貢献しています。以前はAlgolabs AIで、YOLOベースのオブジェクト検出を使用して、倉庫ロボットがリアルタイムで製品位置を識別・照合できるスマートパレット認識システムを構築しました。UADE大学（アルゼンチン企業大学）でソフトウェア工学の学位を取得し、多言語話者（スペイン語、英語C1、日本語JLPT N1）です。`
       },
       facts: {
         experience: '3年以上のML経験',
         location: 'アルゼンチン、ブエノスアイレス在住',
         education: 'ソフトウェア工学学位取得',
-        languages: '多言語話者（スペイン語、英語、日本語）',
+        languages: '多言語話者（スペイン語、英語C1、日本語N1）',
         role: 'MLエンジニア / ソフトウェアエンジニア',
         fullStack: 'フルスタック開発者'
       }
