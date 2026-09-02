@@ -165,8 +165,8 @@ const Hero = () => {
               className="flex flex-col sm:flex-row gap-2.5 justify-center lg:justify-start mb-6"
             >
               <a
-                href="/resumes/Joel_Solaeche_Resume_EN.pdf"
-                download
+                href="/resumes/Joel_Solaeche_Resume_EN_202605.pdf"
+                download="Joel_Solaeche_Resume_EN.pdf"
                 className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-zinc-900/80 text-slate-300 rounded-lg text-sm font-medium hover:bg-zinc-800 hover:text-white transition-colors duration-200 border border-zinc-700 hover:border-zinc-600 cursor-pointer"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -175,8 +175,8 @@ const Hero = () => {
                 <span>EN Resume</span>
               </a>
               <a
-                href="/resumes/Joel_Solaeche_%E5%B1%A5%E6%AD%B4%E6%9B%B8.pdf"
-                download
+                href="/resumes/Joel_Solaeche_%E5%B1%A5%E6%AD%B4%E6%9B%B8_202609.pdf"
+                download="Joel_Solaeche_履歴書.pdf"
                 className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-zinc-900/80 text-slate-300 rounded-lg text-sm font-medium hover:bg-zinc-800 hover:text-white transition-colors duration-200 border border-zinc-700 hover:border-zinc-600 cursor-pointer"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -186,8 +186,8 @@ const Hero = () => {
               </a>
               {language === 'ja' && (
                 <a
-                  href="/resumes/Joel_Solaeche_%E8%81%B7%E5%8B%99%E7%B5%8C%E6%AD%B4%E6%9B%B8.pdf"
-                  download
+                  href="/resumes/Joel_Solaeche_%E8%81%B7%E5%8B%99%E7%B5%8C%E6%AD%B4%E6%9B%B8_202609.pdf"
+                  download="Joel_Solaeche_職務経歴書.pdf"
                   className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-zinc-900/80 text-slate-300 rounded-lg text-sm font-medium hover:bg-zinc-800 hover:text-white transition-colors duration-200 border border-zinc-700 hover:border-zinc-600 cursor-pointer"
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
